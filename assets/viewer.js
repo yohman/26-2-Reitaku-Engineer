@@ -12,7 +12,7 @@ const fullscreenLabel = viewer.querySelector('[data-fullscreen-label]');
 const languageButton = document.querySelector('[data-language-toggle]');
 const archiveDeck = new URLSearchParams(location.search).get('deck') === '2025';
 const pageCount = archiveDeck ? 10 : 57;
-const pdfUrl = archiveDeck ? 'assets/week01/week01-slides.pdf' : 'assets/week01/麗澤流エンジニア2026_1.pdf';
+const pdfUrl = archiveDeck ? 'assets/week01/week01-slides.pdf' : 'assets/week01/麗澤流エンジニア2026_1.pdf';
 const slideDirectory = archiveDeck ? 'assets/week01/slides' : 'assets/week01/slides-2026';
 const questionUrl = 'https://script.google.com/macros/s/AKfycbz7kuUplBbrLkwNnpCSfE_fH3Ua1PL3rd3Ml84l4-oc13gfjQmDaCY1OF4AkGNyiwEF/exec?lecture=engineer';
 const draftQuestionUrl = 'https://script.google.com/macros/s/AKfycby4YxQXKwTc0IYB4p8Gr9ASgoKpcUewbDwASkmqbKk/dev?lecture=engineer';
