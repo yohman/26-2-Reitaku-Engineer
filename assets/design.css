@@ -109,6 +109,10 @@ html[lang="ja"] .agenda-week-title h2 { letter-spacing: .01em; }
 .material-heading p { color: var(--muted); }
 .material-heading h4 { font-size: 1.08rem; }
 .week-one-slideshow, .engineer-map-viewer { border: 0; }
+.engineer-map-viewer:not(:fullscreen):not(.is-fullscreen-fallback) { cursor: zoom-in; touch-action: auto; }
+.engineer-map-viewer:not(:fullscreen):not(.is-fullscreen-fallback) .map-viewer-toolbar { display: none; }
+.map-open-cue { position: absolute; z-index: 5; right: .65rem; bottom: .65rem; padding: .38rem .55rem; background: rgba(13,20,27,.9); color: var(--ink); font: 600 .68rem/1.3 var(--sans); pointer-events: none; }
+.engineer-map-viewer:fullscreen .map-open-cue, .engineer-map-viewer.is-fullscreen-fallback .map-open-cue { display: none; }
 .slide-toolbar { border-top-color: var(--rule); }
 .slide-toolbar button, .map-viewer-toolbar button { border: 0; background: var(--layer-3); }
 .slide-toolbar button:hover:not(:disabled), .slide-toolbar button:focus-visible,

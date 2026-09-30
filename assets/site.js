@@ -87,12 +87,12 @@ function weekOneMaterialsHtml() {
     </div>
     <div class="week-one-material-grid">
       <section class="week-one-slide-panel" aria-labelledby="week-one-slides-title"><header class="material-heading"><div><p>2025 MATERIAL · 10 SLIDES</p><h4 id="week-one-slides-title">${ja ? '講義スライド' : 'Lecture slides'}</h4></div><a href="viewer.html">${ja ? 'PDFビューアを開く →' : 'Open PDF viewer →'}</a></header>
-        <div class="week-one-slideshow" data-slideshow role="group" aria-label="${ja ? '第1回講義スライド' : 'Week 1 lecture slides'}" tabindex="0"><div class="slide-stage"><img data-slide-image src="assets/week01/slides/slide-01.jpg" alt="${ja ? '2025年度第1回スライド 1 / 10' : '2025 Week 1 lecture slide 1 of 10'}"></div><div class="slide-toolbar"><button type="button" data-slide-step="-1" aria-label="${ja ? '前のスライド' : 'Previous slide'}">←</button><output data-slide-count aria-live="polite">1 / 10</output><button type="button" data-slide-step="1" aria-label="${ja ? '次のスライド' : 'Next slide'}">→</button></div></div><a class="slide-download" href="assets/week01/week01-slides.pdf" download>${ja ? '元のPDFをダウンロード ↓' : 'Download the original PDF ↓'}</a>
+        <div class="week-one-slideshow" data-slideshow role="group" aria-label="${ja ? '第1回講義スライド' : 'Week 1 lecture slides'}" tabindex="0"><div class="slide-stage"><img data-slide-image src="assets/week01/slides/slide-01.jpg" alt="${ja ? '2025年度第1回スライド 1 / 10' : '2025 Week 1 lecture slide 1 of 10'}"></div><div class="slide-toolbar"><button type="button" data-slide-step="-1" aria-label="${ja ? '前のスライド' : 'Previous slide'}">←</button><output data-slide-count aria-live="polite">1 / 10</output><button type="button" data-slide-step="1" aria-label="${ja ? '次のスライド' : 'Next slide'}">→</button></div></div>
       </section>
       <section class="engineer-map-panel" aria-labelledby="engineer-map-title"><header class="material-heading"><div><p>2025 LECTURE · TWO MAPS</p><h4 id="engineer-map-title">${ja ? '2つのマップを探索' : 'Explore the maps'}</h4></div></header>
         <div class="map-tabs" id="week-one-map-tabs" role="tablist" aria-label="${ja ? '地図を選ぶ' : 'Choose a map'}"><button id="map-tab-engineering" type="button" role="tab" aria-selected="true" aria-controls="map-panel-engineering" tabindex="0">${ja ? '工学マップ' : 'Engineering'}</button><button id="map-tab-computer-science" type="button" role="tab" aria-selected="false" aria-controls="map-panel-computer-science" tabindex="-1">${ja ? 'コンピュータサイエンス' : 'Computer Science'}</button></div>
         <div class="map-tab-panel" id="map-panel-engineering" role="tabpanel" aria-labelledby="map-tab-engineering">
-        <div class="engineer-map-viewer" id="engineer-map-viewer" style="--map-ratio:2183 / 1643;--map-width-at-height:132.87vh;--map-height-at-width:75.27vw" tabindex="0" role="application" aria-label="${ja ? 'Engineer Map。ドラッグして移動、スクロールして拡大・縮小できます。' : 'Engineer Map. Drag to pan and use the scroll wheel to zoom.'}" data-map-viewer>
+        <div class="engineer-map-viewer" id="engineer-map-viewer" style="--map-ratio:2183 / 1643;--map-width-at-height:132.87vh;--map-height-at-width:75.27vw" tabindex="0" role="application" aria-label="${ja ? 'Engineer Map。クリックして全画面表示。全画面ではドラッグとスクロールで地図を操作できます。' : 'Engineer Map. Click to open fullscreen; then drag and scroll to explore.'}" data-map-viewer>
           <div class="map-canvas"><img class="engineer-map-image" src="assets/week01/engineer-map.png" alt="A map showing the fields and connections within engineering" draggable="false"><div class="map-hotspots" aria-label="${ja ? '日本語訳のある分野名' : 'Engineering fields with Japanese translations'}">
             <button class="map-term" style="--x:14%;--y:5%" data-map-term="Civil engineering" data-map-ja="土木工学"><span>Civil engineering</span><span lang="ja">土木工学</span></button>
             <button class="map-term" style="--x:30%;--y:8%" data-map-term="Geological engineering" data-map-ja="地質工学"><span>Geological engineering</span><span lang="ja">地質工学</span></button>
@@ -125,14 +125,14 @@ function weekOneMaterialsHtml() {
             <button class="map-term" style="--x:89.3%;--y:91%" data-map-term="Data engineering" data-map-ja="データ工学"><span>Data engineering</span><span lang="ja">データ工学</span></button>
             <button class="map-term" style="--x:52%;--y:77%" data-map-term="Bio-engineering" data-map-ja="生物工学"><span>Bio-engineering</span><span lang="ja">生物工学</span></button>
           </div></div>
-          <p class="map-viewer-instruction">${ja ? '丸印にカーソルを合わせると日本語訳' : 'Hover a marker for the Japanese translation'}</p><div class="map-viewer-toolbar" aria-label="${ja ? '地図の操作' : 'Map controls'}"><button type="button" data-map-action="out" aria-label="${ja ? '縮小' : 'Zoom out'}">−</button><output data-map-zoom aria-live="polite">100%</output><button type="button" data-map-action="in" aria-label="${ja ? '拡大' : 'Zoom in'}">+</button><button type="button" data-map-action="reset">${ja ? 'リセット' : 'Reset'}</button><button type="button" data-map-action="fullscreen" aria-pressed="false">${ja ? '全画面' : 'Fullscreen'}</button></div>
-        </div><p class="map-viewer-hint">${ja ? 'ドラッグして移動 · スクロールまたは＋／−で拡大 · 0でリセット' : 'Drag to pan · Scroll or use + / − to zoom · Press 0 to reset'}</p><p class="map-original-link"><a href="assets/week01/engineer-map.png" target="_blank" rel="noopener">${ja ? 'Engineer Mapの原寸画像 ↗' : 'Open the original Engineer Map ↗'}</a></p>
+          <p class="map-viewer-instruction">${ja ? '丸印にカーソルを合わせると日本語訳' : 'Hover a marker for the Japanese translation'}</p><span class="map-open-cue" aria-hidden="true">${ja ? 'クリックして全画面 ↗' : 'Click to open fullscreen ↗'}</span><div class="map-viewer-toolbar" aria-label="${ja ? '地図の操作' : 'Map controls'}"><button type="button" data-map-action="out" aria-label="${ja ? '縮小' : 'Zoom out'}">−</button><output data-map-zoom aria-live="polite">100%</output><button type="button" data-map-action="in" aria-label="${ja ? '拡大' : 'Zoom in'}">+</button><button type="button" data-map-action="reset">${ja ? 'リセット' : 'Reset'}</button><button type="button" data-map-action="fullscreen" aria-pressed="false">${ja ? '全画面' : 'Fullscreen'}</button></div>
+        </div><p class="map-viewer-hint">${ja ? 'クリックして全画面表示 · 丸印にカーソルを合わせると日本語訳' : 'Click the map for fullscreen · Hover a marker for its Japanese translation'}</p><p class="map-original-link"><a href="assets/week01/engineer-map.png" target="_blank" rel="noopener">${ja ? 'Engineer Mapの原寸画像 ↗' : 'Open the original Engineer Map ↗'}</a></p>
         </div>
         <div class="map-tab-panel" id="map-panel-computer-science" role="tabpanel" aria-labelledby="map-tab-computer-science" hidden>
-          <div class="engineer-map-viewer" id="computer-science-map-viewer" style="--map-ratio:3840 / 2704;--map-width-at-height:142.01vh;--map-height-at-width:70.42vw" tabindex="0" role="application" aria-label="${ja ? 'コンピュータサイエンスの地図。ドラッグして移動、スクロールして拡大・縮小できます。' : 'Map of Computer Science. Drag to pan and use the scroll wheel to zoom.'}" data-map-viewer>
+          <div class="engineer-map-viewer" id="computer-science-map-viewer" style="--map-ratio:3840 / 2704;--map-width-at-height:142.01vh;--map-height-at-width:70.42vw" tabindex="0" role="application" aria-label="${ja ? 'コンピュータサイエンスの地図。クリックして全画面表示。全画面ではドラッグとスクロールで操作できます。' : 'Map of Computer Science. Click to open fullscreen; then drag and scroll to explore.'}" data-map-viewer>
             <div class="map-canvas"><img class="engineer-map-image" src="assets/week01/computer-science-map.png" alt="Map of Computer Science by Dominic Walliman" draggable="false"><div class="map-hotspots" aria-label="${ja ? 'コンピュータサイエンスの用語と日本語訳' : 'Computer science terms with Japanese translations'}">${computerScienceMapTermsHtml()}</div></div>
-            <p class="map-viewer-instruction">${ja ? '丸印にカーソルを合わせると日本語訳' : 'Hover a marker for the Japanese translation'}</p><div class="map-viewer-toolbar" aria-label="${ja ? '地図の操作' : 'Map controls'}"><button type="button" data-map-action="out" aria-label="${ja ? '縮小' : 'Zoom out'}">−</button><output data-map-zoom aria-live="polite">100%</output><button type="button" data-map-action="in" aria-label="${ja ? '拡大' : 'Zoom in'}">+</button><button type="button" data-map-action="reset">${ja ? 'リセット' : 'Reset'}</button><button type="button" data-map-action="fullscreen" aria-pressed="false">${ja ? '全画面' : 'Fullscreen'}</button></div>
-          </div><p class="map-viewer-hint">${ja ? 'ドラッグして移動 · スクロールまたは＋／−で拡大 · 0でリセット' : 'Drag to pan · Scroll or use + / − to zoom · Press 0 to reset'}</p><p class="map-original-link"><a href="assets/week01/computer-science-map.png" target="_blank" rel="noopener">${ja ? 'Computer Science Mapの原寸画像 ↗' : 'Open the original Computer Science map ↗'}</a> · Dominic Walliman, 2017</p>
+            <p class="map-viewer-instruction">${ja ? '丸印にカーソルを合わせると日本語訳' : 'Hover a marker for the Japanese translation'}</p><span class="map-open-cue" aria-hidden="true">${ja ? 'クリックして全画面 ↗' : 'Click to open fullscreen ↗'}</span><div class="map-viewer-toolbar" aria-label="${ja ? '地図の操作' : 'Map controls'}"><button type="button" data-map-action="out" aria-label="${ja ? '縮小' : 'Zoom out'}">−</button><output data-map-zoom aria-live="polite">100%</output><button type="button" data-map-action="in" aria-label="${ja ? '拡大' : 'Zoom in'}">+</button><button type="button" data-map-action="reset">${ja ? 'リセット' : 'Reset'}</button><button type="button" data-map-action="fullscreen" aria-pressed="false">${ja ? '全画面' : 'Fullscreen'}</button></div>
+          </div><p class="map-viewer-hint">${ja ? 'クリックして全画面表示 · 丸印にカーソルを合わせると日本語訳' : 'Click the map for fullscreen · Hover a marker for its Japanese translation'}</p><p class="map-original-link"><a href="assets/week01/computer-science-map.png" target="_blank" rel="noopener">${ja ? 'Computer Science Mapの原寸画像 ↗' : 'Open the original Computer Science map ↗'}</a> · Dominic Walliman, 2017</p>
         </div>
       </section>
     </div>
@@ -146,6 +146,7 @@ function initEngineerMapViewers() {
     const canvas = viewer.querySelector('.map-canvas');
     const output = viewer.querySelector('[data-map-zoom]');
     const state = {scale:1, x:0, y:0, pointer:null, startX:0, startY:0, originX:0, originY:0};
+    const isFullscreen = () => document.fullscreenElement === viewer || viewer.classList.contains('is-fullscreen-fallback');
     const paint = () => {
       canvas.style.transform = `translate3d(${state.x}px, ${state.y}px, 0) scale(${state.scale})`;
       output.value = `${Math.round(state.scale * 100)}%`;
@@ -161,16 +162,20 @@ function initEngineerMapViewers() {
       paint();
     };
     viewer.querySelectorAll('[data-map-action]').forEach(button => button.addEventListener('click', () => {
-      if (button.dataset.mapAction === 'in') zoomAt(1.35);
-      else if (button.dataset.mapAction === 'out') zoomAt(1 / 1.35);
+      if (button.dataset.mapAction === 'in') zoomAt(1.2);
+      else if (button.dataset.mapAction === 'out') zoomAt(1 / 1.2);
       else { state.scale = 1; state.x = 0; state.y = 0; paint(); }
     }));
     viewer.addEventListener('wheel', event => {
+      if (!isFullscreen()) return;
       event.preventDefault();
       const rect = viewer.getBoundingClientRect();
-      zoomAt(event.deltaY < 0 ? 1.15 : 1 / 1.15, event.clientX - rect.left, event.clientY - rect.top);
+      const pixels = event.deltaY * (event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? viewer.clientHeight : 1);
+      const factor = Math.exp(-Math.max(-160, Math.min(160, pixels)) * .001);
+      zoomAt(factor, event.clientX - rect.left, event.clientY - rect.top);
     }, {passive:false});
     viewer.addEventListener('pointerdown', event => {
+      if (!isFullscreen()) return;
       if (event.target.closest('.map-viewer-toolbar, .map-term')) return;
       state.pointer = event.pointerId; state.startX = event.clientX; state.startY = event.clientY; state.originX = state.x; state.originY = state.y;
       viewer.setPointerCapture(event.pointerId); viewer.classList.add('is-dragging');
@@ -182,23 +187,36 @@ function initEngineerMapViewers() {
     const stopDrag = event => { if (state.pointer !== event.pointerId) return; state.pointer = null; viewer.classList.remove('is-dragging'); };
     viewer.addEventListener('pointerup', stopDrag); viewer.addEventListener('pointercancel', stopDrag);
     viewer.addEventListener('keydown', event => {
+      if (!isFullscreen()) {
+        if (event.target === viewer && (event.key === 'Enter' || event.key === ' ')) { event.preventDefault(); openFullscreen(); }
+        return;
+      }
       if (event.key === '+' || event.key === '=') { event.preventDefault(); zoomAt(1.25); }
       else if (event.key === '-') { event.preventDefault(); zoomAt(1 / 1.25); }
       else if (event.key === '0') { event.preventDefault(); state.scale = 1; state.x = 0; state.y = 0; paint(); }
     });
     const fullscreenButton = viewer.querySelector('[data-map-action="fullscreen"]');
     const setFullscreenState = () => {
-      const active = document.fullscreenElement === viewer || viewer.classList.contains('is-fullscreen-fallback');
+      const active = isFullscreen();
       fullscreenButton.setAttribute('aria-pressed', String(active));
       fullscreenButton.textContent = active ? (language === 'ja' ? '全画面を終了' : 'Exit fullscreen') : (language === 'ja' ? '全画面' : 'Fullscreen');
+      if (!active) { state.scale = 1; state.x = 0; state.y = 0; paint(); }
     };
+    const openFullscreen = async () => {
+      if (viewer.requestFullscreen) {
+        try { await viewer.requestFullscreen(); }
+        catch { viewer.classList.add('is-fullscreen-fallback'); document.body.classList.add('map-fullscreen-open'); }
+      } else { viewer.classList.add('is-fullscreen-fallback'); document.body.classList.add('map-fullscreen-open'); }
+      setFullscreenState();
+    };
+    viewer.addEventListener('click', event => {
+      if (!isFullscreen() && event.target.closest('.map-canvas')) openFullscreen();
+    });
     fullscreenButton.addEventListener('click', async () => {
-      if (document.fullscreenElement === viewer || viewer.classList.contains('is-fullscreen-fallback')) {
+      if (isFullscreen()) {
         if (document.fullscreenElement) await document.exitFullscreen();
         else { viewer.classList.remove('is-fullscreen-fallback'); document.body.classList.remove('map-fullscreen-open'); }
-      } else if (viewer.requestFullscreen) {
-        try { await viewer.requestFullscreen(); } catch { viewer.classList.add('is-fullscreen-fallback'); document.body.classList.add('map-fullscreen-open'); }
-      } else { viewer.classList.add('is-fullscreen-fallback'); document.body.classList.add('map-fullscreen-open'); }
+      } else await openFullscreen();
       setFullscreenState();
     });
     viewer.addEventListener('keydown', event => {
