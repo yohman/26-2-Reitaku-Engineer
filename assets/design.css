@@ -25,7 +25,7 @@ h1, h2, h3, h4 { font-family: var(--sans); }
 .wrap { width: min(calc(100% - 48px), 1160px); }
 
 /* Shared shell */
-.site-header { min-height: 70px; background: rgba(11,16,21,.96); box-shadow: 0 1px 0 var(--rule); }
+.site-header { min-height: 70px; background: rgba(11,16,21,.96); box-shadow: none; }
 .wordmark { font-family: var(--sans); font-size: 1.03rem; font-weight: 700; letter-spacing: -.015em; }
 .wordmark span { color: var(--blue); font-family: var(--mono); font-size: .8em; font-weight: 600; }
 .site-nav { gap: 1.15rem; font-size: .74rem; letter-spacing: .02em; }
@@ -36,7 +36,7 @@ html[lang="ja"] .site-nav { font-size: .76rem; letter-spacing: 0; }
 .language-toggle { margin-left: .2rem; padding: .5rem .68rem; background: var(--layer-2); color: var(--ink); }
 .language-toggle:hover, .language-toggle:focus-visible { background: var(--blue); color: #0b1015; }
 .menu-toggle { color: var(--ink); }
-.site-footer { padding-block: 2.5rem; background: #10171e; border-top: 1px solid var(--rule); }
+.site-footer { padding-block: 2.5rem; background: #10171e; border-top: 0; }
 .footer-grid a { color: var(--blue); }
 
 /* Type and spacing form the hierarchy, while layers group related content. */
@@ -64,7 +64,7 @@ html[lang="ja"] .eyebrow, html[lang="ja"] .section-label, html[lang="ja"] .kicke
 .intro-grid { padding-block: clamp(3.5rem, 6vw, 5.5rem); }
 .intro-grid h2, .section-heading h2, .editorial-grid h2 { line-height: 1.15; letter-spacing: -.025em; }
 .prose-large { font-size: clamp(1.12rem, 1.75vw, 1.36rem); line-height: 1.65; }
-.feature-card { padding: clamp(1.6rem, 3.5vw, 3rem); background: var(--layer-2); border: 0; }
+.feature-card { padding: clamp(1.6rem, 3.5vw, 3rem); background: var(--layer-1); border: 0; box-shadow: none; }
 .feature-card .kicker { color: var(--blue); }
 .feature-card h2 { font-size: clamp(2rem, 4vw, 3.5rem); line-height: 1.18; letter-spacing: -.025em; }
 .feature-card p:not(.kicker) { font-size: 1.08rem; }
@@ -135,6 +135,7 @@ html[lang="ja"] .agenda-week-title h2 { letter-spacing: .01em; }
 .callout { margin-bottom: 5rem; background: #1b2d3a; color: var(--ink); }
 .callout h2 { line-height: 1.16; }
 .guest { padding-block: 2.8rem; }
+.guest, .resource-row, .make-row { box-shadow: none; }
 .guest-photo { border: 0; }
 .guest-bio { background: var(--layer-1); }
 .guest-placeholder { background: var(--layer-3); color: var(--blue); }
