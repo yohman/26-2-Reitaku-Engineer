@@ -67,14 +67,14 @@ function sectionHtml(value) {
 }
 const QUESTIONS_URL = 'https://script.google.com/macros/s/AKfycbz7kuUplBbrLkwNnpCSfE_fH3Ua1PL3rd3Ml84l4-oc13gfjQmDaCY1OF4AkGNyiwEF/exec?lecture=engineer';
 const COMPUTER_SCIENCE_MAP_TERMS = [
-  ['Computational complexity','計算複雑性',11,11],['Information theory','情報理論',30,13],['Cryptography','暗号理論',42,11],['Scheduling','スケジューリング',72,13],['Computer architecture','コンピュータ・アーキテクチャ',88,13],
-  ['Theoretical computer science','理論計算機科学',34,27],['Computability theory','計算可能性理論',29,31],['Turing machine','チューリングマシン',50,31],['Computer engineering','コンピュータ工学',78,29],['Algorithms','アルゴリズム',8,35],['Logic','論理学',18,34],
-  ['Graph theory','グラフ理論',18,50],['Computational geometry','計算幾何学',29,50],['Automata theory','オートマトン理論',36,55],['Formal methods','形式手法',58,38],['Parallel programming','並列プログラミング',55,44],
-  ['Software and programming languages','ソフトウェアと言語',81,38],['Compilers','コンパイラ',95,47],['Software engineering','ソフトウェア工学',65,48],['Operating systems','オペレーティングシステム',75,47],['Networking','ネットワーク',88,44],['Data management','データ管理',94,45],
-  ['Machine learning','機械学習',8,58],['Optimisation','最適化',21,58],['Boolean satisfiability','充足可能性問題',37,60],['Supercomputing','スーパーコンピューティング',51,60],['Computer graphics','コンピュータグラフィックス',66,61],
-  ['Artificial intelligence','人工知能',20,75],['Robotics','ロボット工学',37,68],['Computer vision','コンピュータビジョン',8,70],['Image processing','画像処理',8,96],['Natural language processing','自然言語処理',25,84],
-  ['Knowledge representation','知識表現',31,89],['Telepresence','テレプレゼンス',44,83],['Virtual reality','仮想現実',61,80],['Augmented reality','拡張現実',62,84],['Human-computer interaction','ヒューマン・コンピュータ・インタラクション',73,84],
-  ['Simulation','シミュレーション',77,80],['Computational science','計算科学',79,69],['Hacking','ハッキング',94,66],['Internet of things','モノのインターネット',78,95],['Big data','ビッグデータ',94,95]
+  ['Computational complexity','計算複雑性',22.2,10.5],['Information theory','情報理論',37.7,12],['Cryptography','暗号理論',49.3,10.5],['Scheduling','スケジューリング',81,11.6],['Computer architecture','コンピュータ・アーキテクチャ',97.7,11.6],
+  ['Theoretical computer science','理論計算機科学',50.6,26],['Computability theory','計算可能性理論',39.6,29.5],['Turing machine','チューリングマシン',57.7,30.4],['Computer engineering','コンピュータ工学',90.3,28],['Algorithms','アルゴリズム',15.4,35.5],['Logic','論理学',22.5,33],
+  ['Graph theory','グラフ理論',24.1,49],['Computational geometry','計算幾何学',34.5,49],['Automata theory','オートマトン理論',41,53.8],['Formal methods','形式手法',68,37],['Parallel programming','並列プログラミング',62.8,43.5],
+  ['Software and programming languages','ソフトウェアと言語',93.2,32.3],['Compilers','コンパイラ',88.5,43.5],['Software engineering','ソフトウェア工学',74.8,47.3],['Operating systems','オペレーティングシステム',86,46.3],['Networking','ネットワーク',95,45.9],['Data management','データ管理',88.5,50.4],
+  ['Machine learning','機械学習',17,52.7],['Optimisation','最適化',29.3,56.5],['Boolean satisfiability','充足可能性問題',47,56.1],['Supercomputing','スーパーコンピューティング',60,58.3],['Computer graphics','コンピュータグラフィックス',76.3,57],
+  ['Artificial intelligence','人工知能',34.5,66],['Robotics','ロボット工学',42.5,66],['Computer vision','コンピュータビジョン',16.8,69],['Image processing','画像処理',16.4,96],['Natural language processing','自然言語処理',36,84.1],
+  ['Knowledge representation','知識表現',43.5,89],['Telepresence','テレプレゼンス',55.3,81.5],['Virtual reality','仮想現実',74,78],['Augmented reality','拡張現実',71,81.8],['Human-computer interaction','ヒューマン・コンピュータ・インタラクション',80.5,81.8],
+  ['Simulation','シミュレーション',85.5,79.7],['Computational science','計算科学',91,62.1],['Hacking','ハッキング',96,68],['Internet of things','モノのインターネット',85,90.5],['Big data','ビッグデータ',88.5,93.8]
 ];
 function computerScienceMapTermsHtml() {
   return COMPUTER_SCIENCE_MAP_TERMS.map(([english,japanese,x,y]) => `<button class="map-term" style="--x:${x}%;--y:${y}%" data-map-term="${english}" data-map-ja="${japanese}"><span>${english}</span><span lang="ja">${japanese}</span></button>`).join('');
@@ -94,36 +94,36 @@ function weekOneMaterialsHtml() {
         <div class="map-tab-panel" id="map-panel-engineering" role="tabpanel" aria-labelledby="map-tab-engineering">
         <div class="engineer-map-viewer" id="engineer-map-viewer" style="--map-ratio:2183 / 1643;--map-width-at-height:132.87vh;--map-height-at-width:75.27vw" tabindex="0" role="application" aria-label="${ja ? 'Engineer Map。ドラッグして移動、スクロールして拡大・縮小できます。' : 'Engineer Map. Drag to pan and use the scroll wheel to zoom.'}" data-map-viewer>
           <div class="map-canvas"><img class="engineer-map-image" src="assets/week01/engineer-map.png" alt="A map showing the fields and connections within engineering" draggable="false"><div class="map-hotspots" aria-label="${ja ? '日本語訳のある分野名' : 'Engineering fields with Japanese translations'}">
-            <button class="map-term" style="--x:8%;--y:5%" data-map-term="Civil engineering" data-map-ja="土木工学"><span>Civil engineering</span><span lang="ja">土木工学</span></button>
-            <button class="map-term" style="--x:25%;--y:8%" data-map-term="Geological engineering" data-map-ja="地質工学"><span>Geological engineering</span><span lang="ja">地質工学</span></button>
-            <button class="map-term" style="--x:43%;--y:13%" data-map-term="Fluid mechanics" data-map-ja="流体力学"><span>Fluid mechanics</span><span lang="ja">流体力学</span></button>
-            <button class="map-term" style="--x:68%;--y:4%" data-map-term="Satellites" data-map-ja="人工衛星"><span>Satellites</span><span lang="ja">人工衛星</span></button>
-            <button class="map-term" style="--x:77%;--y:10%" data-map-term="Aerodynamics" data-map-ja="空気力学"><span>Aerodynamics</span><span lang="ja">空気力学</span></button>
-            <button class="map-term" style="--x:84%;--y:5%" data-map-term="Aerospace engineering" data-map-ja="航空宇宙工学"><span>Aerospace engineering</span><span lang="ja">航空宇宙工学</span></button>
-            <button class="map-term" style="--x:60%;--y:15%" data-map-term="Marine engineering" data-map-ja="海洋工学"><span>Marine engineering</span><span lang="ja">海洋工学</span></button>
-            <button class="map-term" style="--x:67%;--y:17%" data-map-term="Naval engineering" data-map-ja="造船工学"><span>Naval engineering</span><span lang="ja">造船工学</span></button>
-            <button class="map-term" style="--x:8%;--y:31%" data-map-term="Structural engineering" data-map-ja="構造工学"><span>Structural engineering</span><span lang="ja">構造工学</span></button>
-            <button class="map-term" style="--x:15%;--y:36%" data-map-term="Architectural engineering" data-map-ja="建築工学"><span>Architectural engineering</span><span lang="ja">建築工学</span></button>
-            <button class="map-term" style="--x:24%;--y:36%" data-map-term="Agricultural engineering" data-map-ja="農業工学"><span>Agricultural engineering</span><span lang="ja">農業工学</span></button>
-            <button class="map-term" style="--x:65%;--y:33%" data-map-term="Materials engineering" data-map-ja="材料工学"><span>Materials engineering</span><span lang="ja">材料工学</span></button>
-            <button class="map-term" style="--x:95%;--y:34%" data-map-term="Audio engineering" data-map-ja="音響工学"><span>Audio engineering</span><span lang="ja">音響工学</span></button>
-            <button class="map-term" style="--x:21%;--y:53%" data-map-term="Environmental engineering" data-map-ja="環境工学"><span>Environmental engineering</span><span lang="ja">環境工学</span></button>
-            <button class="map-term" style="--x:8%;--y:50%" data-map-term="Nuclear engineering" data-map-ja="原子力工学"><span>Nuclear engineering</span><span lang="ja">原子力工学</span></button>
-            <button class="map-term" style="--x:46%;--y:47%" data-map-term="Manufacturing engineering" data-map-ja="生産工学"><span>Manufacturing engineering</span><span lang="ja">生産工学</span></button>
-            <button class="map-term" style="--x:66%;--y:52%" data-map-term="Automotive engineering" data-map-ja="自動車工学"><span>Automotive engineering</span><span lang="ja">自動車工学</span></button>
-            <button class="map-term" style="--x:53%;--y:58%" data-map-term="Robotics and mechatronics" data-map-ja="ロボット工学・メカトロニクス"><span>Robotics and mechatronics</span><span lang="ja">ロボット工学・メカトロニクス</span></button>
-            <button class="map-term" style="--x:40%;--y:61%" data-map-term="Industrial engineering" data-map-ja="産業工学"><span>Industrial engineering</span><span lang="ja">産業工学</span></button>
-            <button class="map-term" style="--x:60%;--y:53%" data-map-term="Mechanical engineering" data-map-ja="機械工学"><span>Mechanical engineering</span><span lang="ja">機械工学</span></button>
-            <button class="map-term" style="--x:88%;--y:55%" data-map-term="Electrical engineering" data-map-ja="電気工学"><span>Electrical engineering</span><span lang="ja">電気工学</span></button>
-            <button class="map-term" style="--x:7%;--y:63%" data-map-term="Power and energy systems" data-map-ja="電力・エネルギーシステム"><span>Power and energy systems</span><span lang="ja">電力・エネルギーシステム</span></button>
-            <button class="map-term" style="--x:7%;--y:82%" data-map-term="Chemical engineering" data-map-ja="化学工学"><span>Chemical engineering</span><span lang="ja">化学工学</span></button>
-            <button class="map-term" style="--x:40%;--y:80%" data-map-term="Biomedical engineering" data-map-ja="生体医工学"><span>Biomedical engineering</span><span lang="ja">生体医工学</span></button>
-            <button class="map-term" style="--x:74%;--y:78%" data-map-term="Photonics" data-map-ja="フォトニクス・光工学"><span>Photonics</span><span lang="ja">フォトニクス・光工学</span></button>
-            <button class="map-term" style="--x:84%;--y:83%" data-map-term="Computer engineering" data-map-ja="コンピュータ工学"><span>Computer engineering</span><span lang="ja">コンピュータ工学</span></button>
-            <button class="map-term" style="--x:76%;--y:90%" data-map-term="Software engineering" data-map-ja="ソフトウェア工学"><span>Software engineering</span><span lang="ja">ソフトウェア工学</span></button>
-            <button class="map-term" style="--x:89%;--y:88%" data-map-term="Network engineering" data-map-ja="ネットワーク工学"><span>Network engineering</span><span lang="ja">ネットワーク工学</span></button>
-            <button class="map-term" style="--x:96%;--y:90%" data-map-term="Data engineering" data-map-ja="データ工学"><span>Data engineering</span><span lang="ja">データ工学</span></button>
-            <button class="map-term" style="--x:47%;--y:94%" data-map-term="Bio-engineering" data-map-ja="生物工学"><span>Bio-engineering</span><span lang="ja">生物工学</span></button>
+            <button class="map-term" style="--x:14%;--y:5%" data-map-term="Civil engineering" data-map-ja="土木工学"><span>Civil engineering</span><span lang="ja">土木工学</span></button>
+            <button class="map-term" style="--x:30%;--y:8%" data-map-term="Geological engineering" data-map-ja="地質工学"><span>Geological engineering</span><span lang="ja">地質工学</span></button>
+            <button class="map-term" style="--x:50%;--y:13%" data-map-term="Fluid mechanics" data-map-ja="流体力学"><span>Fluid mechanics</span><span lang="ja">流体力学</span></button>
+            <button class="map-term" style="--x:78%;--y:4%" data-map-term="Satellites" data-map-ja="人工衛星"><span>Satellites</span><span lang="ja">人工衛星</span></button>
+            <button class="map-term" style="--x:85%;--y:10%" data-map-term="Aerodynamics" data-map-ja="空気力学"><span>Aerodynamics</span><span lang="ja">空気力学</span></button>
+            <button class="map-term" style="--x:90%;--y:2.2%" data-map-term="Aerospace engineering" data-map-ja="航空宇宙工学"><span>Aerospace engineering</span><span lang="ja">航空宇宙工学</span></button>
+            <button class="map-term" style="--x:65.8%;--y:15%" data-map-term="Marine engineering" data-map-ja="海洋工学"><span>Marine engineering</span><span lang="ja">海洋工学</span></button>
+            <button class="map-term" style="--x:73%;--y:15%" data-map-term="Naval engineering" data-map-ja="造船工学"><span>Naval engineering</span><span lang="ja">造船工学</span></button>
+            <button class="map-term" style="--x:9.8%;--y:29%" data-map-term="Structural engineering" data-map-ja="構造工学"><span>Structural engineering</span><span lang="ja">構造工学</span></button>
+            <button class="map-term" style="--x:22.2%;--y:36%" data-map-term="Architectural engineering" data-map-ja="建築工学"><span>Architectural engineering</span><span lang="ja">建築工学</span></button>
+            <button class="map-term" style="--x:30.2%;--y:36%" data-map-term="Agricultural engineering" data-map-ja="農業工学"><span>Agricultural engineering</span><span lang="ja">農業工学</span></button>
+            <button class="map-term" style="--x:73.1%;--y:34%" data-map-term="Materials engineering" data-map-ja="材料工学"><span>Materials engineering</span><span lang="ja">材料工学</span></button>
+            <button class="map-term" style="--x:89.6%;--y:34%" data-map-term="Audio engineering" data-map-ja="音響工学"><span>Audio engineering</span><span lang="ja">音響工学</span></button>
+            <button class="map-term" style="--x:27.7%;--y:53%" data-map-term="Environmental engineering" data-map-ja="環境工学"><span>Environmental engineering</span><span lang="ja">環境工学</span></button>
+            <button class="map-term" style="--x:14.8%;--y:50%" data-map-term="Nuclear engineering" data-map-ja="原子力工学"><span>Nuclear engineering</span><span lang="ja">原子力工学</span></button>
+            <button class="map-term" style="--x:54.8%;--y:47%" data-map-term="Manufacturing engineering" data-map-ja="生産工学"><span>Manufacturing engineering</span><span lang="ja">生産工学</span></button>
+            <button class="map-term" style="--x:76%;--y:53%" data-map-term="Automotive engineering" data-map-ja="自動車工学"><span>Automotive engineering</span><span lang="ja">自動車工学</span></button>
+            <button class="map-term" style="--x:62.5%;--y:58%" data-map-term="Robotics and mechatronics" data-map-ja="ロボット工学・メカトロニクス"><span>Robotics and mechatronics</span><span lang="ja">ロボット工学・メカトロニクス</span></button>
+            <button class="map-term" style="--x:49.5%;--y:61%" data-map-term="Industrial engineering" data-map-ja="産業工学"><span>Industrial engineering</span><span lang="ja">産業工学</span></button>
+            <button class="map-term" style="--x:67.5%;--y:53%" data-map-term="Mechanical engineering" data-map-ja="機械工学"><span>Mechanical engineering</span><span lang="ja">機械工学</span></button>
+            <button class="map-term" style="--x:95.1%;--y:52.8%" data-map-term="Electrical engineering" data-map-ja="電気工学"><span>Electrical engineering</span><span lang="ja">電気工学</span></button>
+            <button class="map-term" style="--x:14.4%;--y:63%" data-map-term="Power and energy systems" data-map-ja="電力・エネルギーシステム"><span>Power and energy systems</span><span lang="ja">電力・エネルギーシステム</span></button>
+            <button class="map-term" style="--x:12.9%;--y:82%" data-map-term="Chemical engineering" data-map-ja="化学工学"><span>Chemical engineering</span><span lang="ja">化学工学</span></button>
+            <button class="map-term" style="--x:46.9%;--y:56%" data-map-term="Biomedical engineering" data-map-ja="生体医工学"><span>Biomedical engineering</span><span lang="ja">生体医工学</span></button>
+            <button class="map-term" style="--x:79.2%;--y:53%" data-map-term="Photonics" data-map-ja="フォトニクス・光工学"><span>Photonics</span><span lang="ja">フォトニクス・光工学</span></button>
+            <button class="map-term" style="--x:92.3%;--y:83%" data-map-term="Computer engineering" data-map-ja="コンピュータ工学"><span>Computer engineering</span><span lang="ja">コンピュータ工学</span></button>
+            <button class="map-term" style="--x:82.5%;--y:90%" data-map-term="Software engineering" data-map-ja="ソフトウェア工学"><span>Software engineering</span><span lang="ja">ソフトウェア工学</span></button>
+            <button class="map-term" style="--x:80%;--y:92%" data-map-term="Network engineering" data-map-ja="ネットワーク工学"><span>Network engineering</span><span lang="ja">ネットワーク工学</span></button>
+            <button class="map-term" style="--x:89.3%;--y:91%" data-map-term="Data engineering" data-map-ja="データ工学"><span>Data engineering</span><span lang="ja">データ工学</span></button>
+            <button class="map-term" style="--x:52%;--y:77%" data-map-term="Bio-engineering" data-map-ja="生物工学"><span>Bio-engineering</span><span lang="ja">生物工学</span></button>
           </div></div>
           <p class="map-viewer-instruction">${ja ? '丸印にカーソルを合わせると日本語訳' : 'Hover a marker for the Japanese translation'}</p><div class="map-viewer-toolbar" aria-label="${ja ? '地図の操作' : 'Map controls'}"><button type="button" data-map-action="out" aria-label="${ja ? '縮小' : 'Zoom out'}">−</button><output data-map-zoom aria-live="polite">100%</output><button type="button" data-map-action="in" aria-label="${ja ? '拡大' : 'Zoom in'}">+</button><button type="button" data-map-action="reset">${ja ? 'リセット' : 'Reset'}</button><button type="button" data-map-action="fullscreen" aria-pressed="false">${ja ? '全画面' : 'Fullscreen'}</button></div>
         </div><p class="map-viewer-hint">${ja ? 'ドラッグして移動 · スクロールまたは＋／−で拡大 · 0でリセット' : 'Drag to pan · Scroll or use + / − to zoom · Press 0 to reset'}</p><p class="map-original-link"><a href="assets/week01/engineer-map.png" target="_blank" rel="noopener">${ja ? 'Engineer Mapの原寸画像 ↗' : 'Open the original Engineer Map ↗'}</a></p>
