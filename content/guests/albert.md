@@ -5,7 +5,7 @@ name_ja: Albert Kochaphum
 week: 8
 role: Community-based mapping, GIS, and social justice.
 role_ja: コミュニティ参加型マッピング、GIS、社会正義。
-image: 
+image: albert.png
 ---
 
 ## Bio

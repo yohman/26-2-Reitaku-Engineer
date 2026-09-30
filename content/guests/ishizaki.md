@@ -6,7 +6,7 @@ date: 2026-11-26
 week: 9
 role: Former executive vice president of TEPCO.
 role_ja: 元東京電力副社長。
-image: 
+image: ishizaki.png
 ---
 
 ## Bio
