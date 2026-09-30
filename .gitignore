@@ -1,0 +1,7 @@
+# The 2025 folder contains archived course files, student submissions, and
+# source documents that are not part of the public 2026 site.
+/2025/
+
+# macOS metadata
+.DS_Store
+
