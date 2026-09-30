@@ -151,11 +151,16 @@ function weekOneMaterialsHtml() {
       <a class="question-cta" href="${QUESTIONS_URL}" target="_blank" rel="noopener"><span>${ja ? '質問がありますか？' : 'Have a question?'}</span><strong>${ja ? '授業への質問を送る' : 'Ask a question about this class'} <b aria-hidden="true">↗</b></strong><small>${ja ? '質問フォームを新しいタブで開く' : 'Open the student question form'}</small></a>
     </div>
     <div class="week-one-material-grid">
-      <section class="week-one-slide-panel" aria-labelledby="week-one-slides-title"><header class="material-heading"><div><p>2026 PRESENTATION · 57 SLIDES</p><h4 id="week-one-slides-title">${ja ? '講義スライド' : 'Lecture slides'}</h4></div><a href="viewer.html">${ja ? 'PDFビューアを開く →' : 'Open PDF viewer →'}</a></header>
-        <div class="week-one-slideshow" data-slideshow role="group" aria-label="${ja ? '2026年度第1回講義スライド' : '2026 Week 1 lecture slides'}" tabindex="0"><div class="slide-stage"><img data-slide-image src="assets/week01/slides-2026/slide-01.jpg" alt="${ja ? '2026年度第1回スライド 1 / 57' : '2026 Week 1 lecture slide 1 of 57'}"></div><div class="slide-toolbar"><button type="button" data-slide-step="-1" aria-label="${ja ? '前のスライド' : 'Previous slide'}">←</button><output data-slide-count aria-live="polite">1 / 57</output><button type="button" data-slide-step="1" aria-label="${ja ? '次のスライド' : 'Next slide'}">→</button></div></div>
-        <p class="slide-archive-link"><a href="viewer.html?deck=2025">${ja ? '2025年度の参考スライド →' : '2025 reference slides →'}</a></p>
+      <section class="week-one-slide-panel" aria-labelledby="week-one-slides-title"><header class="material-heading"><div><p>WEEK 01 · TWO PRESENTATIONS</p><h4 id="week-one-slides-title">${ja ? '2つのプレゼンテーション' : 'Two presentations'}</h4></div></header>
+        <div class="map-tabs presentation-tabs" id="week-one-presentation-tabs" role="tablist" aria-label="${ja ? 'プレゼンテーションを選ぶ' : 'Choose a presentation'}"><button id="presentation-tab-course" type="button" role="tab" aria-selected="true" aria-controls="presentation-panel-course" tabindex="0">${ja ? '授業イントロ' : 'Course introduction'}</button><button id="presentation-tab-yoh" type="button" role="tab" aria-selected="false" aria-controls="presentation-panel-yoh" tabindex="-1">${ja ? 'Yohのストーリー' : "Yoh’s story"}</button></div>
+        <div class="presentation-tab-panel" id="presentation-panel-course" role="tabpanel" aria-labelledby="presentation-tab-course"><div class="material-heading presentation-panel-heading"><p>${ja ? '麗澤流エンジニア 第1回 · 57枚' : 'Reitaku Engineering · 57 slides'}</p><a href="viewer.html">${ja ? 'PDFビューアを開く →' : 'Open PDF viewer →'}</a></div>
+          <div class="week-one-slideshow" data-slideshow data-slide-dir="assets/week01/slides-2026" data-slide-total="57" data-slide-label="${ja ? '授業イントロ' : 'Course introduction'}" role="group" aria-label="${ja ? '授業イントロのスライド' : 'Course introduction slides'}" tabindex="0"><div class="slide-stage"><img data-slide-image src="assets/week01/slides-2026/slide-01.jpg" alt="${ja ? '授業イントロ 1 / 57' : 'Course introduction 1 of 57'}"></div><div class="slide-toolbar"><button type="button" data-slide-step="-1" aria-label="${ja ? '前のスライド' : 'Previous slide'}">←</button><output data-slide-count aria-live="polite">1 / 57</output><button type="button" data-slide-step="1" aria-label="${ja ? '次のスライド' : 'Next slide'}">→</button></div></div>
+        </div>
+        <div class="presentation-tab-panel" id="presentation-panel-yoh" role="tabpanel" aria-labelledby="presentation-tab-yoh" hidden><div class="material-heading presentation-panel-heading"><p>${ja ? 'Yohのエンジニア・ストーリー · 10枚' : 'Yoh’s engineering story · 10 slides'}</p><a href="viewer.html?deck=yoh">${ja ? 'PDFビューアを開く →' : 'Open PDF viewer →'}</a></div>
+          <div class="week-one-slideshow" data-slideshow data-slide-dir="assets/week01/slides" data-slide-total="10" data-slide-label="${ja ? 'Yohのプレゼン' : 'Yoh’s presentation'}" role="group" aria-label="${ja ? 'Yohのプレゼンテーション' : 'Yoh’s presentation slides'}" tabindex="0"><div class="slide-stage"><img data-slide-image src="assets/week01/slides/slide-01.jpg" alt="${ja ? 'Yohのプレゼン 1 / 10' : 'Yoh’s presentation 1 of 10'}"><a class="slide-atlas-link" data-atlas-link href="https://yohman.github.io/26-2-Global-Engineer/atlas.html" target="_blank" rel="noopener"><span>${ja ? 'Yohのエンジニアとしての歩み' : 'Yoh’s engineering story'}</span><strong>Atlas Journey ↗</strong></a></div><div class="slide-toolbar"><button type="button" data-slide-step="-1" aria-label="${ja ? '前のスライド' : 'Previous slide'}">←</button><output data-slide-count aria-live="polite">1 / 10</output><button type="button" data-slide-step="1" aria-label="${ja ? '次のスライド' : 'Next slide'}">→</button></div></div>
+        </div>
       </section>
-      <section class="engineer-map-panel" aria-labelledby="engineer-map-title"><header class="material-heading"><div><p>2025 LECTURE · TWO MAPS</p><h4 id="engineer-map-title">${ja ? '2つのマップを探索' : 'Explore the maps'}</h4></div></header>
+      <section class="engineer-map-panel" aria-labelledby="engineer-map-title"><header class="material-heading"><div><p>ENGINEERING · COMPUTER SCIENCE</p><h4 id="engineer-map-title">${ja ? '2つのマップを探索' : 'Explore the maps'}</h4></div></header>
         <div class="map-tabs" id="week-one-map-tabs" role="tablist" aria-label="${ja ? '地図を選ぶ' : 'Choose a map'}"><button id="map-tab-engineering" type="button" role="tab" aria-selected="true" aria-controls="map-panel-engineering" tabindex="0">${ja ? '工学マップ' : 'Engineering'}</button><button id="map-tab-computer-science" type="button" role="tab" aria-selected="false" aria-controls="map-panel-computer-science" tabindex="-1">${ja ? 'コンピュータサイエンス' : 'Computer Science'}</button></div>
         <div class="map-tab-panel" id="map-panel-engineering" role="tabpanel" aria-labelledby="map-tab-engineering">
         <div class="engineer-map-viewer" id="engineer-map-viewer" style="--map-ratio:2183 / 1643;--map-width-at-height:132.87vh;--map-height-at-width:75.27vw" tabindex="0" role="application" aria-label="${ja ? 'Engineer Map。クリックして全画面表示。全画面ではドラッグとスクロールで地図を操作できます。' : 'Engineer Map. Click to open fullscreen; then drag and scroll to explore.'}" data-map-viewer>
@@ -300,26 +305,30 @@ function initEngineerMapViewers() {
     const image = slideshow.querySelector('[data-slide-image]');
     const count = slideshow.querySelector('[data-slide-count]');
     const buttons = [...slideshow.querySelectorAll('[data-slide-step]')];
+    const total = Number(slideshow.dataset.slideTotal);
+    const directory = slideshow.dataset.slideDir;
+    const atlasLink = slideshow.querySelector('[data-atlas-link]');
     let current = 1;
     const show = page => {
-      current = Math.max(1, Math.min(57, page));
-      image.src = `assets/week01/slides-2026/slide-${String(current).padStart(2,'0')}.jpg`;
-      image.alt = `${language === 'ja' ? '2026年度第1回スライド' : '2026 Week 1 lecture slide'} ${current} / 57`;
-      count.value = `${current} / 57`; count.textContent = count.value;
-      buttons[0].disabled = current === 1; buttons[1].disabled = current === 57;
+      current = Math.max(1, Math.min(total, page));
+      image.src = `${directory}/slide-${String(current).padStart(2,'0')}.jpg`;
+      image.alt = `${slideshow.dataset.slideLabel} ${current} / ${total}`;
+      count.value = `${current} / ${total}`; count.textContent = count.value;
+      buttons[0].disabled = current === 1; buttons[1].disabled = current === total;
+      if (atlasLink) atlasLink.hidden = current !== 1;
     };
     buttons.forEach(button => button.addEventListener('click', () => show(current + Number(button.dataset.slideStep))));
     slideshow.addEventListener('keydown', event => {
       if (event.key === 'ArrowLeft') { event.preventDefault(); show(current - 1); }
       else if (event.key === 'ArrowRight') { event.preventDefault(); show(current + 1); }
       else if (event.key === 'Home') { event.preventDefault(); show(1); }
-      else if (event.key === 'End') { event.preventDefault(); show(57); }
+      else if (event.key === 'End') { event.preventDefault(); show(total); }
     });
     show(current);
   });
 }
-function initWeekOneMapTabs() {
-  const tabs = [...document.querySelectorAll('#week-one-map-tabs [role="tab"]')];
+function initWeekOneTabs(tablistId) {
+  const tabs = [...document.querySelectorAll(`#${tablistId} [role="tab"]`)];
   if (!tabs.length) return;
   const activate = index => tabs.forEach((tab, i) => {
     const selected = i === index;
@@ -368,7 +377,8 @@ function renderAgenda() {
   }).join('') + `<p class="schedule-note">${language === 'ja' ? '最終発表は2回を予定しています。もう一回の日程は未定です。' : 'Two final presentation sessions are intended. The second date is to be confirmed.'}</p>`;
   target.querySelectorAll('details.agenda-more').forEach(details => details.addEventListener('toggle', () => agendaOpenState.set(details.dataset.week, details.open)));
   initEngineerMapViewers();
-  initWeekOneMapTabs();
+  initWeekOneTabs('week-one-presentation-tabs');
+  initWeekOneTabs('week-one-map-tabs');
 }
 function renderGuests() {
   const target = document.querySelector('#guest-list'); if (!target) return;
