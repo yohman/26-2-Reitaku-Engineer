@@ -151,8 +151,9 @@ function weekOneMaterialsHtml() {
       <a class="question-cta" href="${QUESTIONS_URL}" target="_blank" rel="noopener"><span>${ja ? '質問がありますか？' : 'Have a question?'}</span><strong>${ja ? '授業への質問を送る' : 'Ask a question about this class'} <b aria-hidden="true">↗</b></strong><small>${ja ? '質問フォームを新しいタブで開く' : 'Open the student question form'}</small></a>
     </div>
     <div class="week-one-material-grid">
-      <section class="week-one-slide-panel" aria-labelledby="week-one-slides-title"><header class="material-heading"><div><p>2025 MATERIAL · 10 SLIDES</p><h4 id="week-one-slides-title">${ja ? '講義スライド' : 'Lecture slides'}</h4></div><a href="viewer.html">${ja ? 'PDFビューアを開く →' : 'Open PDF viewer →'}</a></header>
-        <div class="week-one-slideshow" data-slideshow role="group" aria-label="${ja ? '第1回講義スライド' : 'Week 1 lecture slides'}" tabindex="0"><div class="slide-stage"><img data-slide-image src="assets/week01/slides/slide-01.jpg" alt="${ja ? '2025年度第1回スライド 1 / 10' : '2025 Week 1 lecture slide 1 of 10'}"></div><div class="slide-toolbar"><button type="button" data-slide-step="-1" aria-label="${ja ? '前のスライド' : 'Previous slide'}">←</button><output data-slide-count aria-live="polite">1 / 10</output><button type="button" data-slide-step="1" aria-label="${ja ? '次のスライド' : 'Next slide'}">→</button></div></div>
+      <section class="week-one-slide-panel" aria-labelledby="week-one-slides-title"><header class="material-heading"><div><p>2026 PRESENTATION · 57 SLIDES</p><h4 id="week-one-slides-title">${ja ? '講義スライド' : 'Lecture slides'}</h4></div><a href="viewer.html">${ja ? 'PDFビューアを開く →' : 'Open PDF viewer →'}</a></header>
+        <div class="week-one-slideshow" data-slideshow role="group" aria-label="${ja ? '2026年度第1回講義スライド' : '2026 Week 1 lecture slides'}" tabindex="0"><div class="slide-stage"><img data-slide-image src="assets/week01/slides-2026/slide-01.jpg" alt="${ja ? '2026年度第1回スライド 1 / 57' : '2026 Week 1 lecture slide 1 of 57'}"></div><div class="slide-toolbar"><button type="button" data-slide-step="-1" aria-label="${ja ? '前のスライド' : 'Previous slide'}">←</button><output data-slide-count aria-live="polite">1 / 57</output><button type="button" data-slide-step="1" aria-label="${ja ? '次のスライド' : 'Next slide'}">→</button></div></div>
+        <p class="slide-archive-link"><a href="viewer.html?deck=2025">${ja ? '2025年度の参考スライド →' : '2025 reference slides →'}</a></p>
       </section>
       <section class="engineer-map-panel" aria-labelledby="engineer-map-title"><header class="material-heading"><div><p>2025 LECTURE · TWO MAPS</p><h4 id="engineer-map-title">${ja ? '2つのマップを探索' : 'Explore the maps'}</h4></div></header>
         <div class="map-tabs" id="week-one-map-tabs" role="tablist" aria-label="${ja ? '地図を選ぶ' : 'Choose a map'}"><button id="map-tab-engineering" type="button" role="tab" aria-selected="true" aria-controls="map-panel-engineering" tabindex="0">${ja ? '工学マップ' : 'Engineering'}</button><button id="map-tab-computer-science" type="button" role="tab" aria-selected="false" aria-controls="map-panel-computer-science" tabindex="-1">${ja ? 'コンピュータサイエンス' : 'Computer Science'}</button></div>
@@ -301,18 +302,18 @@ function initEngineerMapViewers() {
     const buttons = [...slideshow.querySelectorAll('[data-slide-step]')];
     let current = 1;
     const show = page => {
-      current = Math.max(1, Math.min(10, page));
-      image.src = `assets/week01/slides/slide-${String(current).padStart(2,'0')}.jpg`;
-      image.alt = `${language === 'ja' ? '2025年度第1回スライド' : '2025 Week 1 lecture slide'} ${current} / 10`;
-      count.value = `${current} / 10`; count.textContent = count.value;
-      buttons[0].disabled = current === 1; buttons[1].disabled = current === 10;
+      current = Math.max(1, Math.min(57, page));
+      image.src = `assets/week01/slides-2026/slide-${String(current).padStart(2,'0')}.jpg`;
+      image.alt = `${language === 'ja' ? '2026年度第1回スライド' : '2026 Week 1 lecture slide'} ${current} / 57`;
+      count.value = `${current} / 57`; count.textContent = count.value;
+      buttons[0].disabled = current === 1; buttons[1].disabled = current === 57;
     };
     buttons.forEach(button => button.addEventListener('click', () => show(current + Number(button.dataset.slideStep))));
     slideshow.addEventListener('keydown', event => {
       if (event.key === 'ArrowLeft') { event.preventDefault(); show(current - 1); }
       else if (event.key === 'ArrowRight') { event.preventDefault(); show(current + 1); }
       else if (event.key === 'Home') { event.preventDefault(); show(1); }
-      else if (event.key === 'End') { event.preventDefault(); show(10); }
+      else if (event.key === 'End') { event.preventDefault(); show(57); }
     });
     show(current);
   });

@@ -6,12 +6,19 @@ const linkLayer = viewer.querySelector('[data-link-layer]');
 const previous = viewer.querySelector('[data-previous]');
 const next = viewer.querySelector('[data-next]');
 const pageInput = viewer.querySelector('[data-page-input]');
+const pageTotal = viewer.querySelector('[data-page-total]');
 const fullscreenButton = viewer.querySelector('[data-fullscreen]');
 const fullscreenLabel = viewer.querySelector('[data-fullscreen-label]');
 const languageButton = document.querySelector('[data-language-toggle]');
-const pageCount = 10;
-const pdfUrl = 'assets/week01/week01-slides.pdf';
-const fallbackLinks = new Map([[2, [{url: 'https://youtu.be/rk9Uwvno9SU', rect: [312.75, 245.25, 647.25, 272.25]}]]]);
+const archiveDeck = new URLSearchParams(location.search).get('deck') === '2025';
+const pageCount = archiveDeck ? 10 : 57;
+const pdfUrl = archiveDeck ? 'assets/week01/week01-slides.pdf' : 'assets/week01/麗澤流エンジニア2026_1.pdf';
+const slideDirectory = archiveDeck ? 'assets/week01/slides' : 'assets/week01/slides-2026';
+const questionUrl = 'https://script.google.com/macros/s/AKfycbz7kuUplBbrLkwNnpCSfE_fH3Ua1PL3rd3Ml84l4-oc13gfjQmDaCY1OF4AkGNyiwEF/exec?lecture=engineer';
+const draftQuestionUrl = 'https://script.google.com/macros/s/AKfycby4YxQXKwTc0IYB4p8Gr9ASgoKpcUewbDwASkmqbKk/dev?lecture=engineer';
+const fallbackLinks = archiveDeck
+  ? new Map([[2, [{url: 'https://youtu.be/rk9Uwvno9SU', rect: [312.75, 245.25, 647.25, 272.25]}]]])
+  : new Map([[8, [{url: questionUrl, rect: [90, 115, 700, 205]}]]]);
 const fallbackPageSize = {width: 960, height: 540};
 let language = (() => { try { return localStorage.getItem('reitaku-engineering-language') || 'en'; } catch { return 'en'; } })();
 let currentPage = Math.max(1, Math.min(pageCount, Number(new URLSearchParams(location.search).get('page')) || 1));
@@ -26,13 +33,16 @@ function setLanguage() {
     element.textContent = language === 'ja' ? element.dataset.ja : element.dataset.en;
   });
   document.title = `${language === 'ja' ? '第1回スライド' : 'Week 1 slides'} · Reitaku Engineering`;
+  document.querySelector('.viewer-heading h1').textContent = archiveDeck
+    ? (language === 'ja' ? '2025年度の参考スライド' : '2025 reference slides')
+    : (language === 'ja' ? '麗澤流エンジニア 第1回' : 'Reitaku Engineering · Week 1');
   languageButton.textContent = language === 'ja' ? 'EN' : 'JP';
   languageButton.setAttribute('aria-label', language === 'ja' ? 'Switch to English' : '日本語に切り替える');
   previous.setAttribute('aria-label', language === 'ja' ? '前のページ' : 'Previous page');
   next.setAttribute('aria-label', language === 'ja' ? '次のページ' : 'Next page');
   pageInput.setAttribute('aria-label', language === 'ja' ? 'ページ番号' : 'Page number');
   viewer.setAttribute('aria-label', language === 'ja' ? '第1回PDFスライドビューア' : 'Week 1 PDF slide viewer');
-  image.alt = `${language === 'ja' ? '2025年度第1回講義スライド' : '2025 Week 1 lecture slide'} ${currentPage} / ${pageCount}`;
+  image.alt = `${language === 'ja' ? `${archiveDeck ? '2025' : '2026'}年度第1回講義スライド` : `${archiveDeck ? '2025' : '2026'} Week 1 lecture slide`} ${currentPage} / ${pageCount}`;
   linkLayer.querySelectorAll('a').forEach(link => setLinkLabel(link));
   updateFullscreenLabel();
 }
@@ -49,7 +59,7 @@ function placeLinks(links, width, height, convertRect) {
   linkLayer.style.height = `${height}px`;
   for (const annotation of links) {
     let url;
-    try { url = new URL(annotation.url); } catch { continue; }
+    try { url = new URL(annotation.url === draftQuestionUrl ? questionUrl : annotation.url); } catch { continue; }
     if (url.protocol !== 'https:' && url.protocol !== 'http:') continue;
     const [x1, y1, x2, y2] = convertRect(annotation.rect);
     const left = Math.min(x1, x2), top = Math.min(y1, y2);
@@ -94,7 +104,7 @@ function updateFullscreenLabel() {
 }
 
 function pageImage(page) {
-  return `assets/week01/slides/slide-${String(page).padStart(2, '0')}.jpg`;
+  return `${slideDirectory}/slide-${String(page).padStart(2, '0')}.jpg`;
 }
 
 async function renderPdfPage(pageNumber) {
@@ -145,8 +155,10 @@ function showPage(requestedPage) {
   canvas.hidden = true;
   linkLayer.replaceChildren();
   linkLayer.hidden = true;
-  image.alt = `${language === 'ja' ? '2025年度第1回講義スライド' : '2025 Week 1 lecture slide'} ${currentPage} / ${pageCount}`;
+  image.alt = `${language === 'ja' ? `${archiveDeck ? '2025' : '2026'}年度第1回講義スライド` : `${archiveDeck ? '2025' : '2026'} Week 1 lecture slide`} ${currentPage} / ${pageCount}`;
   pageInput.value = currentPage;
+  pageInput.max = String(pageCount);
+  pageTotal.textContent = `/ ${pageCount}`;
   previous.disabled = currentPage === 1;
   next.disabled = currentPage === pageCount;
   const url = new URL(location.href);
