@@ -2,6 +2,7 @@ const viewer = document.querySelector('.slide-pdf-viewer');
 const stage = viewer.querySelector('[data-stage]');
 const image = viewer.querySelector('[data-slide-image]');
 const canvas = viewer.querySelector('[data-pdf-canvas]');
+const linkLayer = viewer.querySelector('[data-link-layer]');
 const previous = viewer.querySelector('[data-previous]');
 const next = viewer.querySelector('[data-next]');
 const pageInput = viewer.querySelector('[data-page-input]');
@@ -10,6 +11,8 @@ const fullscreenLabel = viewer.querySelector('[data-fullscreen-label]');
 const languageButton = document.querySelector('[data-language-toggle]');
 const pageCount = 10;
 const pdfUrl = 'assets/week01/week01-slides.pdf';
+const fallbackLinks = new Map([[2, [{url: 'https://youtu.be/rk9Uwvno9SU', rect: [312.75, 245.25, 647.25, 272.25]}]]]);
+const fallbackPageSize = {width: 960, height: 540};
 let language = (() => { try { return localStorage.getItem('reitaku-engineering-language') || 'en'; } catch { return 'en'; } })();
 let currentPage = Math.max(1, Math.min(pageCount, Number(new URLSearchParams(location.search).get('page')) || 1));
 let pdf = null;
@@ -30,7 +33,54 @@ function setLanguage() {
   pageInput.setAttribute('aria-label', language === 'ja' ? 'ページ番号' : 'Page number');
   viewer.setAttribute('aria-label', language === 'ja' ? '第1回PDFスライドビューア' : 'Week 1 PDF slide viewer');
   image.alt = `${language === 'ja' ? '2025年度第1回講義スライド' : '2025 Week 1 lecture slide'} ${currentPage} / ${pageCount}`;
+  linkLayer.querySelectorAll('a').forEach(link => setLinkLabel(link));
   updateFullscreenLabel();
+}
+
+function setLinkLabel(link) {
+  link.setAttribute('aria-label', language === 'ja'
+    ? `${link.dataset.host} を新しいタブで開く`
+    : `Open ${link.dataset.host} in a new tab`);
+}
+
+function placeLinks(links, width, height, convertRect) {
+  linkLayer.replaceChildren();
+  linkLayer.style.width = `${width}px`;
+  linkLayer.style.height = `${height}px`;
+  for (const annotation of links) {
+    let url;
+    try { url = new URL(annotation.url); } catch { continue; }
+    if (url.protocol !== 'https:' && url.protocol !== 'http:') continue;
+    const [x1, y1, x2, y2] = convertRect(annotation.rect);
+    const left = Math.min(x1, x2), top = Math.min(y1, y2);
+    const right = Math.max(x1, x2), bottom = Math.max(y1, y2);
+    const link = document.createElement('a');
+    link.href = url.href;
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+    link.title = url.href;
+    link.dataset.host = url.hostname;
+    setLinkLabel(link);
+    link.style.left = `${left}px`;
+    link.style.top = `${top}px`;
+    link.style.width = `${right - left}px`;
+    link.style.height = `${bottom - top}px`;
+    linkLayer.append(link);
+  }
+  linkLayer.hidden = !linkLayer.childElementCount;
+}
+
+function showFallbackLinks() {
+  if (image.hidden) return;
+  const width = image.getBoundingClientRect().width;
+  const height = image.getBoundingClientRect().height;
+  if (!width || !height) return;
+  placeLinks(fallbackLinks.get(currentPage) || [], width, height, rect => [
+    rect[0] / fallbackPageSize.width * width,
+    (fallbackPageSize.height - rect[3]) / fallbackPageSize.height * height,
+    rect[2] / fallbackPageSize.width * width,
+    (fallbackPageSize.height - rect[1]) / fallbackPageSize.height * height
+  ]);
 }
 
 function updateFullscreenLabel() {
@@ -56,6 +106,7 @@ async function renderPdfPage(pageNumber) {
   try {
     const page = await pdf.getPage(pageNumber);
     if (revision !== renderRevision) return;
+    const annotationsTask = page.getAnnotations({intent: 'display'}).catch(() => []);
     const base = page.getViewport({scale: 1});
     const scale = Math.min(
       Math.max(1, stage.clientWidth - 32) / base.width,
@@ -71,13 +122,18 @@ async function renderPdfPage(pageNumber) {
     context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
     renderTask = page.render({canvasContext: context, viewport});
     await renderTask.promise;
+    const annotations = await annotationsTask;
     if (revision !== renderRevision) return;
     canvas.hidden = false;
     image.hidden = true;
+    const links = annotations.filter(annotation => annotation.subtype === 'Link' && annotation.url);
+    placeLinks(links.length ? links : fallbackLinks.get(pageNumber) || [], viewport.width, viewport.height,
+      rect => viewport.convertToViewportRectangle(rect));
   } catch (error) {
     if (error?.name !== 'RenderingCancelledException' && revision === renderRevision) {
       canvas.hidden = true;
       image.hidden = false;
+      requestAnimationFrame(showFallbackLinks);
     }
   }
 }
@@ -87,6 +143,8 @@ function showPage(requestedPage) {
   image.src = pageImage(currentPage);
   image.hidden = false;
   canvas.hidden = true;
+  linkLayer.replaceChildren();
+  linkLayer.hidden = true;
   image.alt = `${language === 'ja' ? '2025年度第1回講義スライド' : '2025 Week 1 lecture slide'} ${currentPage} / ${pageCount}`;
   pageInput.value = currentPage;
   previous.disabled = currentPage === 1;
@@ -95,8 +153,11 @@ function showPage(requestedPage) {
   if (currentPage === 1) url.searchParams.delete('page');
   else url.searchParams.set('page', String(currentPage));
   history.replaceState(null, '', url);
+  requestAnimationFrame(showFallbackLinks);
   renderPdfPage(currentPage);
 }
+
+image.addEventListener('load', showFallbackLinks);
 
 previous.addEventListener('click', () => showPage(currentPage - 1));
 next.addEventListener('click', () => showPage(currentPage + 1));
@@ -131,6 +192,7 @@ document.addEventListener('fullscreenchange', () => {
 });
 window.addEventListener('resize', () => {
   if (pdf) requestAnimationFrame(() => renderPdfPage(currentPage));
+  else requestAnimationFrame(showFallbackLinks);
 });
 languageButton.addEventListener('click', () => {
   language = language === 'en' ? 'ja' : 'en';
