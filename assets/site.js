@@ -67,14 +67,79 @@ function sectionHtml(value) {
 }
 const QUESTIONS_URL = 'https://script.google.com/macros/s/AKfycbz7kuUplBbrLkwNnpCSfE_fH3Ua1PL3rd3Ml84l4-oc13gfjQmDaCY1OF4AkGNyiwEF/exec?lecture=engineer';
 const COMPUTER_SCIENCE_MAP_TERMS = [
-  ['Computational complexity','計算複雑性',22.2,10.5],['Information theory','情報理論',37.7,12],['Cryptography','暗号理論',49.3,10.5],['Scheduling','スケジューリング',81,11.6],['Computer architecture','コンピュータ・アーキテクチャ',97.7,11.6],
-  ['Theoretical computer science','理論計算機科学',50.6,26],['Computability theory','計算可能性理論',39.6,29.5],['Turing machine','チューリングマシン',57.7,30.4],['Computer engineering','コンピュータ工学',90.3,28],['Algorithms','アルゴリズム',15.4,35.5],['Logic','論理学',22.5,33],
-  ['Graph theory','グラフ理論',24.1,49],['Computational geometry','計算幾何学',34.5,49],['Automata theory','オートマトン理論',41,53.8],['Formal methods','形式手法',68,37],['Parallel programming','並列プログラミング',62.8,43.5],
-  ['Software and programming languages','ソフトウェアと言語',93.2,32.3],['Compilers','コンパイラ',88.5,43.5],['Software engineering','ソフトウェア工学',74.8,47.3],['Operating systems','オペレーティングシステム',86,46.3],['Networking','ネットワーク',95,45.9],['Data management','データ管理',88.5,50.4],
-  ['Machine learning','機械学習',17,52.7],['Optimisation','最適化',29.3,56.5],['Boolean satisfiability','充足可能性問題',47,56.1],['Supercomputing','スーパーコンピューティング',60,58.3],['Computer graphics','コンピュータグラフィックス',76.3,57],
-  ['Artificial intelligence','人工知能',34.5,66],['Robotics','ロボット工学',42.5,66],['Computer vision','コンピュータビジョン',16.8,69],['Image processing','画像処理',16.4,96],['Natural language processing','自然言語処理',36,84.1],
-  ['Knowledge representation','知識表現',43.5,89],['Telepresence','テレプレゼンス',55.3,81.5],['Virtual reality','仮想現実',74,78],['Augmented reality','拡張現実',71,81.8],['Human-computer interaction','ヒューマン・コンピュータ・インタラクション',80.5,81.8],
-  ['Simulation','シミュレーション',85.5,79.7],['Computational science','計算科学',91,62.1],['Hacking','ハッキング',96,68],['Internet of things','モノのインターネット',85,90.5],['Big data','ビッグデータ',88.5,93.8]
+  ['Computational complexity','計算複雑性',22.2,10.5],
+  ['NP-complete','NP完全',18,16],
+  ['BQP','BQP（量子計算の複雑性クラス）',17,23],
+  ['P','P（多項式時間）',17,27],
+  ['Information theory','情報理論',37.7,12],
+  ['Coding theory','符号理論',39,20],
+  ['Cryptography','暗号理論',49.3,10.5],
+  ['Monitor','モニター',57,13],
+  ['GPU','GPU（画像処理装置）',54,19],
+  ['SSD','SSD（半導体記憶装置）',60,17],
+  ['Hardware','ハードウェア',69,15],
+  ['RAM','RAM（主記憶装置）',60,22],
+  ['CPU','CPU（中央処理装置）',55,25],
+  ['Motherboard','マザーボード',60,28],
+  ['Data structures','データ構造',68,25],
+  ['Scheduling','スケジューリング',81,11.6],
+  ['Scheduler','スケジューラ',79,19],
+  ['Multiprocessing','マルチプロセッシング',79,25],
+  ['Computer architecture','コンピュータ・アーキテクチャ',97.7,11.6],
+  ['Central processing unit','中央処理装置',87,17],
+  ['Control unit','制御装置',87,19],
+  ['Arithmetic logic unit','算術論理装置',87,22],
+  ['Memory unit','記憶装置',87,25],
+  ['Theoretical computer science','理論計算機科学',50.6,26],
+  ['Computability theory','計算可能性理論',39.6,29.5],
+  ['Turing machine','チューリングマシン',57.7,30.4],
+  ['Computer engineering','コンピュータ工学',90.3,28],
+  ['Algorithms','アルゴリズム',15.4,35.5],
+  ['Logic','論理学',22.5,33],
+  ['Graph theory','グラフ理論',23.2,45],
+  ['Computational geometry','計算幾何学',30,45],
+  ['Automata theory','オートマトン理論',37,45.5],
+  ['Quantum computation','量子計算',45,45],
+  ['And more','その他',54,45],
+  ['Formal methods','形式手法',64,37],
+  ['Parallel programming','並列プログラミング',60,44],
+  ['Software and programming languages','ソフトウェアとプログラミング言語',93.2,32.3],
+  ['Web apps','ウェブアプリ',92,35],
+  ['Browser','ブラウザー',90,37],
+  ['Applications (software)','アプリケーションソフト',89,39],
+  ['BIOS','BIOS（基本入出力システム）',85,42],
+  ['Silicon','シリコン',83,44],
+  ['Compilers','コンパイラ',90.5,41],
+  ['Software engineering','ソフトウェア工学',74.8,47.3],
+  ['Operating systems','オペレーティングシステム',85,47.5],
+  ['Networking','ネットワーク',93,47],
+  ['Data management','データ管理',90,44],
+  ['Analysis of algorithms','アルゴリズム解析',9,54],
+  ['Algorithmic complexity','アルゴリズムの計算量',16,54],
+  ['Machine learning','機械学習',16,58.5],
+  ['Optimisation','最適化',29.3,56.5],
+  ['Boolean satisfiability','ブール充足可能性問題',47,56.1],
+  ['Supercomputing','スーパーコンピューティング',60,58.3],
+  ['Computer graphics','コンピュータグラフィックス',73,61],
+  ['Performance','性能',89,55],
+  ['Artificial intelligence','人工知能',32,69],
+  ['Robotics','ロボット工学',40,70],
+  ['Computer vision','コンピュータビジョン',15,72],
+  ['Find the humans','人を探そう',15,75],
+  ['Image processing','画像処理',16.4,96],
+  ['Natural language processing','自然言語処理',36,84.1],
+  ['Chatbots','チャットボット',26,87],
+  ['Knowledge representation','知識表現',43,96],
+  ['Applications','応用分野',58,77.5],
+  ['Telepresence','テレプレゼンス',49,84],
+  ['Virtual reality','仮想現実',73,79],
+  ['Augmented reality','拡張現実',66,83],
+  ['Human-computer interaction','ヒューマン・コンピュータ・インタラクション',78,84],
+  ['Simulation','シミュレーション',85.5,79.7],
+  ['Computational science','計算科学',90,63],
+  ['Hacking','ハッキング',90,65],
+  ['Internet of things','モノのインターネット',87,96],
+  ['Big data','ビッグデータ',89,80]
 ];
 function computerScienceMapTermsHtml() {
   return COMPUTER_SCIENCE_MAP_TERMS.map(([english,japanese,x,y]) => `<button class="map-term" style="--x:${x}%;--y:${y}%" data-map-term="${english}" data-map-ja="${japanese}"><span>${english}</span><span lang="ja">${japanese}</span></button>`).join('');
@@ -117,13 +182,13 @@ function weekOneMaterialsHtml() {
             <button class="map-term" style="--x:95.1%;--y:52.8%" data-map-term="Electrical engineering" data-map-ja="電気工学"><span>Electrical engineering</span><span lang="ja">電気工学</span></button>
             <button class="map-term" style="--x:14.4%;--y:63%" data-map-term="Power and energy systems" data-map-ja="電力・エネルギーシステム"><span>Power and energy systems</span><span lang="ja">電力・エネルギーシステム</span></button>
             <button class="map-term" style="--x:12.9%;--y:82%" data-map-term="Chemical engineering" data-map-ja="化学工学"><span>Chemical engineering</span><span lang="ja">化学工学</span></button>
-            <button class="map-term" style="--x:46.9%;--y:56%" data-map-term="Biomedical engineering" data-map-ja="生体医工学"><span>Biomedical engineering</span><span lang="ja">生体医工学</span></button>
-            <button class="map-term" style="--x:79.2%;--y:53%" data-map-term="Photonics" data-map-ja="フォトニクス・光工学"><span>Photonics</span><span lang="ja">フォトニクス・光工学</span></button>
+            <button class="map-term" style="--x:46.9%;--y:80%" data-map-term="Biomedical engineering" data-map-ja="生体医工学"><span>Biomedical engineering</span><span lang="ja">生体医工学</span></button>
+            <button class="map-term" style="--x:79.2%;--y:76%" data-map-term="Photonics" data-map-ja="フォトニクス・光工学"><span>Photonics</span><span lang="ja">フォトニクス・光工学</span></button>
             <button class="map-term" style="--x:92.3%;--y:83%" data-map-term="Computer engineering" data-map-ja="コンピュータ工学"><span>Computer engineering</span><span lang="ja">コンピュータ工学</span></button>
             <button class="map-term" style="--x:82.5%;--y:90%" data-map-term="Software engineering" data-map-ja="ソフトウェア工学"><span>Software engineering</span><span lang="ja">ソフトウェア工学</span></button>
             <button class="map-term" style="--x:80%;--y:92%" data-map-term="Network engineering" data-map-ja="ネットワーク工学"><span>Network engineering</span><span lang="ja">ネットワーク工学</span></button>
             <button class="map-term" style="--x:89.3%;--y:91%" data-map-term="Data engineering" data-map-ja="データ工学"><span>Data engineering</span><span lang="ja">データ工学</span></button>
-            <button class="map-term" style="--x:52%;--y:77%" data-map-term="Bio-engineering" data-map-ja="生物工学"><span>Bio-engineering</span><span lang="ja">生物工学</span></button>
+            <button class="map-term" style="--x:52%;--y:95%" data-map-term="Bio-engineering" data-map-ja="生物工学"><span>Bio-engineering</span><span lang="ja">生物工学</span></button>
           </div></div>
           <p class="map-viewer-instruction">${ja ? '丸印にカーソルを合わせると日本語訳' : 'Hover a marker for the Japanese translation'}</p><span class="map-open-cue" aria-hidden="true">${ja ? 'クリックして全画面 ↗' : 'Click to open fullscreen ↗'}</span><div class="map-viewer-toolbar" aria-label="${ja ? '地図の操作' : 'Map controls'}"><button type="button" data-map-action="out" aria-label="${ja ? '縮小' : 'Zoom out'}">−</button><output data-map-zoom aria-live="polite">100%</output><button type="button" data-map-action="in" aria-label="${ja ? '拡大' : 'Zoom in'}">+</button><button type="button" data-map-action="reset">${ja ? 'リセット' : 'Reset'}</button><button type="button" data-map-action="fullscreen" aria-pressed="false">${ja ? '全画面' : 'Fullscreen'}</button></div>
         </div><p class="map-viewer-hint">${ja ? 'クリックして全画面表示 · 全画面では丸印にカーソルを合わせると日本語訳' : 'Click the map for fullscreen · In fullscreen, hover a marker for its Japanese translation'}</p><p class="map-original-link"><a href="assets/week01/engineer-map.png" target="_blank" rel="noopener">${ja ? 'Engineer Mapの原寸画像 ↗' : 'Open the original Engineer Map ↗'}</a></p>
