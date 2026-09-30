@@ -259,6 +259,7 @@ function initWeekOneMapTabs() {
   });
 }
 let weeks = [], guests = [];
+const agendaOpenState = new Map();
 function renderHome() {
   const target = document.querySelector('#next-class'); if (!target) return;
   const today = new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Tokyo',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
@@ -269,6 +270,7 @@ function renderHome() {
 }
 function renderAgenda() {
   const target = document.querySelector('#agenda-list'); if (!target) return;
+  target.querySelectorAll('details.agenda-more').forEach(details => agendaOpenState.set(details.dataset.week, details.open));
   const planning = new URLSearchParams(location.search).has('planning');
   const today = new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Tokyo',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
   target.innerHTML = weeks.map(w => {
@@ -277,8 +279,10 @@ function renderAgenda() {
     const summary = localized(w,'overview') || (language === 'ja' ? '詳細は後日案内します。' : 'Details forthcoming.');
     const sections = [language === 'ja' ? 'Reaction JP' : 'Reaction',language === 'ja' ? 'Materials JP' : 'Materials','Resources'].filter(key => w.sections[key]);
     const details = sections.map(key => `<div class="detail-block"><h3>${key === 'Resources' ? (language === 'ja' ? '参考資料' : 'Background resource') : key.includes('Reaction') ? (language === 'ja' ? '振り返り' : 'Reflection') : (language === 'ja' ? '資料' : 'Materials')}</h3>${sectionHtml(w.sections[key])}</div>`).join('');
-    return `<article class="agenda-week" id="week-${escapeHtml(w.week)}"><div class="agenda-week-heading"><div><span class="week-number">${String(w.week).padStart(2,'0')}</span><p class="week-date">${escapeHtml(dateLabel(w.date,{month:'short',day:'numeric'}))}</p></div><div class="agenda-week-title"><p>${language === 'ja' ? '木曜日 · 4限' : 'Thursday · Period 4'} · ${escapeHtml(dateLabel(w.date))}</p><h2>${escapeHtml(localized(w,'title'))}</h2><p class="speaker-line">${speaker}</p></div></div>${Number(w.week) === 1 ? weekOneMaterialsHtml() : ''}<details class="agenda-more" ${planning || w.date <= today ? 'open' : ''}><summary>${language === 'ja' ? '授業の詳細' : 'Class details'}</summary><div class="agenda-content"><p class="agenda-overview">${escapeHtml(summary)}</p>${details}</div></details></article>`;
+    const isOpen = agendaOpenState.get(w.week) ?? (Number(w.week) === 1 || planning || w.date <= today);
+    return `<article class="agenda-week" id="week-${escapeHtml(w.week)}"><div class="agenda-week-heading"><div><span class="week-number">${String(w.week).padStart(2,'0')}</span><p class="week-date">${escapeHtml(dateLabel(w.date,{month:'short',day:'numeric'}))}</p></div><div class="agenda-week-title"><p>${language === 'ja' ? '木曜日 · 4限' : 'Thursday · Period 4'} · ${escapeHtml(dateLabel(w.date))}</p><h2>${escapeHtml(localized(w,'title'))}</h2><p class="speaker-line">${speaker}</p></div></div><details class="agenda-more" data-week="${escapeHtml(w.week)}" ${isOpen ? 'open' : ''}><summary><span class="agenda-label-closed">${language === 'ja' ? '授業の詳細を見る' : 'Expand week details'}</span><span class="agenda-label-open">${language === 'ja' ? '授業の詳細を閉じる' : 'Collapse week details'}</span><span class="agenda-summary-symbol" aria-hidden="true"></span></summary><div class="agenda-content"><p class="agenda-overview">${escapeHtml(summary)}</p>${details}</div>${Number(w.week) === 1 ? weekOneMaterialsHtml() : ''}</details></article>`;
   }).join('') + `<p class="schedule-note">${language === 'ja' ? '最終発表は2回を予定しています。もう一回の日程は未定です。' : 'Two final presentation sessions are intended. The second date is to be confirmed.'}</p>`;
+  target.querySelectorAll('details.agenda-more').forEach(details => details.addEventListener('toggle', () => agendaOpenState.set(details.dataset.week, details.open)));
   initEngineerMapViewers();
   initWeekOneMapTabs();
 }
