@@ -296,7 +296,11 @@ function renderAgenda() {
     const speaker = guest ? `<a href="guests.html#${escapeHtml(guest.id)}">${escapeHtml(localized(guest,'name'))} ↗</a>` : '';
     const summary = localized(w,'overview') || (language === 'ja' ? '詳細は後日案内します。' : 'Details forthcoming.');
     const sections = [language === 'ja' ? 'Reaction JP' : 'Reaction',language === 'ja' ? 'Materials JP' : 'Materials','Resources'].filter(key => w.sections[key]);
-    const details = sections.map(key => `<div class="detail-block"><h3>${key === 'Resources' ? (language === 'ja' ? '参考資料' : 'Background resource') : key.includes('Reaction') ? (language === 'ja' ? '振り返り' : 'Reflection') : (language === 'ja' ? '資料' : 'Materials')}</h3>${sectionHtml(w.sections[key])}</div>`).join('');
+    const details = sections.map(key => {
+      const heading = key === 'Resources' ? (language === 'ja' ? '参考資料' : 'Background resource') : key.includes('Reaction') ? (language === 'ja' ? '振り返り' : 'Reflection') : (language === 'ja' ? '資料' : 'Materials');
+      const showHeading = !(Number(w.week) === 1 && key.startsWith('Materials'));
+      return `<div class="detail-block">${showHeading ? `<h3>${heading}</h3>` : ''}${sectionHtml(w.sections[key])}</div>`;
+    }).join('');
     const isOpen = agendaOpenState.get(w.week) ?? (Number(w.week) === 1 || planning || w.date <= today);
     return `<article class="agenda-week" id="week-${escapeHtml(w.week)}"><div class="agenda-week-heading"><div><span class="week-number">${String(w.week).padStart(2,'0')}</span><p class="week-date">${escapeHtml(dateLabel(w.date,{month:'short',day:'numeric'}))}</p></div><div class="agenda-week-title"><p>${language === 'ja' ? '木曜日 · 4限' : 'Thursday · Period 4'} · ${escapeHtml(dateLabel(w.date))}</p><h2>${escapeHtml(localized(w,'title'))}</h2><p class="speaker-line">${speaker}</p></div></div><details class="agenda-more" data-week="${escapeHtml(w.week)}" ${isOpen ? 'open' : ''}><summary><span class="agenda-label-closed">${language === 'ja' ? '授業の詳細を見る' : 'Expand week details'}</span><span class="agenda-label-open">${language === 'ja' ? '授業の詳細を閉じる' : 'Collapse week details'}</span><span class="agenda-summary-symbol" aria-hidden="true"></span></summary><div class="agenda-content"><p class="agenda-overview">${escapeHtml(summary)}</p>${details}</div>${Number(w.week) === 1 ? weekOneMaterialsHtml() : ''}</details></article>`;
   }).join('') + `<p class="schedule-note">${language === 'ja' ? '最終発表は2回を予定しています。もう一回の日程は未定です。' : 'Two final presentation sessions are intended. The second date is to be confirmed.'}</p>`;
