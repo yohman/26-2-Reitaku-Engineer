@@ -88,6 +88,13 @@ html[lang="ja"] .agenda-week-title h2 { letter-spacing: .01em; }
 .agenda-guest-photo { display: block; flex: 0 0 64px; width: 64px; height: 64px; overflow: hidden; border-radius: 50%; background: var(--layer-3); }
 .agenda-guest-photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .agenda-guest-photo:hover, .agenda-guest-photo:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
+.week-two-feature { max-width: 850px; margin: 1.5rem 0 0 calc(110px + clamp(1.25rem, 3.5vw, 3rem)); }
+.week-two-video { aspect-ratio: 16 / 9; background: #090c10; }
+.week-two-video iframe { display: block; width: 100%; height: 100%; border: 0; }
+.week-two-video-caption { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .5rem 1.2rem; margin: .8rem 0 0; font-size: .82rem; }
+.week-two-video-caption strong { font-weight: 600; }
+.week-two-video-caption a { color: var(--blue); text-underline-offset: .2em; }
+.week-two-summary { max-width: 70ch; margin: 1.1rem 0 0; color: var(--ink); font-size: 1rem; line-height: 1.7; }
 .agenda-more { margin: 1.25rem 0 0; }
 .agenda-more summary { display: inline-flex; align-items: center; gap: 1.15rem; min-height: 44px; margin-left: calc(110px + clamp(1.25rem, 3.5vw, 3rem)); padding: .64rem .9rem; list-style: none; border: 0; border-radius: 3px; background: var(--layer-3); color: var(--ink); cursor: pointer; font: 600 .79rem/1.3 var(--sans); text-decoration: none; }
 .agenda-more summary::-webkit-details-marker { display: none; }
@@ -186,7 +193,7 @@ html[lang="ja"] .agenda-week-title h2 { letter-spacing: .01em; }
 @media (max-width: 720px) {
   .wrap { width: min(calc(100% - 30px), 1160px); }
   .editorial-grid { grid-template-columns: 1fr; }
-  .agenda-more summary, .agenda-content { margin-left: 0; }
+  .agenda-more summary, .agenda-content, .week-two-feature { margin-left: 0; }
   .agenda-week-heading { grid-template-columns: 70px minmax(0, 1fr); }
   .agenda-week-title h2 { font-size: clamp(1.55rem, 5vw, 2.2rem); }
   .agenda-week { padding: 1.2rem; }
