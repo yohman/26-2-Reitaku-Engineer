@@ -371,7 +371,7 @@ function renderAgenda() {
   const today = new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Tokyo',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
   target.innerHTML = weeks.map(w => {
     const guest = guests.find(g => g.id === w.guest_id);
-    const speaker = guest ? `<a href="guests.html#${escapeHtml(guest.id)}">${language === 'ja' ? 'ゲスト紹介 ↗' : 'Guest profile ↗'}</a>` : '';
+    const speaker = guest ? `<a href="guests.html#${escapeHtml(guest.id)}">${language === 'ja' ? 'ゲスト：' : 'Guest: '}${escapeHtml(localized(guest,'name'))} ↗</a>` : '';
     const guestPhoto = guest?.image ? `<a class="agenda-guest-photo" href="guests.html#${escapeHtml(guest.id)}" aria-label="${escapeHtml(localized(guest,'name'))}"><img src="content/guests/${encodeURIComponent(guest.image)}" alt="" loading="lazy"></a>` : '';
     const summary = localized(w,'overview') || (language === 'ja' ? '詳細は後日案内します。' : 'Details forthcoming.');
     const sections = [language === 'ja' ? 'Reaction JP' : 'Reaction',language === 'ja' ? 'Materials JP' : 'Materials','Resources'].filter(key => w.sections[key]);
