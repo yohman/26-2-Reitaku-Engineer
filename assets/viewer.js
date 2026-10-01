@@ -10,11 +10,21 @@ const pageTotal = viewer.querySelector('[data-page-total]');
 const fullscreenButton = viewer.querySelector('[data-fullscreen]');
 const fullscreenLabel = viewer.querySelector('[data-fullscreen-label]');
 const atlasLink = viewer.querySelector('[data-atlas-link]');
+const viewerError = viewer.querySelector('[data-viewer-error]');
 const languageButton = document.querySelector('[data-language-toggle]');
-const yohDeck = ['yoh', '2025'].includes(new URLSearchParams(location.search).get('deck'));
-const pageCount = yohDeck ? 10 : 57;
-const pdfUrl = yohDeck ? 'assets/week01/week01-slides.pdf' : 'assets/week01/麗澤流エンジニア2026_1.pdf';
-const slideDirectory = yohDeck ? 'assets/week01/slides' : 'assets/week01/slides-2026';
+const requestedDeck = new URLSearchParams(location.search).get('deck');
+const deckKey = ['yoh', '2025'].includes(requestedDeck) ? 'yoh' : ['vibe', 'oishi'].includes(requestedDeck) ? requestedDeck : 'course';
+const decks = {
+  course: {week: 1, pages: 57, pdf: 'assets/week01/麗澤流エンジニア2026_1.pdf', slides: 'assets/week01/slides-2026', title: {en: 'Reitaku Engineering · Week 1', ja: '麗澤流エンジニア 第1回'}, short: {en: 'Course introduction', ja: '授業イントロ'}},
+  yoh: {week: 1, pages: 10, pdf: 'assets/week01/week01-slides.pdf', slides: 'assets/week01/slides', title: {en: 'Yoh’s engineering story', ja: 'Yohのエンジニア・ストーリー'}, short: {en: 'Yoh’s presentation', ja: 'Yohのプレゼン'}},
+  vibe: {week: 2, pages: 241, pdf: 'assets/week02/vibe-coding-textbook.pdf', cover: 'assets/week02/vibe-coding-cover.jpg', title: {en: 'Vibe Coding: App Development Textbook', ja: 'Vibe Codingからはじめるアプリ開発の教科書'}, short: {en: 'Vibe Coding textbook', ja: 'Vibe Codingの教科書'}},
+  oishi: {week: 3, pages: 50, pdf: 'assets/week03/oishi-ai-health-wellbeing.pdf', cover: 'assets/week03/oishi-cover.jpg', title: {en: 'AI, Health, and Well-being', ja: 'AIと医療・ウェルビーイング'}, short: {en: 'Oishi’s presentation', ja: '大石先生のプレゼンテーション'}}
+};
+const deck = decks[deckKey];
+const yohDeck = deckKey === 'yoh';
+let pageCount = deck.pages;
+const pdfUrl = deck.pdf;
+const slideDirectory = deck.slides;
 const questionUrl = 'https://script.google.com/macros/s/AKfycbz7kuUplBbrLkwNnpCSfE_fH3Ua1PL3rd3Ml84l4-oc13gfjQmDaCY1OF4AkGNyiwEF/exec?lecture=engineer';
 const draftQuestionUrl = 'https://script.google.com/macros/s/AKfycby4YxQXKwTc0IYB4p8Gr9ASgoKpcUewbDwASkmqbKk/dev?lecture=engineer';
 const fallbackLinks = yohDeck
@@ -29,22 +39,31 @@ let renderRevision = 0;
 
 function setLanguage() {
   document.documentElement.lang = language;
+  document.body.classList.toggle('is-book-viewer', deckKey === 'vibe');
   document.querySelectorAll('[data-ja]').forEach(element => {
     if (!element.dataset.en) element.dataset.en = element.textContent;
     element.textContent = language === 'ja' ? element.dataset.ja : element.dataset.en;
   });
-  document.title = `${language === 'ja' ? '第1回スライド' : 'Week 1 slides'} · Reitaku Engineering`;
-  document.querySelector('.viewer-heading h1').textContent = yohDeck
-    ? (language === 'ja' ? 'Yohのエンジニア・ストーリー' : 'Yoh’s engineering story')
-    : (language === 'ja' ? '麗澤流エンジニア 第1回' : 'Reitaku Engineering · Week 1');
-  document.querySelector(yohDeck ? '[data-deck-yoh]' : '[data-deck-course]').setAttribute('aria-current', 'page');
+  document.title = `${deck.title[language]} · Reitaku Engineering`;
+  document.querySelector('.viewer-heading h1').textContent = deck.title[language];
+  document.querySelector('.viewer-heading .eyebrow').textContent = language === 'ja' ? `第${deck.week}回 · ${deckKey === 'vibe' ? '参考教材' : '講義資料'}` : `WEEK ${String(deck.week).padStart(2, '0')} · ${deckKey === 'vibe' ? 'COURSE MATERIAL' : 'PRESENTATION'}`;
+  const backLink = document.querySelector('.viewer-site-header .site-nav a');
+  backLink.href = `agenda.html#week-${deck.week}`;
+  backLink.textContent = language === 'ja' ? '授業予定に戻る' : 'Back to agenda';
+  const deckTabs = document.querySelector('.viewer-deck-tabs');
+  deckTabs.hidden = deck.week !== 1;
+  if (deck.week === 1) document.querySelector(yohDeck ? '[data-deck-yoh]' : '[data-deck-course]').setAttribute('aria-current', 'page');
   languageButton.textContent = language === 'ja' ? 'EN' : 'JP';
   languageButton.setAttribute('aria-label', language === 'ja' ? 'Switch to English' : '日本語に切り替える');
   previous.setAttribute('aria-label', language === 'ja' ? '前のページ' : 'Previous page');
   next.setAttribute('aria-label', language === 'ja' ? '次のページ' : 'Next page');
   pageInput.setAttribute('aria-label', language === 'ja' ? 'ページ番号' : 'Page number');
-  viewer.setAttribute('aria-label', language === 'ja' ? '第1回PDFスライドビューア' : 'Week 1 PDF slide viewer');
-  image.alt = `${language === 'ja' ? (yohDeck ? 'Yohのプレゼン' : '授業イントロ') : (yohDeck ? 'Yoh’s presentation' : 'Course introduction')} ${currentPage} / ${pageCount}`;
+  viewer.setAttribute('aria-label', `${deck.title[language]} · ${language === 'ja' ? 'PDFビューア' : 'PDF viewer'}`);
+  image.alt = `${deck.short[language]} ${currentPage} / ${pageCount}`;
+  viewerError.querySelector('a').textContent = language === 'ja' ? 'PDFをブラウザで開く ↗' : 'Open PDF in browser ↗';
+  viewerError.querySelector('a').href = pdfUrl;
+  viewerError.querySelector('span').textContent = language === 'ja' ? 'このページを表示できませんでした。' : 'This page could not be displayed.';
+  if (deckKey === 'vibe') document.querySelector('.viewer-hint').textContent = language === 'ja' ? 'ページ内は縦にスクロール · ← → キーでページ移動 · Esc で全画面を終了' : 'Scroll within a page to read · Use ← → to change pages · Esc exits full screen';
   linkLayer.querySelectorAll('a').forEach(link => setLinkLabel(link));
   updateFullscreenLabel();
 }
@@ -106,7 +125,7 @@ function updateFullscreenLabel() {
 }
 
 function pageImage(page) {
-  return `${slideDirectory}/slide-${String(page).padStart(2, '0')}.jpg`;
+  return slideDirectory ? `${slideDirectory}/slide-${String(page).padStart(2, '0')}.jpg` : deck.cover;
 }
 
 async function renderPdfPage(pageNumber) {
@@ -120,10 +139,9 @@ async function renderPdfPage(pageNumber) {
     if (revision !== renderRevision) return;
     const annotationsTask = page.getAnnotations({intent: 'display'}).catch(() => []);
     const base = page.getViewport({scale: 1});
-    const scale = Math.min(
-      Math.max(1, stage.clientWidth - 32) / base.width,
-      Math.max(1, stage.clientHeight - 32) / base.height
-    );
+    const widthScale = Math.max(1, stage.clientWidth - 32) / base.width;
+    const heightScale = Math.max(1, stage.clientHeight - 32) / base.height;
+    const scale = deckKey === 'vibe' ? Math.max(.25, Math.min(widthScale, 1.8)) : Math.max(.25, Math.min(widthScale, heightScale));
     const viewport = page.getViewport({scale});
     const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
     canvas.width = Math.round(viewport.width * pixelRatio);
@@ -138,13 +156,15 @@ async function renderPdfPage(pageNumber) {
     if (revision !== renderRevision) return;
     canvas.hidden = false;
     image.hidden = true;
+    viewerError.hidden = true;
     const links = annotations.filter(annotation => annotation.subtype === 'Link' && annotation.url);
     placeLinks(links.length ? links : fallbackLinks.get(pageNumber) || [], viewport.width, viewport.height,
       rect => viewport.convertToViewportRectangle(rect));
   } catch (error) {
     if (error?.name !== 'RenderingCancelledException' && revision === renderRevision) {
       canvas.hidden = true;
-      image.hidden = false;
+      image.hidden = !slideDirectory || currentPage !== 1;
+      viewerError.hidden = !!slideDirectory;
       requestAnimationFrame(showFallbackLinks);
     }
   }
@@ -152,12 +172,14 @@ async function renderPdfPage(pageNumber) {
 
 function showPage(requestedPage) {
   currentPage = Math.max(1, Math.min(pageCount, Number(requestedPage) || 1));
+  stage.scrollTop = 0;
   image.src = pageImage(currentPage);
-  image.hidden = false;
+  image.hidden = !slideDirectory && currentPage !== 1;
   canvas.hidden = true;
+  viewerError.hidden = true;
   linkLayer.replaceChildren();
   linkLayer.hidden = true;
-  image.alt = `${language === 'ja' ? (yohDeck ? 'Yohのプレゼン' : '授業イントロ') : (yohDeck ? 'Yoh’s presentation' : 'Course introduction')} ${currentPage} / ${pageCount}`;
+  image.alt = `${deck.short[language]} ${currentPage} / ${pageCount}`;
   atlasLink.hidden = !(yohDeck && currentPage === 1);
   pageInput.value = currentPage;
   pageInput.max = String(pageCount);
@@ -221,6 +243,8 @@ if (window.pdfjsLib) {
   window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
   window.pdfjsLib.getDocument(pdfUrl).promise.then(documentPdf => {
     pdf = documentPdf;
-    renderPdfPage(currentPage);
-  }).catch(() => { /* The prepared slide images remain available. */ });
-}
+    pageCount = pdf.numPages;
+    currentPage = Math.min(currentPage, pageCount);
+    showPage(currentPage);
+  }).catch(() => { if (!slideDirectory) viewerError.hidden = false; });
+} else if (!slideDirectory) viewerError.hidden = false;
