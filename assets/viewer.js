@@ -13,11 +13,12 @@ const atlasLink = viewer.querySelector('[data-atlas-link]');
 const viewerError = viewer.querySelector('[data-viewer-error]');
 const languageButton = document.querySelector('[data-language-toggle]');
 const requestedDeck = new URLSearchParams(location.search).get('deck');
-const deckKey = ['yoh', '2025'].includes(requestedDeck) ? 'yoh' : ['vibe', 'oishi'].includes(requestedDeck) ? requestedDeck : 'course';
+const deckKey = ['yoh', '2025'].includes(requestedDeck) ? 'yoh' : ['vibe', 'studio', 'oishi'].includes(requestedDeck) ? requestedDeck : 'course';
 const decks = {
   course: {week: 1, pages: 57, pdf: 'assets/week01/麗澤流エンジニア2026_1.pdf', slides: 'assets/week01/slides-2026', title: {en: 'Reitaku Engineering · Week 1', ja: '麗澤流エンジニア 第1回'}, short: {en: 'Course introduction', ja: '授業イントロ'}},
   yoh: {week: 1, pages: 10, pdf: 'assets/week01/week01-slides.pdf', slides: 'assets/week01/slides', title: {en: 'Yoh’s engineering story', ja: 'Yohのエンジニア・ストーリー'}, short: {en: 'Yoh’s presentation', ja: 'Yohのプレゼン'}},
   vibe: {week: 2, pages: 241, pdf: 'assets/week02/vibe-coding-textbook.pdf', cover: 'assets/week02/vibe-coding-cover.jpg', title: {en: 'Vibe Coding: App Development Textbook', ja: 'Vibe Codingからはじめるアプリ開発の教科書'}, short: {en: 'Vibe Coding textbook', ja: 'Vibe Codingの教科書'}},
+  studio: {week: 2, pages: 37, pdf: 'assets/week02/ai-studio-prototyping.pdf', cover: 'assets/week02/ai-studio-cover.jpg', title: {en: 'Rapid Prototyping with Google AI Studio', ja: '爆速プロトタイプ構築術'}, short: {en: 'Google AI Studio slides', ja: 'Google AI Studioの講義スライド'}},
   oishi: {week: 3, pages: 50, pdf: 'assets/week03/oishi-ai-health-wellbeing.pdf', cover: 'assets/week03/oishi-cover.jpg', title: {en: 'AI, Health, and Well-being', ja: 'AIと医療・ウェルビーイング'}, short: {en: 'Oishi’s presentation', ja: '大石先生のプレゼンテーション'}}
 };
 const deck = decks[deckKey];
@@ -29,7 +30,7 @@ const questionUrl = 'https://script.google.com/macros/s/AKfycbz7kuUplBbrLkwNnpCS
 const draftQuestionUrl = 'https://script.google.com/macros/s/AKfycby4YxQXKwTc0IYB4p8Gr9ASgoKpcUewbDwASkmqbKk/dev?lecture=engineer';
 const fallbackLinks = yohDeck
   ? new Map([[2, [{url: 'https://youtu.be/rk9Uwvno9SU', rect: [312.75, 245.25, 647.25, 272.25]}]]])
-  : new Map([[8, [{url: questionUrl, rect: [90, 115, 700, 205]}]]]);
+  : deckKey === 'course' ? new Map([[8, [{url: questionUrl, rect: [90, 115, 700, 205]}]]]) : new Map();
 const fallbackPageSize = {width: 960, height: 540};
 let language = (() => { try { return localStorage.getItem('reitaku-engineering-language') || 'en'; } catch { return 'en'; } })();
 let currentPage = Math.max(1, Math.min(pageCount, Number(new URLSearchParams(location.search).get('page')) || 1));
