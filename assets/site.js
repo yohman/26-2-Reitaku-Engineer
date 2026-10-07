@@ -361,7 +361,7 @@ function weekTwoFilmLinksHtml() {
   const links = [
     {href: 'https://www.youtube.com/watch?v=H2yp74qe0gc', label: ja ? '「いのちの未来」PV' : 'Future of Life pavilion video'},
     {href: 'https://reitaku-lab.github.io/mirai/', label: ja ? '「私たちの未来」' : 'Mirai project'},
-    {href: 'https://reitaku-lab.github.io/mirai/gallery/', label: ja ? '「私たちの未来」ギャラリー' : 'Mirai gallery'}
+    {href: 'https://reitaku-lab.github.io/mirai/gallery/', label: ja ? '石黒浩 写真ギャラリー' : 'Ishiguro photo gallery'}
   ];
   return `<nav class="week-two-film-links" aria-label="${ja ? '映画の関連リンク' : 'Film-related links'}"><p class="section-label">${ja ? '関連リンク' : 'Related links'}</p><div>${links.map(link => `<a href="${link.href}" target="_blank" rel="noopener">${link.label} ↗</a>`).join('')}</div></nav>`;
 }
