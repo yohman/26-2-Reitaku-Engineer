@@ -356,10 +356,19 @@ const agendaOpenState = new Map();
 function weekTwoFilmHtml(summary) {
   return `<div class="week-two-feature"><div class="week-two-video"><iframe src="https://www.youtube-nocookie.com/embed/an7R_mK09Rg" title="The Pen and the Voice · ${language === 'ja' ? '予告編' : 'preview'}" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div><p class="week-two-video-caption"><strong>The Pen and the Voice · ${language === 'ja' ? '予告編' : 'Preview'}</strong><a href="https://www.youtube.com/watch?v=an7R_mK09Rg" target="_blank" rel="noopener">${language === 'ja' ? 'YouTubeで見る ↗' : 'Watch on YouTube ↗'}</a></p><p class="week-two-summary">${escapeHtml(summary)}</p></div>`;
 }
+function weekTwoFilmLinksHtml() {
+  const ja = language === 'ja';
+  const links = [
+    {href: 'https://www.youtube.com/watch?v=H2yp74qe0gc', label: ja ? '「いのちの未来」PV' : 'Future of Life pavilion video'},
+    {href: 'https://reitaku-lab.github.io/mirai/', label: ja ? '「私たちの未来」' : 'Mirai project'},
+    {href: 'https://reitaku-lab.github.io/mirai/gallery/', label: ja ? '「私たちの未来」ギャラリー' : 'Mirai gallery'}
+  ];
+  return `<nav class="week-two-film-links" aria-label="${ja ? '映画の関連リンク' : 'Film-related links'}"><p class="section-label">${ja ? '関連リンク' : 'Related links'}</p><div>${links.map(link => `<a href="${link.href}" target="_blank" rel="noopener">${link.label} ↗</a>`).join('')}</div></nav>`;
+}
 function weekTwoPartOneHtml(week, summary) {
   const ja = language === 'ja';
   const discussion = week.sections[ja ? 'Discussion JP' : 'Discussion'];
-  return `<section class="week-two-part" aria-labelledby="week-two-part-one-title"><div class="week-two-section-heading"><p class="section-label">${ja ? '第1部' : 'PART 1'}</p><h3 id="week-two-part-one-title">${ja ? '映画鑑賞とグループ討論' : 'Film and group discussion'}</h3></div>${weekTwoFilmHtml(summary)}${discussion ? `<div class="week-two-discussion"><h4>${ja ? 'グループ討論' : 'Group discussion'}</h4>${sectionHtml(discussion)}</div>` : ''}</section>`;
+  return `<section class="week-two-part" aria-labelledby="week-two-part-one-title"><div class="week-two-section-heading"><p class="section-label">${ja ? '第1部' : 'PART 1'}</p><h3 id="week-two-part-one-title">${ja ? '映画鑑賞とグループ討論' : 'Film and group discussion'}</h3></div>${weekTwoFilmHtml(summary)}${weekTwoFilmLinksHtml()}${discussion ? `<div class="week-two-discussion"><h4>${ja ? 'グループ討論' : 'Group discussion'}</h4>${sectionHtml(discussion)}</div>` : ''}</section>`;
 }
 function weekTwoMaterialsHtml() {
   const ja = language === 'ja';

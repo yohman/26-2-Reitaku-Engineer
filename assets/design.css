@@ -99,6 +99,11 @@ html[lang="ja"] .agenda-week-title h2 { letter-spacing: .01em; }
 .week-two-section-heading .section-label { margin: 0 0 .35rem; color: var(--blue); font-size: .7rem; }
 .week-two-section-heading h3 { margin: 0 0 1.15rem; font-size: clamp(1.2rem, 2vw, 1.5rem); }
 .week-two-part .week-two-feature { max-width: none; margin: 0; }
+.week-two-film-links { margin-top: 1.2rem; }
+.week-two-film-links .section-label { margin: 0 0 .5rem; color: var(--muted); font-size: .68rem; }
+.week-two-film-links > div { display: flex; flex-wrap: wrap; gap: .55rem; }
+.week-two-film-links a { display: inline-flex; align-items: center; min-height: 40px; padding: .55rem .75rem; background: var(--layer-2); color: var(--blue); font-size: .8rem; line-height: 1.35; text-decoration: none; }
+.week-two-film-links a:hover, .week-two-film-links a:focus-visible { background: var(--layer-3); text-decoration: underline; text-underline-offset: .2em; }
 .week-two-discussion { margin-top: 1.25rem; padding: 1.1rem; background: var(--layer-2); }
 .week-two-discussion h4 { margin: 0 0 .55rem; font-size: 1rem; }
 .week-two-discussion p { margin: .6rem 0 0; font-size: .9rem; line-height: 1.65; }
