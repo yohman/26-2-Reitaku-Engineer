@@ -95,9 +95,14 @@ html[lang="ja"] .agenda-week-title h2 { letter-spacing: .01em; }
 .week-two-video-caption strong { font-weight: 600; }
 .week-two-video-caption a { color: var(--blue); text-underline-offset: .2em; }
 .week-two-summary { max-width: 70ch; margin: 1.1rem 0 0; color: var(--ink); font-size: 1rem; line-height: 1.7; }
-.week-two-materials { max-width: 850px; margin: 2rem 0 0 calc(110px + clamp(1.25rem, 3.5vw, 3rem)); padding: 1.25rem; background: var(--layer-1); }
-.week-two-materials-heading .section-label { margin: 0 0 .35rem; color: var(--blue); font-size: .7rem; }
-.week-two-materials-heading h3 { margin: 0 0 1.15rem; font-size: clamp(1.2rem, 2vw, 1.5rem); }
+.week-two-part, .week-two-materials { max-width: 850px; margin: 1.5rem 0 0 calc(110px + clamp(1.25rem, 3.5vw, 3rem)); padding: 1.25rem; background: var(--layer-1); }
+.week-two-section-heading .section-label { margin: 0 0 .35rem; color: var(--blue); font-size: .7rem; }
+.week-two-section-heading h3 { margin: 0 0 1.15rem; font-size: clamp(1.2rem, 2vw, 1.5rem); }
+.week-two-part .week-two-feature { max-width: none; margin: 0; }
+.week-two-discussion { margin-top: 1.25rem; padding: 1.1rem; background: var(--layer-2); }
+.week-two-discussion h4 { margin: 0 0 .55rem; font-size: 1rem; }
+.week-two-discussion p { margin: .6rem 0 0; font-size: .9rem; line-height: 1.65; }
+.week-two-discussion a { color: var(--blue); text-underline-offset: .2em; }
 .week-two-materials-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .8rem; }
 .week-two-material { display: flex; min-width: 0; flex-direction: column; background: var(--layer-2); }
 .week-two-material-cover { display: grid; place-items: center; height: 155px; overflow: hidden; background: #0b1015; }
@@ -214,7 +219,7 @@ html[lang="ja"] .agenda-week-title h2 { letter-spacing: .01em; }
 @media (max-width: 720px) {
   .wrap { width: min(calc(100% - 30px), 1160px); }
   .editorial-grid { grid-template-columns: 1fr; }
-  .agenda-more summary, .agenda-content, .week-two-feature, .week-two-materials, .agenda-document-card { margin-left: 0; }
+  .agenda-more summary, .agenda-content, .week-two-feature, .week-two-part, .week-two-materials, .agenda-document-card { margin-left: 0; }
   .agenda-week-heading { grid-template-columns: 70px minmax(0, 1fr); }
   .agenda-week-title h2 { font-size: clamp(1.55rem, 5vw, 2.2rem); }
   .agenda-week { padding: 1.2rem; }
