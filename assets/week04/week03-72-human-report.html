@@ -1,0 +1,446 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>72人が人に残したいもの</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Shippori+Mincho:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fbfaf7; --surface:#ffffff; --ink:#1d2433; --muted:#5d6475; --line:#e6e2da;
+  --coral:#e2553a; --coral-soft:#fde8e2; --teal:#1b7f79; --teal-soft:#ddf1ee;
+  --gold:#c98a14; --violet:#6c4fb3; --night:#141a28; --night-ink:#f3f1ec;
+  --shadow:0 6px 24px rgba(29,36,51,.08);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#121722; --surface:#1a2130; --ink:#eef0f4; --muted:#a3abbb; --line:#2c3446;
+    --coral:#ff7a5c; --coral-soft:#3a2420; --teal:#43c1b7; --teal-soft:#16302f;
+    --gold:#e7b04a; --violet:#a58cf0; --night:#0b0f18; --night-ink:#f3f1ec;
+    --shadow:0 6px 24px rgba(0,0,0,.35);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#121722; --surface:#1a2130; --ink:#eef0f4; --muted:#a3abbb; --line:#2c3446;
+  --coral:#ff7a5c; --coral-soft:#3a2420; --teal:#43c1b7; --teal-soft:#16302f;
+  --gold:#e7b04a; --violet:#a58cf0; --night:#0b0f18; --night-ink:#f3f1ec;
+  --shadow:0 6px 24px rgba(0,0,0,.35);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Zen Kaku Gothic New",system-ui,sans-serif;line-height:1.75;font-size:16px;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+h2{font-size:clamp(24px,3.4vw,36px);line-height:1.35;margin:0 0 8px;font-weight:900;letter-spacing:.01em}
+.kicker{font-size:13px;font-weight:700;letter-spacing:.14em;color:var(--coral);margin-bottom:6px}
+.lead{color:var(--muted);margin:0 0 28px;max-width:720px}
+section{padding:72px 0}
+section+section{border-top:1px solid var(--line)}
+.mincho{font-family:"Shippori Mincho",serif}
+
+/* hero */
+.hero{position:relative;background:var(--night);color:var(--night-ink);min-height:640px;overflow:hidden;padding:0}
+.hero canvas{position:absolute;inset:0;width:100%;height:100%}
+.hero .copy{position:relative;z-index:2;padding:84px 20px 40px;max-width:1080px;margin:0 auto;pointer-events:none}
+.hero .copy *{pointer-events:auto}
+.hero .tag{display:inline-block;font-size:13px;letter-spacing:.12em;color:#ffb39f;border:1px solid rgba(255,179,159,.4);border-radius:999px;padding:4px 14px}
+.hero h1{font-size:clamp(34px,6vw,64px);line-height:1.2;margin:18px 0 12px;font-weight:900}
+.hero h1 em{font-style:normal;color:#ff8a6b}
+.hero p{max-width:520px;color:#c9cdd8;margin:0 0 22px}
+.btn{font:inherit;font-size:14px;font-weight:700;border:0;border-radius:999px;padding:10px 20px;cursor:pointer;background:#ff8a6b;color:#1b1310}
+.btn.ghost{background:transparent;color:var(--night-ink);border:1px solid rgba(255,255,255,.35);margin-left:8px}
+.hero .hint{position:absolute;z-index:2;left:0;right:0;bottom:84px;text-align:center;font-size:13px;color:#8d94a6}
+.tip{position:absolute;z-index:5;pointer-events:none;max-width:280px;background:var(--surface);color:var(--ink);border-radius:12px;padding:10px 12px;font-size:13px;line-height:1.6;box-shadow:var(--shadow);opacity:0;transition:opacity .15s}
+.tip b{color:var(--coral)}
+
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:-56px;position:relative;z-index:3}
+.stat{background:var(--surface);border-radius:16px;padding:18px 18px 14px;box-shadow:var(--shadow)}
+.stat .num{font-size:clamp(30px,4.4vw,44px);font-weight:900;line-height:1.1;color:var(--coral)}
+.stat .num small{font-size:16px;margin-left:2px;color:var(--ink)}
+.stat .lbl{font-size:13px;color:var(--muted);margin-top:4px}
+
+/* bars */
+.bars{display:flex;flex-direction:column;gap:10px}
+.bar{display:grid;grid-template-columns:200px 1fr 54px;gap:12px;align-items:center;cursor:pointer;border-radius:10px;padding:6px 8px;transition:background .2s}
+.bar:hover,.bar.on{background:var(--teal-soft)}
+.bar .name{font-weight:700;font-size:15px}
+.bar .track{height:26px;background:var(--line);border-radius:6px;overflow:hidden}
+.bar .fill{height:100%;width:0;border-radius:6px;background:var(--teal);transition:width 1.1s cubic-bezier(.2,.8,.2,1)}
+.bar.hot .fill{background:var(--coral)}
+.bar .cnt{font-weight:900;font-size:18px;text-align:right}
+.callout{display:flex;gap:18px;align-items:center;background:var(--coral-soft);border-radius:16px;padding:20px 22px;margin:26px 0 0}
+.callout .big{font-size:44px;font-weight:900;color:var(--coral);line-height:1;white-space:nowrap}
+.drawer{margin-top:18px;display:none}
+.drawer.open{display:block}
+.drawer h3{font-size:16px;margin:0 0 10px}
+.mini{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px}
+.mini .m{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 14px;font-size:13.5px;line-height:1.7;cursor:pointer}
+.mini .m .id{font-size:12px;color:var(--muted);font-weight:700}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.two h4{font-size:14px;margin:0 0 8px}
+.two .ai h4{color:var(--teal)}
+.two .hu h4{color:var(--coral)}
+.two .mini{grid-template-columns:1fr}
+
+/* tug of war */
+.tug{display:flex;flex-direction:column;gap:4px}
+.thead,.trow{display:grid;grid-template-columns:1fr 220px 1fr;gap:10px;align-items:center;padding:5px 8px}
+.thead{font-size:13px;font-weight:700;color:var(--muted)}
+.thead .l{text-align:right;color:var(--teal)}
+.thead .r{color:var(--coral)}
+.trow{cursor:pointer;border-radius:10px;transition:background .2s}
+.trow:hover,.trow.on{background:var(--line)}
+.trow .nm{text-align:center;font-weight:700;font-size:14px;line-height:1.4}
+.trow .track{height:22px;display:flex;align-items:center;gap:6px}
+.trow .tl .track{justify-content:flex-end}
+.trow .fill{height:100%;width:0;transition:width 1.1s cubic-bezier(.2,.8,.2,1)}
+.trow .tl .fill{background:var(--teal);border-radius:6px 0 0 6px}
+.trow .tr .fill{background:var(--coral);border-radius:0 6px 6px 0}
+.trow .c{font-weight:900;font-size:16px}
+.trow .c.z{color:var(--muted);font-weight:500}
+.trow.hot .nm{color:var(--coral)}
+
+/* flips */
+.flips{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.flip{perspective:1000px;height:270px;cursor:pointer}
+.flip .in{position:relative;width:100%;height:100%;transition:transform .7s cubic-bezier(.3,.7,.2,1);transform-style:preserve-3d}
+.flip.on .in{transform:rotateY(180deg)}
+.flip .f,.flip .b{position:absolute;inset:0;backface-visibility:hidden;border-radius:18px;padding:22px;display:flex;flex-direction:column;justify-content:space-between}
+.flip .f{background:var(--surface);box-shadow:var(--shadow);border:1px solid var(--line)}
+.flip .b{background:var(--teal);color:#fff;transform:rotateY(180deg)}
+.flip .q{font-size:13px;color:var(--muted);font-weight:700;letter-spacing:.06em}
+.flip .b .q{color:rgba(255,255,255,.75)}
+.flip .t{font-size:22px;font-weight:900;line-height:1.45}
+.flip .n{font-size:13px}
+.flip .n b{font-size:30px;font-weight:900;margin-right:4px}
+.flip .tap{font-size:12px;color:var(--muted)}
+
+/* template dots */
+.mapbox{display:grid;grid-template-columns:1fr 300px;gap:18px;align-items:start}
+.tbox{background:var(--surface);border-radius:18px;box-shadow:var(--shadow);padding:22px}
+.tgrid{display:grid;grid-template-columns:repeat(12,1fr);gap:8px}
+.tgrid button{aspect-ratio:1;border-radius:50%;border:0;padding:0;cursor:pointer;background:var(--line);transition:transform .2s, background .3s}
+.tgrid button.t{background:var(--teal)}
+.tgrid button.x{background:var(--coral)}
+.tgrid button:hover,.tgrid button.on{transform:scale(1.35)}
+.legend{display:flex;gap:14px;font-size:13px;color:var(--muted);margin-top:14px;flex-wrap:wrap}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:5px;vertical-align:middle}
+.panel{background:var(--surface);border-radius:18px;box-shadow:var(--shadow);padding:18px;min-height:200px;position:sticky;top:16px}
+.panel .id{font-size:13px;font-weight:700;color:var(--muted)}
+.panel .v{font-size:17px;font-weight:700;line-height:1.6;margin:8px 0 10px}
+.panel .full{font-size:13.5px;color:var(--muted);white-space:pre-wrap;max-height:320px;overflow:auto}
+.newp{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:22px}
+.np{border:2px dashed var(--coral);border-radius:16px;padding:14px 16px;background:var(--coral-soft);cursor:pointer}
+.np .nm{font-weight:900;color:var(--coral)}
+.np .d{font-size:13px;margin-top:6px;line-height:1.6}
+.np .k{font-size:12px;color:var(--muted);margin-top:6px}
+
+/* voices */
+.vgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.vc{background:var(--surface);border-radius:18px;padding:22px 24px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:12px}
+.vc .top{display:flex;justify-content:space-between;align-items:center;font-size:12.5px;color:var(--muted);font-weight:700}
+.vc .badge{background:var(--teal-soft);color:var(--teal);border-radius:999px;padding:2px 10px}
+.vc blockquote{margin:0;font-family:"Shippori Mincho",serif;font-size:20px;line-height:1.7;font-weight:700}
+.vc blockquote::before{content:"“";color:var(--coral);font-size:30px;margin-right:2px}
+.vc .cm{font-size:14px;color:var(--ink);border-left:0;background:var(--bg);border-radius:10px;padding:10px 12px}
+.vc .cm::before{content:"読みどころ　";font-weight:900;color:var(--coral);font-size:12.5px}
+.vc button{align-self:flex-start;font:inherit;font-size:13px;background:none;border:0;color:var(--teal);font-weight:700;cursor:pointer;padding:0}
+.vc .full{display:none;font-size:13.5px;color:var(--muted);white-space:pre-wrap}
+.vc.open .full{display:block}
+
+.close{background:var(--night);color:var(--night-ink);text-align:center}
+.close h2{font-size:clamp(26px,4vw,42px)}
+.close p{color:#c9cdd8;max-width:640px;margin:10px auto 0}
+.qs{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:30px;text-align:left}
+.qs div{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:16px 18px;font-size:15px}
+.qs b{display:block;color:#ff8a6b;font-size:13px;margin-bottom:4px}
+.foot{font-size:12.5px;color:var(--muted);padding:28px 0 48px}
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .8s, transform .8s}
+.reveal.in{opacity:1;transform:none}
+
+@media (max-width:860px){
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .flips{grid-template-columns:1fr}
+  .mapbox{grid-template-columns:1fr}
+  .panel{position:static}
+  .newp{grid-template-columns:repeat(2,1fr)}
+  .vgrid{grid-template-columns:1fr}
+  .qs{grid-template-columns:1fr}
+  .two{grid-template-columns:1fr}
+  .bar{grid-template-columns:120px 1fr 40px}
+  .bar .name{font-size:13px}
+  .thead,.trow{grid-template-columns:1fr 1fr;grid-template-areas:"nm nm" "l r";row-gap:2px}
+  .thead span:nth-child(2){display:none}
+  .thead .l,.trow .tl{grid-area:l}
+  .thead .r,.trow .tr{grid-area:r}
+  .trow .nm{grid-area:nm;font-size:13px}
+  .tgrid{grid-template-columns:repeat(9,1fr)}
+}
+@media (prefers-reduced-motion: reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<header class="hero" id="top">
+  <canvas id="sky"></canvas>
+  <div class="copy">
+    <span class="tag">麗澤流エンジニア 2026｜第3回レポート 全体分析</span>
+    <h1>72人が、<br><em>人に残したいもの</em>。</h1>
+    <p>大石先生の講義のあとに書いた「AIが医療を支えられる場面」と「人間にしてほしいこと」。72人分、24,612字を読みました。光の一つ一つが、一人のレポートです。触れると、その人が「人間に」と書いたことが見えます。</p>
+    <button class="btn" id="gather">ひとつに集める</button><button class="btn ghost" id="scatter">ばらばらに戻す</button>
+  </div>
+  <div class="hint">↓ 下へ進むと、全体の傾向と、ていねいに読みたい声があります</div>
+  <div class="tip" id="tip"></div>
+</header>
+
+<div class="wrap">
+  <div class="stats reveal">
+    <div class="stat"><div class="num" data-count="72">0<small>人</small></div><div class="lbl">提出（情報システム工学 50／ロボティクス 22）</div></div>
+    <div class="stat"><div class="num" data-count="45">0<small>人</small></div><div class="lbl">が「治療方針・最終判断は人間に」と書いた</div></div>
+    <div class="stat"><div class="num" data-count="40">0<small>人</small></div><div class="lbl">が「不安に寄り添うのは人間に」と書いた</div></div>
+    <div class="stat"><div class="num" data-count="12">0<small>人</small></div><div class="lbl">が「AIに話し相手になってほしい」と書いた</div></div>
+  </div>
+
+  <section id="impress">
+    <div class="kicker">01　選んだ例</div>
+    <h2>見つける技術と、支える技術</h2>
+    <p class="lead">大石先生のプレゼンテーションから選んだ例（または自分で考えた場面）を数えました（1人が複数を挙げた場合はそれぞれ数えています）。棒をクリックすると、その例を選んだ人の文章が開きます。</p>
+    <div class="bars" id="bars"></div>
+    <div class="callout reveal">
+      <div class="big">49 : 25</div>
+      <div>病院の中で「見つける・治す」技術（画像診断、手術、診断支援、カルテ、再生医療）を選んだ人は<b>49人</b>。暮らしの中で「支える」技術（認知症や孤独、見守り、こころ）を選んだ人は<b>25人</b>でした。後者の25人のうち<b>11人</b>が、AIに「話し相手」を任せる案を書いています。</div>
+    </div>
+    <div class="drawer" id="drawer"><h3 id="drawerTitle"></h3><div class="mini" id="drawerList"></div></div>
+  </section>
+
+  <section id="tug">
+    <div class="kicker">02　AIと人間の綱引き</div>
+    <h2>話し相手はAIに、寄り添いは人間に</h2>
+    <p class="lead">AIに任せたいこと（左）と、人間にしてほしいこと（右）を、場面ごとに数えました。「見つける」「手術する」は左に、「伝える」「決める」「寄り添う」は右に大きく傾いています。目を引くのは「話し相手」です。12人がAIに任せたいと書いた一方で、「寄り添う」は40人が人間に、と書いています。話すことと寄り添うことのあいだに、線が引かれています（両方を書いた人が5人います）。行をクリックすると、それぞれの側の文章が開きます。</p>
+    <div class="tug reveal" id="tugbox">
+      <div class="thead"><span class="l">← AIに任せたい</span><span></span><span class="r">人間にしてほしい →</span></div>
+    </div>
+    <div class="drawer" id="tugDrawer"><h3 id="tugTitle"></h3><div class="two"><div class="ai"><h4 id="tugAiH"></h4><div class="mini" id="tugAi"></div></div><div class="hu"><h4 id="tugHuH"></h4><div class="mini" id="tugHu"></div></div></div></div>
+  </section>
+
+  <section id="flip">
+    <div class="kicker">03　よくある答えの、裏側</div>
+    <h2>カードをめくると、もう一歩先の答え</h2>
+    <p class="lead">多くの人が書いた答えを表に、その答えをもう一歩進めた人の考えを裏に書きました。表の答えがまちがっているわけではありません。裏は、そこから先へ進むためのヒントです。</p>
+    <div class="flips">
+      <div class="flip reveal" tabindex="0"><div class="in">
+        <div class="f"><div class="q">よくある答え</div><div class="t">最終判断は、<br>人間がする。</div><div class="tap">クリックしてめくる ↻</div></div>
+        <div class="b"><div class="q">その裏側</div><div class="t">なぜ人間なのか。人格と責任を持てるのは、人と法人だけだから。</div><div class="n"><b>45</b>人が「最終判断は人間」と書いた。理由を「責任」で説明したのは10人</div></div>
+      </div></div>
+      <div class="flip reveal" tabindex="0"><div class="in">
+        <div class="f"><div class="q">よくある答え</div><div class="t">AIは、<br>見落としを減らす。</div><div class="tap">クリックしてめくる ↻</div></div>
+        <div class="b"><div class="q">その裏側</div><div class="t">でも、前例のないものはノイズとして捨ててしまうかもしれない。</div><div class="n"><b>8</b>人が、偶然の発見や想定外の事態は人間に、と書いた</div></div>
+      </div></div>
+      <div class="flip reveal" tabindex="0"><div class="in">
+        <div class="f"><div class="q">よくある答え</div><div class="t">AIは、<br>気持ちに寄り添えない。</div><div class="tap">クリックしてめくる ↻</div></div>
+        <div class="b"><div class="q">その裏側</div><div class="t">だから「検査」に見えない形で支える。AIが呉服の弟子になって、教わる。</div><div class="n"><b>4</b>人が、本人の誇りを傷つけない使い方を考えた</div></div>
+      </div></div>
+    </div>
+  </section>
+
+  <section id="tmpl">
+    <div class="kicker">04　同じ型と、その外側</div>
+    <h2>29人が、同じ型で答えた</h2>
+    <p class="lead">「AIは画像やデータで病気を見つける。人間は患者の不安に寄り添い、最終的に決める（説明する）」。72人中29人が、この型で答えました。講義の内容をよく押さえた、まっとうな答えです。そのうえで、型の外へ一歩踏み出した答えも少なくありません。丸をクリックすると、その人の文章が読めます。</p>
+    <div class="mapbox">
+      <div class="tbox">
+        <div class="tgrid" id="tgrid"></div>
+        <div class="legend"><span><i style="background:var(--teal)"></i>同じ型で答えた（29人）</span><span><i style="background:var(--coral)"></i>下のカードで紹介している人</span><span><i style="background:var(--line)"></i>そのほか</span></div>
+      </div>
+      <div class="panel" id="panel"><div class="id">丸をクリック</div><div class="v">一人ひとりが「人間に」と書いたことがここに出ます</div><div class="full">型どおりの答えが悪いわけではありません。ただ、同じ型の答えが多いときほど、少し違う答えに、次の議論の種があります。</div></div>
+    </div>
+    <h3 style="margin:34px 0 0;font-size:18px">型の外へ踏み出した答え</h3>
+    <div class="newp" id="newp"></div>
+  </section>
+
+  <section id="voices">
+    <div class="kicker">05　ていねいに読みたい14の声</div>
+    <h2>一文に、その人の見方がある</h2>
+    <p class="lead">多数派の意見ではなく、ほかの人が書いていない視点や、講義の話を自分の体験や知っている出来事につなげた文章を選びました。番号は名簿と関係なくランダムに振っています。</p>
+    <div class="vgrid" id="vgrid"></div>
+  </section>
+</div>
+
+<section class="close">
+  <div class="wrap">
+    <div class="kicker" style="color:#ff8a6b">次の問い</div>
+    <h2>「人間にしかできない」の、その先へ</h2>
+    <p>いちばん多かった答えは「最終判断は人間に」（45人）と「寄り添うのは人間に」（40人）でした。次は、エンジニアとして、その線をもう一歩具体的に引いてみましょう。</p>
+    <div class="qs">
+      <div><b>責任の問い</b>AIの提案どおりにして間違えたとき、責任を負うのは誰ですか。</div>
+      <div><b>尊厳の問い</b>本人に知らせずに会話から測るのは、見守りですか、監視ですか。</div>
+      <div><b>技術者の問い</b>寄り添う人が、もっと寄り添えるようにするために、何をつくりますか。</div>
+    </div>
+  </div>
+</section>
+<div class="wrap foot">
+  集計・分類はAIがレポートを読んで付けた目安で、教員が確認・修正する前提のものです。引用は原文のまま載せ、氏名・学籍番号は載せていません。表示番号は名簿の順番とは関係なく、第1回・第2回の番号とも対応していません。
+</div>
+
+<script>
+const DATA = {"students": [{"id": "01", "dept": "情報", "imp": ["W"], "ai": ["mon"], "hu": ["mind", "plan"], "tmpl": true, "vision": "患者の気持ちに寄り添ったり、治療について最終的な判断をしたりすることは、人間にしてほしいと思う", "text": "大石先生のプレゼンテーションを聞いて、AIは患者の体温や心拍数などのデータを分析し、体調の異常を早く見つけることに役立つと思いました。特に、医療現場では多くの患者を対応する必要があるため、AIを使って異常を知らせることができれば、病気の悪化を防ぐことにもつながると考えました。\n一方で、患者の気持ちに寄り添ったり、治療について最終的な判断をしたりすることは、人間にしてほしいと思う。AIはデータをもとに判断できても、患者が感じている不安や、一人一人の気持ちをすべて理解するのは難しいと思うので、AIに任せられる部分は活用しつつ、人間が患者と直接向き合うことでより多くの人が安心でき、命を救い、医者や看護師さんの負担も減らせるので、どんどん発展行ってほしいなとこの講義をもって感じました。"}, {"id": "02", "dept": "情報", "imp": ["G"], "ai": ["img", "rec"], "hu": ["tell", "plan", "mind"], "tmpl": true, "vision": "患者に病名や治療方針を説明したり、最終的な判断を下したりするのは人間が行うべきだと思います", "text": "AIはレントゲン写真やCT画像を分析し、人間では気付きにくい小さな異常を見つけることができます。そのため、医師の診断をサポートし、病気の早期発見や治療にもつながると思います。また、患者のデータを素早く整理することで、医療現場の負担軽減にも役立つと思います。\n一方で、患者に病名や治療方針を説明したり、最終的な判断を下したりするのは人間が行うべきだと思います。患者の不安や気持ちに寄り添いながら説明するには、共感や信頼関係が必要だからです。AIは多くの情報を処理できますが、人の感情を完全に理解することは難しいため、医療ではAIと人間が協力することが大切だと考えます。"}, {"id": "05", "dept": "ロボ", "imp": ["G"], "ai": ["img", "dx"], "hu": ["mind"], "tmpl": false, "vision": "患者の気持ちに寄り添ったり、治療への不安を聞いたりする場面では、人間に判断してほしいです", "text": "AIなどの技術は医師の判断を助けることができると思います。レントゲンやCTなどの画像から病気の可能性を見つけたり、患者のデータを分析して病気の早期発見をしたりする場面で役立つと思います。一方で、患者の気持ちに寄り添ったり、治療への不安を聞いたりする場面では、人間に判断してほしいです。病気になると不安や孤独感を感じることもあるため、人間が相手の気持ちを理解し、寄り添い合って安心できるように支えることが大切だと思います、"}, {"id": "06", "dept": "ロボ", "imp": ["S"], "ai": ["ope"], "hu": ["diag"], "tmpl": false, "vision": "患者さんの診療は人間にやってもらいたいです", "text": "人にはコンディションがあるため毎日同じようにできることが少ないと考えますが、AIだったらいつも同じ仕事をこなしてくれるため、大石先生が話していた3時間ぐらい皮膚を引っ張り続けるなどの仕事や針を通すみたいな仕事で支えられると考えます。患者さんの診療は人間にやってもらいたいです。AIでは事実を淡々と述べられるだけだと今の段階では考えられるからです。それではあまり本音を話しにくいと考えました。もっと温かみがあるとAIでもいいと思います。"}, {"id": "07", "dept": "情報", "imp": ["C"], "ai": ["care"], "hu": ["care"], "tmpl": false, "vision": "人じゃないとその時の健康から食事を決めることができないため食事は人間", "text": "認知症などを持ったおじいちゃんやおばあちゃんの介護などに使いやすいと思っています。単純なボケ防止からその日のルーティンの指示など介護や認知症防止、または軽減をとてもしやすいためいいと思います。人間には、その時の健康からその日の食事などを人間が決めてほしいです。人じゃないとその時の健康から食事を決めることができないため食事は人間、ほかの介護やボケ防止の脳トレなどをロボットやAIにやらせていけばいいと思いました。"}, {"id": "08", "dept": "ロボ", "imp": ["S"], "ai": ["img", "rec", "mon", "dx"], "hu": ["tell", "mind", "plan", "resp", "emer"], "tmpl": true, "vision": "医師が最終的な責任を引き受けることこそが患者の安心感を支える重要な仕事であると考える", "text": "大石先生のプレゼンテーションから例を一つ選んでください。 \n\nロボット支援手術の解説について、私はロボティクス専攻なので、個人的に一番興味深かった。手振れ補正などの精密な操作性、安全性など、スライドのみの印象では、外科医療の大部分はすでにロボットによって自動化されているのかと思った。しかし、大石先生の「熟練の方がAIを活用した方が、若手の方がAIを活用した時より成績の伸びが大きかった」という旨の話を聞いて、ロボットが単なる人の代替ではなく、人の優れた技術をさらに拡張するパートナーとして機能していることに、個人的に希望をもらった。\n\nAIなどの技術がよりよい医療を支えられるのはどんな場面でしょうか。自分なりにアイデアをまとめてください。 \n\nAIは膨大なデータの処理や機械学習などのパターン認識、24時間一貫して稼働し続けられる持続可能性が強みである。それらを踏まえて私が考える、AIを活用し、よりよい医療を支える具体的な場面として、高度な画像診断による微小な疾患の検出、患者のビッグデータを用いた医療の個別化の強化、電子カルテの作成など、これまで人が行っていた事務作業の自動化、そしてウェアラブル機器による遠隔医療の、リアルタイムでの監視が可能になることなどが挙げられる。これらによって、診断ミスの防止や負担の軽減、早期の介入が可能になると考えられる。\n\n逆にAIではなく、人間に判断してほしい、やってほしいのはどんな場面や行為でしょうか。理由も考えてください。 \n\n人間の役割として、感情の共有や複雑な倫理的判断、最終的な責任の引き受けは現在人間にしかできない。がんの末期告知などの深刻な告知と精神的ケアには、現在のAIでは代替できない共感が必要だと考える。また、延命治療の可否、手術中の不測の事態といった、正解のない倫理的、総合的な意思決定では患者の価値観に寄り添う対話、熟練者の勘による臨機応変な対応が不可欠だと考える。そして、AIはミスに対して責任を負えないため、医師が最終的な責任を引き受けることこそが患者の安心感を支える重要な仕事であると考える。"}, {"id": "09", "dept": "ロボ", "imp": ["G"], "ai": ["img", "rec", "mon"], "hu": ["diag", "tell", "plan"], "tmpl": false, "vision": "最終的な治療の方針についても人間が判断した方がいいと思う", "text": "AIなどの技術がよりよい医療を支えられる場面は病気の早期発見があると思う。プレゼンテーションで挙げられていたが、技術や経験が豊富な医者でも見つけるのが困難な症状のものを、AIを使用することで見落としを減らせれば医療の質をさらに高めることが出来ると思う。他にも新薬の開発をAIで補助したり、記録の資料作成をして医療関係者の負担を減らしたり、高齢者の体調の変化を検知して以上を早期発見できるような技術ができれば、より医療を支えられるようになると思う。\nAIではなく、人間に判断してほしいこととして、診察があると思う。重病にかかってしまった患者に対し、AIより人間の医者が言葉で伝えたほうが、患者に対して親身に接することができると思うから。\nまた、最終的な治療の方針についても人間が判断した方がいいと思う。AIの分析だけでなく、患者の希望や生活環境も考慮する必要があると思うから。"}, {"id": "11", "dept": "ロボ", "imp": ["G"], "ai": ["img"], "hu": ["tell", "plan", "mind"], "tmpl": true, "vision": "患者への説明や、治療方法を最終的に決めることは、人間に判断してほしい", "text": "大石先生のプレゼンテーションから、AIを使って病気を見つける技術を選んだ。AIは、レントゲンや検査のデータを分析し、病気の可能性を見つけることに役立つと思う。人間が気づきにくい小さな変化も見つけられれば、病気の早期発見につながると考える。\n\n一方で、患者への説明や、治療方法を最終的に決めることは、人間に判断してほしい。患者は病気への不安や悩みを持っているため、医師が気持ちに寄り添い、一人ひとりの状況に合わせて考えることが大切だからだ。AIの便利なところを活用しながら、人間が責任を持って患者を支えることが、よりよい医療につながると思う。"}, {"id": "12", "dept": "ロボ", "imp": ["C", "F"], "ai": ["talk"], "hu": ["disc"], "tmpl": false, "vision": "ほかにもいろいろなことが偶然からできたと聞いているので人間がやってほしいと思った", "text": "高齢者の孤独化の例\n高齢者一人一人に時間を割くことはできないので、それをAIがやることが望ましいと思った。現在のAIなら会話をすることも容易なので適していると思った。\n\n偶然から菌が見つかったという例\n大石先生がおっしゃっていた通り、AIで実験などの工程を任せることは、今までなかったことが発見できたりする可能性が少なくなるような気がしました。ほかにもいろいろなことが偶然からできたと聞いているので人間がやってほしいと思った。"}, {"id": "13", "dept": "ロボ", "imp": ["G", "S"], "ai": ["img", "ope", "dx"], "hu": ["resp"], "tmpl": false, "vision": "AIに出力した内容に対してちゃんと責任を負うのが人間の行うべき行為であると考える", "text": "CT・MRI・内視鏡画像・病理画像から、病変の疑いがある部分をAIが見つけて医師に知らせるといった場面が考えられる。医療現場では手術を行う際の手振れを補正したりなどの活用方法が考えられる。また、カルテなどの個人情報が含まれるような情報でも、AIに安全に入力できるような環境になれば、AIが自動で患者一人一人に合わせた治療を提案できるようになるのではないかと考えている。\n人間は、AIと異なり、自分のとった行動に対して責任を持たないといけないという点において、AIに出力した内容に対してちゃんと責任を負うのが人間の行うべき行為であると考える。"}, {"id": "16", "dept": "情報", "imp": ["G"], "ai": ["img"], "hu": ["mind", "plan"], "tmpl": true, "vision": "患者の気持ちに寄り添ったり、治療方法を最終的に判断したりすることは、人間にやってほしいです", "text": "AIなどの技術がよりよい医療を支えられる場面として、AIによる画像診断を選びました。AIを活用することで、レントゲンやCT画像から病気の可能性を見つけ、医師の診断をサポートできると思います。また、病気の早期発見につながり、多くの人の命を救うことにも役立つと考えます。\n一方で、患者の気持ちに寄り添ったり、治療方法を最終的に判断したりすることは、人間にやってほしいです。なぜなら、医療では病気を治すだけでなく、患者の不安を理解し、一人ひとりの希望に合わせて対応することも大切だからです。AIと人間が協力することで、より安心できる医療を実現できると思います。"}, {"id": "17", "dept": "情報", "imp": ["G", "J"], "ai": ["img", "rec"], "hu": ["tell", "mind", "plan"], "tmpl": true, "vision": "患者の絶望や涙に寄り添い、手を握るような「共感」は機械には代替できません", "text": "医療におけるAIは「正確さと効率」を高め、人間は「温かさと納得感」を担保する役割分担が理想です。\nAIが支える場面（技術の得意分野）\n・画像診断・超早期発見：膨大なデータからミリ単位の病変を瞬時に検出。\n・事務・カルテ入力の自動化：医師の作業を減らし、患者と向き合う時間を創出。\n人間に任せたい場面と理由（人間の得意分野）\n・深刻な病状の告知と傾聴：患者の絶望や涙に寄り添い、手を握るような「共感」は機械には代替できません。\n・延命治療などの倫理的決断：正解のない命の選択において、患者の人生観や家族の想いを汲み取り、共に悩んで「納得のいく答え」を導くのは人間しか不可能です。\nAIが作業を担うことで、人間はより人間らしい医療に集中できます。"}, {"id": "18", "dept": "情報", "imp": ["G"], "ai": ["img"], "hu": ["tell", "plan", "mind"], "tmpl": true, "vision": "患者の不安や気持ちを理解し一人一人の希望に寄り添うことができるのは人間だけができることだと思うから", "text": "プレゼンであったAIを利用して内視鏡でがんを発見していたように人間の目では確認するのが困難なもので特にAIを利用するのがいいと思った。AIを使えばレントゲンやCT画像から多くの人の病気の兆候を見つけられるはずだから。医療従事者他の負担を減らし、診察を効率化することもできると思う。患者絵の症状の説明や治療方針の最終判断はAIではなく人間で行うべきだと思う。患者の不安や気持ちを理解し一人一人の希望に寄り添うことができるのは人間だけができることだと思うから。"}, {"id": "19", "dept": "情報", "imp": ["D"], "ai": ["dx", "talk", "mind"], "hu": ["plan"], "tmpl": false, "vision": "最終判断はやはりAIより同じ立場にいる人間が決めた方がよいと感じる", "text": "【AIが医療を支えられる場面】\n人間では判断できない・見逃しがちなところの診察・判定、様々な症状を持っている人に寄り添う・話し相手になる\n膨大なデータから分析し患者にアドバイスを送るなど\n【人間にやってほしい場面】\n最終判断はやはりAIより同じ立場にいる人間が決めた方がよいと感じる、AIは間違うこともあるので尚更\nまた、人の安心感というのはやはりAIよりずっとあると感じているので、すべてAIにするということはないと思う。"}, {"id": "20", "dept": "情報", "imp": ["D"], "ai": ["dx"], "hu": ["resp", "plan"], "tmpl": false, "vision": "逆に人間に判断、やってほしいことは、責任を持って判断をする、診断をするということです", "text": "大石先生のプレゼンテーションで印象的な例としては、診断にAIを用いるということです。先生もおっしゃっていたように、ある症状を訴えていても、様々な病気に重なることが多いため、患者の方の話をよく聞いたりしながら、分析して病気を特定するという従来の治療方針の建て方に、AIを組み合わせることで、膨大な数の病状を自分の知識と合わせて特定できる、思いがけない希少な病気であったり、忘れていた病気について気づきを得ることで、正しい、効果的な治療になるという点で、AI黎明期の今では正しい使い方であると思います。プログラミングに通ずるように基礎知識をもった人物がAIを利用して知っているけれど毎回繰り返すこと、忘れていたこと、というものを検索ツールとして有用でもあると思います。プレゼンテーションでも言われていたように、熟練の医者がAIを用いるとかなり症状の発見率が上がる、という点で現状のAIと医療のかかわり方は、データベース検索に合わせて、概念空間を以て関連度を算出させるという使い方で医療を支えると思います。\n\n逆に人間に判断、やってほしいことは、責任を持って判断をする、診断をするということです。法制度の面で見れば人格と責任を持てるのは、現実空間のヒトと、法人だけであってAIにはできないという点。（いくつかの判決ではAIを開発している企業とされますが。）AIが確率的に答えを出すから駄目だという話ではなく、人間社会を構成する既存のルールとしては合わないことからという点です。"}, {"id": "21", "dept": "情報", "imp": ["S"], "ai": ["ope"], "hu": ["mind", "care"], "tmpl": false, "vision": "逆にAIではなく人間に判断してほしいことは心や体のケアや看護の仕事です", "text": "AIはより技術的な面で医療分野を支えられるのではないかと感じました。大石先生がおっしゃっていたように「人は手術をするとき緊張して手が震えてしまう」といった人間らしい問題が起きているそうです。それらをAIやロボットの力を借りることで一寸のずれや手の震えも解消することができていて感心しました。そのことから自分は手術以外にもこのような繊細さを求められる治療にはこの技術を取り入れればよいと感じました。逆にAIではなく人間に判断してほしいことは心や体のケアや看護の仕事です。AIやロボットのように感情がない機械に看病や相談にのってもらっても、自分はあまりうれしいとは思わないと感じてしまったからです。"}, {"id": "23", "dept": "ロボ", "imp": ["S"], "ai": ["ope"], "hu": ["emer"], "tmpl": false, "vision": "そういった点においてはまだまだ人間の力が必要だと考えました", "text": "ロボット支援手術が普及しているということについてです。いずれセンサーを完璧に生かしたブレのない手術ができるようになり、人間は監視する程度になると予測しました。\nしかし、今年の7月熊本で手術中に地震が発生するニュースも見ました。安全なスペースの確保のため固定されているものと、ぶつからないように簡単に移動するものに分かれており、地震の中で医師の方々は患者さんを抑えたりスペースの確保の急な対応を求められていました。固定されているものでも大地震には耐えられない可能性などやAI機械は地震など急激な状態変化を理解できるのか対応できるのかなどを考えると正直に怪しいと感じました。人手も対応できないことはあると思いますがそういった点においてはまだまだ人間の力が必要だと考えました。"}, {"id": "25", "dept": "情報", "imp": ["C"], "ai": ["talk", "mon"], "hu": ["tell", "plan", "mind"], "tmpl": true, "vision": "認知症の診断を本人や家族に伝える場面や、治療や介護の方針を決める場面は人間に担ってほしい", "text": "大石先生が紹介した孤独な高齢者や認知症の例では、AIやロボットが毎日話しかけて会話の機会を増やすことで、寂しさをやわらげ、脳への刺激にもできると考える。また、会話の内容や生活リズムを記録し、小さな変化を医師や家族に知らせれば、早期発見にもつながる。一方で、認知症の診断を本人や家族に伝える場面や、治療や介護の方針を決める場面は人間に担ってほしい。相手の表情や気持ちをくみ取って言葉を選び、本人の価値観に寄り添いながら一緒に悩むことは、データだけでは判断できないからである。"}, {"id": "27", "dept": "情報", "imp": ["F", "C"], "ai": ["dx"], "hu": ["self"], "tmpl": false, "vision": "AIがどんなに発展しても自分の意志は大切であり", "text": "今日の講義では、現代の医療技術はどのようになっているのかを学ぶことができました。牛の病気から薬を発見した話などからは、きっかけは意外なところから新たな発見をする可能性があると感じさせられました。また、AIを使用することで認知症を予防できたり、本来探していない病気などの早期発見につながることがわかりました。これらを応用して、日本人の健康寿命が伸ばされることが期待されます。しかし、未熟者よりも熟練者がAIを使用する方がより効果があると聞いて、AIに支配されるのではなく有効活用することで更なる社会発展に繋がると私は思いました。更に、健康寿命というのは日ごろの食生活や運動が関わっていると聞いて、AIは全ての病気を治せるわけではないとわかりました。こういった事例から、AIがどんなに発展しても自分の意志は大切であり、AIを上手く活用することでより過ごしやすい社会になると思いました。"}, {"id": "28", "dept": "情報", "imp": ["S"], "ai": ["care"], "hu": ["mind"], "tmpl": false, "vision": "メンタルクリニックですとか、そういった精神的なところは寧ろ絶対に人間にやってほしいなと思います", "text": "プレゼンテーションでもまさにロボット支援技術に触れられておりましたが、それを発展させた形で私自身のAIなどの技術がよりよい医療を支えられると考えられるアイデアなのですが、矢張り今どんどん進歩しているフィジカルAIを通じて、医療に分類してよいのかは分かりませんが...介護などでは、より良い医療を提供できるのではないかなと思います。また、人間を代替するのではなく、人間と協議する、そういった用途でも使っていけるでしょう。\n逆に例えばメンタルクリニックですとか、そういった精神的なところは寧ろ絶対に人間にやってほしいなと思います。"}, {"id": "30", "dept": "情報", "imp": ["R"], "ai": [], "hu": ["mind"], "tmpl": false, "vision": "患者の病気に寄りそったり患者の話を聞くのは、AIの苦手分野であるため人間がやるべきことだと思います", "text": "例として挙げるプレゼンテーションは再生医療についてです。この技術がより良い医療を支えられる場面は、根本的な治療法がない難治性疾患の克服です。普通の病気は症状の進行を抑えることで治すことができますが、一度傷つくともう元には戻れないとされていた神経細胞を再生したり、壊死した心臓の筋肉に心筋シートを移植することで重症心不全を治療したりすることができます。\n逆に患者の病気に寄りそったり患者の話を聞くのは、AIの苦手分野であるため人間がやるべきことだと思います。"}, {"id": "31", "dept": "情報", "imp": ["S", "C"], "ai": ["care", "talk", "mon"], "hu": ["dx"], "tmpl": false, "vision": "胃カメラなどのその人が病気にかかってるかの判断はまだベテランのお医者さんにやってほしいです", "text": "医療でロボットアームを活用するって話がすごいと思って人間の緊張するときの手のブレをなくせることや、人間の手が向かない方向に手を向かせられるから医療が進歩した話がすごく面白かったです。\n今日先生がおっしゃっていた認知症や高齢者の方々などに対してのケアなどAIでまだまだ支えられるかなって考えがあって理由は認知症患者の介護ってすごい大変っていう共通認識があってその介護を支えられたら幸せになる人が増えるのかなって思います。\n提案です、認知症の人って大体が高齢者で足腰が悪いって方が多いので高齢者を座ったままロボットと会話して移動させる車椅子でこの車椅子の移動させる会話をする中で何をするかAIが聞いたりクイズを出したり認知症改善に向けられる会話を入れたり大幅に移動するときに親族に連絡がいくとかが便利でいいと思いました。\n胃カメラなどのその人が病気にかかってるかの判断はまだベテランのお医者さんにやってほしいです。"}, {"id": "32", "dept": "ロボ", "imp": ["S", "G"], "ai": ["ope", "img"], "hu": ["dx", "plan"], "tmpl": false, "vision": "AIだけに判断を任せるのではなく、医師が患者の状態や検査結果を確認しながら、AIと協力して診断を進めていくという「共同作業」をしていってほしいと考えました", "text": "今回のプレゼンテーションを聞き、「AIなどの技術がよりよい医療を支えられる」と考えた場面は、ロボットによる手術とAIによるがんの早期発見です。ロボットによる手術は、傷口を小さくすることで術後の痛みを減らし、回復を早めることが期待できます。また、AIによる画像診断などでは、人間が見つけにくい小さな変化の発見をサポートし、がんの早期発見につながる可能性もあります。このように、言うなれば人間の限界を超えるための技術は大変素晴らしいと思います。\n一方で、診察や診断をAIに任せきりにすることには問題があるとも聞きました。AIに頼りすぎると、医師自身が考える機会が減り、AIの間違いに気づけなくなる恐れがあると聞き、私はAIだけに判断を任せるのではなく、医師が患者の状態や検査結果を確認しながら、AIと協力して診断を進めていくという「共同作業」をしていってほしいと考えました。AIの分析能力と医師の経験や判断力、そして双方の知識が組み合わさることで、より安全で質の高い医療につながると考えます。"}, {"id": "33", "dept": "情報", "imp": ["C"], "ai": ["img", "talk"], "hu": ["resp", "plan"], "tmpl": false, "vision": "人間が結果を確認し、責任を持って判断することも大切だと思いました", "text": "今回の講義を通して、AIやロボットは人間の生活を便利にするだけでなく、人々の健康や心の支えにもなるのだと感じました。医療の分野では、AIが病気の発見をサポートすることで、医師の負担を減らし、より適切な治療につなげられる可能性があります。一方で、AIの判断が必ずしも正しいとは限らないため、人間が結果を確認し、責任を持って判断することも大切だと思いました。また、認知症の予防には人との交流も重要であると知り、技術が発展しても、人と人とのつながりを大切にする必要があると考えました。将来は、ドラえもんのように人の気持ちを理解し、会話を通して安心感を与えられるロボットが実現すれば、高齢者の孤独を減らすことにもつながると思います。AIの能力と人間らしい思いやりを組み合わせることが、これからの社会に必要なのではないかと感じました。"}, {"id": "34", "dept": "情報", "imp": ["M"], "ai": ["mind"], "hu": ["plan"], "tmpl": false, "vision": "難易度や費用が高額な手術する必要があるかどうかの判断は生成AIなどではなくプロの人間きちんと判断し、対応してほしいと思いました", "text": "今回の講義で、人間の別の誰かのために生きたいと思う気持ちで立ち上がるというものは、漫画やドラマ的なフィクションのようなものではなく本当にあるんだなと思い、このことをAIと対話をして人間に希望を与えるような精神医療系のAI技術が精神疾患の患者を支えることが出来ると思いました。また、難易度や費用が高額な手術する必要があるかどうかの判断は生成AIなどではなくプロの人間きちんと判断し、対応してほしいと思いました。"}, {"id": "36", "dept": "情報", "imp": ["X"], "ai": ["mon"], "hu": ["diag", "ope", "emer"], "tmpl": false, "vision": "経験など臨機応変な対応を取れるのは人間だと私は思います", "text": "AIを使った医療で良い場面は入院者のナースコールなどだと思います。逆に人間に判断して欲しい部分は診察など1番手のかかる部分かと思います。正直に言いますとまだAIが診察や手術などは人間がする方がまだ失敗は少ないと思います。私は小塩先生のようにAIに詳しいわけではありませんが。経験など臨機応変な対応を取れるのは人間だと私は思います。またAIに支えられる場面が何故ナースコールを選んだかと言うと患者に万が一動けない状況があった場合AIが判断して看護師などを呼べるようにするといいと思ったからです。"}, {"id": "38", "dept": "情報", "imp": ["G"], "ai": ["img"], "hu": ["plan", "mind"], "tmpl": true, "vision": "感情などが関わることにはAIではなく人間主導で行ってほしい", "text": "AI内視鏡について例に挙げる。医者は注目している部分や疑っている病気を中心に見るが、AIはそれ以外の部分や全体を見て異常を見つけることができる。なので、人間が見落としやすい変化や、病気の兆候を見つけるような場面がAIが医療を支えられる場面だと考えられる。\n逆に人間が判断してほしい場面は、最終的な判断である。なぜなら、AIは検査の結果などのデータを元に判断するが、医者はそれに加えて、患者の心境などを考えて判断できるからである。感情などが関わることにはAIではなく人間主導で行ってほしい。\nなので、医療におけるAI活用に関しては、医者だけでは足りないこと（検査での分析など）をAIが支えるような関係が、よりよい医療につながると考える。"}, {"id": "40", "dept": "ロボ", "imp": ["S"], "ai": ["ope"], "hu": [], "tmpl": false, "vision": "人が現状の世界と人の様子から判断してほしいことであると私は思っています", "text": "私がAIが医療の現場で人がより支えられると思う場面は手術でAIが医者の命令を聞いて道具を差し出すなどのロボットの性能をより向上させることで医者や患者の助けになるのではないかと思いました。しかし、今だAIに頼れないと私が思う場面は政治などの人の生活を根本的に関わる立場をAIに任せるのは現状のAIの能力と人々の生活では、とてもAIに政治を任せられず、人が現状の世界と人の様子から判断してほしいことであると私は思っています。"}, {"id": "41", "dept": "ロボ", "imp": ["G"], "ai": ["img"], "hu": ["plan", "tell", "mind"], "tmpl": true, "vision": "AI はデータを分析する道具であり、患者の心に向き合う役割は人間が担うべきだと考えます", "text": "AI がよりよい医療を支える場面は、レントゲンや CT 画像のスクリーニングです。大量の画像を短時間で確認し、がんなどの異常箇所を見つける補助ができます。忙しい医師の負担を減らし、見落としを防ぐことに役立ちます。\n\n一方、人間に判断してほしいのは、患者との対話を通じた治療方針の決定です。病状だけでなく、患者の気持ち、生活環境、家族の思いはデータだけでは分かりません。痛みや不安に寄り添う共感、治療のリスクを分かりやすく伝えて意思決定を支えることは、人間の医師にしかできません。AI はデータを分析する道具であり、患者の心に向き合う役割は人間が担うべきだと考えます。"}, {"id": "42", "dept": "情報", "imp": ["G"], "ai": ["img"], "hu": ["tell", "plan", "mind"], "tmpl": true, "vision": "AIの分析結果だけで決めるのではなく、医師が患者と話し合い、一人ひとりに合った治療を考えることが必要だと思う", "text": "AIを使った病気の発見について\nAIは、レントゲンやCTなどの画像を分析し、病気の可能性がある部分を見つける場面で役立つと思う。AIを使うことで、人間が見落としやすい小さな変化に気づいたり、多くの患者のデータを短い時間で調べたりできるため、病気の早期発見につながる。\n\n患者に病気について説明したり、治療方法を最終的に決めたりすることは、人間に判断してほしい。病気になると不安を感じる人も多いため、患者の気持ちを考えながら、分かりやすく説明することが大切だと思う。また、同じ病気でも、患者によって希望する治療や生活の状況は違う。AIの分析結果だけで決めるのではなく、医師が患者と話し合い、一人ひとりに合った治療を考えることが必要だと思う。"}, {"id": "43", "dept": "ロボ", "imp": ["C"], "ai": ["mon"], "hu": ["tell", "plan", "resp"], "tmpl": false, "vision": "AIは「第二の目」として使い、最終判断は人間が行うのがよいと考えます", "text": "選んだ例:声や会話から認知機能の低下を見つけるAI\n\nこの研究は、話す速さや間の取り方などをAIで解析し、認知機能の低下を見分けます。従来の検査は時間と負担が大きいので、ふだんの会話から調べられるAIは、健康診断や遠くに住む家族の見守りで早期発見に役立つと思います。大勢の人を疲れずに同じ基準で見られるのがAIの強みです。\n一方で、診断を伝えることや今後の生活を決める話し合いは、人間に任せたいです。「疑いがある」と言われた人は不安になるので、気持ちに寄り添える人が伝えるべきです。また、AIは方言や言語の違いで間違える可能性があり、責任も取れません。AIは「第二の目」として使い、最終判断は人間が行うのがよいと考えます。"}, {"id": "44", "dept": "情報", "imp": ["G"], "ai": ["img"], "hu": ["tell", "plan", "mind"], "tmpl": true, "vision": "患者への病気の説明や治療方法を最終的に決めることは、人間に判断してほしい", "text": "私は、AIによる画像診断支援が医療をよりよくできると考えた。例えば、レントゲンやCT画像をAIに分析させることで、人間が見落としやすい小さな異常を見つける手助けができると思う。多くの患者を診察する医師の負担を減らし、病気の早期発見にもつながると考えた。\n一方で、患者への病気の説明や治療方法を最終的に決めることは、人間に判断してほしい。患者は病気に対する不安や、それぞれの生活事情を抱えているため、検査結果だけで最適な治療を決められるとは限らないからだ。AIの分析結果を参考にしながら、患者の気持ちに寄り添い、一人ひとりに合った治療を考えることが、よりよい医療につながると思う。"}, {"id": "45", "dept": "情報", "imp": ["C"], "ai": ["care", "tell"], "hu": ["dx", "plan"], "tmpl": false, "vision": "逆にAIではなく人間にやってほしいことは病気や診断の最終確認です", "text": "私が大石先生のプレゼンテーションの中からAIなどの技術がよりよい医療を支えられそうだと思った場面は認知症の人や、認知症になるような生活を送っている人の生活です。認知症の人を介護するのは大変なのでフィジカルAIやそうでなくとも適切な指示を出してくれるAIがあれば負担は軽減されるでしょう。また、認知症になりそうな生活を送っている人に対しては人間が言うよりも角が立たないように現在抱えているリスクや具体的な解決方法のことを伝えてくれることも期待できると思います。逆にAIではなく人間にやってほしいことは病気や診断の最終確認です。現在AIは人間では見つけられないような病気を見つけたり調剤のサポートをしてくれたりしますがそれでもまだまだその信頼性は担保されておらず間違いを犯す可能性が人間と比べて高いと思うのでAIはあくまでサポートのための道具であってほしいです。"}, {"id": "46", "dept": "情報", "imp": ["S"], "ai": ["ope"], "hu": ["plan"], "tmpl": false, "vision": "それを鵜吞みにせず最終決定を判断して下すのは人間のままであってほしいと考えます", "text": "医師の方がロボットアームで手術をしているということを知り、驚くと同時に科学の進歩に感動しました。より精密かつ人間の腕ではできない角度に動かすことでより自由度を高くし、小さな切開で済ませたり、人間ではさらに切開しないといけない箇所の手術でもロボットアームならそのままでも可能だったりできることは本当にすごいことだと思います。\n今後はさらに発展し、AIができることや判断できることはより広がると思います。しかし、それを鵜吞みにせず最終決定を判断して下すのは人間のままであってほしいと考えます。"}, {"id": "47", "dept": "情報", "imp": ["G"], "ai": ["img"], "hu": ["plan", "mind"], "tmpl": true, "vision": "患者の不安や悩みを聞き、気持ちに寄り添うことは人間にしてほしい", "text": "大石先生のプレゼンテーションから、医療現場でのAIの活用について考えた。AIは、レントゲンなどの画像や検査結果を分析し、病気の可能性を見つける場面で役立つと思う。人間だけでは気づきにくい小さな変化を見つけられれば、病気の早期発見にもつながると考えた。ただし、AIの判断が必ず正しいとは限らないため、AIにすべて任せるのではなく、医師が結果を確認することが大切だと思う。一方で、患者の不安や悩みを聞き、気持ちに寄り添うことは人間にしてほしい。病気になった人は、治療への不安や今後の生活について悩むこともあると思う。そのようなときに、患者の話を聞き、一人ひとりの状況に合わせて説明することは重要だと考える。"}, {"id": "48", "dept": "ロボ", "imp": ["J", "D"], "ai": ["rec", "diag"], "hu": ["diag", "mind"], "tmpl": false, "vision": "初めての診断や、病名がわからない症状に対して、うつ病などの精神的な病にいついてはまだAIでは寄り添えきれない可能性があると思うのでまだ人間が判断して対応していくべきだと思います", "text": "AIがより良い医療を支えれるのは、患者のカルテのまとめや、問診や簡単な診察のスムーズ化などに役立てると思います。例えば風邪ぐらいや薬をもらいに来るだけの定期診察などはAIに任せた方が患者側も病院側もスムーズに診察を終えることができるので便利だと思います。ただ初めての診断や、病名がわからない症状に対して、うつ病などの精神的な病にいついてはまだAIでは寄り添えきれない可能性があると思うのでまだ人間が判断して対応していくべきだと思います"}, {"id": "49", "dept": "ロボ", "imp": ["G", "W"], "ai": ["mon"], "hu": ["tell", "plan", "mind"], "tmpl": true, "vision": "治療方針の説明や最終的な判断は人間に行ってほしいです", "text": "大石先生のプレゼンテーションでは、AIによる病気の早期発見の例が印象に残りました。私は、AIは高齢者の健康管理に役立つと考えます。例えば、心拍数や睡眠データを分析し、異常を早く見つけて本人や病院に知らせることで、病気の重症化を防げると思います。一方で、治療方針の説明や最終的な判断は人間に行ってほしいです。なぜなら、患者の不安や希望、家族の状況などはデータだけでは分からず、相手の気持ちに寄り添うことが大切だからです。AIと人間が協力することで、より良い医療が実現すると考えます。"}, {"id": "51", "dept": "情報", "imp": ["S"], "ai": ["ope", "dx"], "hu": ["mind"], "tmpl": false, "vision": "患者さんや家族の不安に寄り添い、気持ちを理解することはAIではなく医者にしてほしいです", "text": "大石先生のプレゼンテーションの中で、AIロボットが医師と一緒に手術をしている例が印象に残りました。AIなどの技術は、手術中に医師の手の動きを補助したり、細かい作業を正確に行ったりする場面で役立つと考えます。また、患者の検査データを分析することで、病気の早期発見や、一人ひとりに合った治療方法を考えることにも活用できると思います。一方で、患者さんや家族の不安に寄り添い、気持ちを理解することはAIではなく医者にしてほしいです。医療では、病気を治すだけでなく、患者さんが安心して治療を受けられることも大切だからです。AIの正確さや技術力と、人間の共感力や判断力を組み合わせることで、よりよい医療につながると考えます。"}, {"id": "53", "dept": "情報", "imp": ["J"], "ai": ["rec"], "hu": ["resp"], "tmpl": false, "vision": "医療系は人命が他の職業と比べて大きく関わっている以上、どんな作業も絶対に人が関わるべきだと思います", "text": "大石先生の話でカルテの分析なんかもAIが出来るとあって、そこで思ったのですが、議事録の自動書き起こしを聞いたことがあるので、カルテ作成の自動化なんかも可能なのかなと思いました。カルテを書くのは専門の人が多いらしいので、そういう貴重な人材への負担を減らすためにもカルテ作成の自動化は良いAI技術だと思います。しかし、AIに丸投げはやはり良くないとも思います。医療系は人命が他の職業と比べて大きく関わっている以上、どんな作業も絶対に人が関わるべきだと思います。カルテ作成の自動化も、カルテの内容と医師や看護師の記憶とで齟齬が無いように確認するべきだと思います。"}, {"id": "54", "dept": "情報", "imp": ["G", "C"], "ai": ["img"], "hu": ["tell", "mind"], "tmpl": true, "vision": "がんになってしまった患者に対してAIが言葉をかけるより人間である医者が言葉をかけたほうが患者に対して思いが伝わり、親身に寄り添える気がする", "text": "技術がある医者でも見つけるのが困難な症状の場合、AIを使うことで早期発見や症状を見つけ出すことができたり、高齢者がAIを使うことで認知症を予防することができる。\nがんになってしまった患者に対してAIが言葉をかけるより人間である医者が言葉をかけたほうが患者に対して思いが伝わり、親身に寄り添える気がする。理由はAIは合理的な解釈ができるが患者の気持ちを受け取る能力はあまりない。医者はたくさんの経験と患者を見てきて患者の気持ちを受け取ることができる"}, {"id": "55", "dept": "ロボ", "imp": ["C"], "ai": ["mon"], "hu": ["plan", "talk"], "tmpl": false, "vision": "一方、人間に任せたいのは、患者の表情や生活背景を見た総合的な判断と、人とのつながりづくりである", "text": "私はフレイルを例に選んだ。フレイルは体力が落ちて外出や交流が減り、さらに衰えるという負のループに陥りやすい。特に定年後の男性は、居場所や役割を失って孤立しやすいと学んだ。\nAIが医療を支えられるのは、早期発見の場面だと思う。AIは見落としや医師によるばらつきを減らせる。スマートウォッチなどで歩数や外出の減少に気づき、本人や家族に知らせる見守りができれば、負のループに入る前に対応できる。\n一方、人間に任せたいのは、患者の表情や生活背景を見た総合的な判断と、人とのつながりづくりである。AIは友人にはなれず、誰かに気にかけてもらえる実感は人との関わりの中で生まれる。AIが広く見て、人が寄り添うという役割分担が大切だと考える。"}, {"id": "56", "dept": "ロボ", "imp": ["K"], "ai": ["talk", "mon"], "hu": ["mind"], "tmpl": false, "vision": "患者さんの繊細な感情を深く読み取り、どのように話をし、どのように接すれば改善できるかといった適切なタイミングを見極められるのは、やはり人間だと思うから", "text": "ページ52 Discussion3\nこの例では、本人の誇りを傷つけずに認知機能の変化を捉えることが課題となっている。そのため僕はこのような場面で、スマートスピーカーや対話ロボット、見守りセンサーの活用をしたらよいのではないかと思った。\nこれは、対話ロボットとの雑談や挨拶、といった日常の会話の中で、声のトーンや話すスピード、言葉の詰まり、同じ話を繰り返す頻度などをAIが自然に分析できれば、本人の尊厳を損なわず、自然とデータが集まるのではないかと思ったからだ。\nまた、そのほかにも見守りセンサーで見れる行動の中で、日常の行動に何か違和感がないかなどを発見できれば、更にデータが集まりやすいのではないかと思った。\nこういったことにAIを使い、患者さんに負担、ストレスがかからないような検査をしていけば、AIはよりよい医療を支えられると思う。\n\n逆に、AIではなく人間に判断してもらいたい場面としては、例で言う患者さんが「もう二度と受診しない」と言っているような場面で、どのように向き合って、どう改善させていくかを機械的ではなく感情に寄り添って考えるべき所だと思う。\n理由は、AIが言うような「こうしたほうがいい」「こうするべきだ」といった正論ではなく、患者さんの繊細な感情を深く読み取り、どのように話をし、どのように接すれば改善できるかといった適切なタイミングを見極められるのは、やはり人間だと思うから。"}, {"id": "58", "dept": "情報", "imp": ["C"], "ai": ["mon", "talk", "care"], "hu": ["tell", "mind", "plan"], "tmpl": true, "vision": "病気の告知や不安の傾聴、人生の選択に関わる場面などは、AIではなく人間が寄り添うことが重要だと思いました", "text": "大石先生のプレゼンテーションで提示されていた「孤独な高齢者」や「認知症の患者」の症例は、現代の医療が直面している大きな課題だと感じました。特に、生活リズムの乱れや服薬忘れ、社会的つながりの喪失などは、AIやロボット技術によって支援できる可能性があると思いました。例えば、見守りセンサーや会話AIによる声かけ、薬の時間を知らせる仕組みなどは、患者の安全や安心感を高める場面で役立つと感じます。一方で、病気の告知や不安の傾聴、人生の選択に関わる場面などは、AIではなく人間が寄り添うことが重要だと思いました。技術が進んでも、患者の感情や価値観を理解しながら判断する部分は人間にしかできないと感じます。これからの医療では、AIと人間がどのように役割分担していくことが望ましいのでしょうか。"}, {"id": "59", "dept": "情報", "imp": ["D"], "ai": ["dx"], "hu": ["plan"], "tmpl": false, "vision": "治療方法を最終的に決めるのは人間の医師であってほしい", "text": "AIがより良い医療を支えられる場面として、病気の診断があると思った。例えば、AIが患者の症状や検査結果を分析することで、医師が見落としてしまう病気に気づいたり、必要な検査を提案したりできそう。また、医師による診断のばらつきを減らせることもメリットだと思った。\n\n一方で、治療方法を最終的に決めるのは人間の医師であってほしい。なぜなら、AIも間違えることがあり、患者の気持ちや生活環境まで完全に理解するのは難しいから。患者によって希望する治療方法も違うと思うので、医師が直接話を聞いて判断することが大切だと思う。\n\nAIの便利な部分を活用しながら、人間が責任を持って判断することが、より良い医療につながると思う。"}, {"id": "61", "dept": "情報", "imp": ["G"], "ai": ["img"], "hu": ["tell", "plan", "mind", "emer"], "tmpl": true, "vision": "病気の告知や治療方針、例外的な病的症状に関しては、人間の手で判断してほしいです", "text": "AIなどの技術を活用し、見落としがちな病気の早期発見を検出することで、医療効率の向上に期待できる。\n　一方、病気の告知や治療方針、例外的な病的症状に関しては、人間の手で判断してほしいです。なぜなら、AIは「共感性」や「倫理的配慮」に欠けている場面が多く、患者の「心情」に対しての寄り添いは人間でないと難しい場面が多いと思ったからです。\n 　医療の大まかなやり取りは人間同士で行い、分析・業務といった内容は、AIに任せることで、効率の良い医療システムを導入できるのではないかと感じました。"}, {"id": "64", "dept": "情報", "imp": ["D"], "ai": ["dx"], "hu": ["plan", "tell"], "tmpl": false, "vision": "患者の不安や希望を聞き、診断や治療について納得できるように説明することも、人間に担ってほしい部分である", "text": "私が興味を持ったのは、AIを活用した病気の診断である。講義では、医師が主な病気を探す一方で、AIは医師が見落としている可能性のある別の原因を探し、診断をサポートするという話があった。人間は一つのことに集中すると、ほかの可能性に気づきにくくなることがあるが、AIを活用することで、より幅広い視点から病気を考えられると思う。\n私は、ドラマの『ドクターX』で、AIが最も可能性が高いと判断した病名を信じたことで問題が起きる話を思い出した。この話から、AIが出した診断が必ずしも正しいとは限らず、結果をそのまま信じることには危険があると考えた。\nAIには大量の情報を分析し、人間が見落としそうな可能性を見つける強みがある。一方、人間の医師には、患者の症状や検査結果、ほかの病気の可能性などを総合的に考えて判断する役割がある。また、患者の不安や希望を聞き、診断や治療について納得できるように説明することも、人間に担ってほしい部分である。\nAIと人間が完全に役割を分けるのではなく、お互いの優れた部分を活用し、足りない部分を補い合うことが大切だと思う。AIの分析を参考にしながら、医師が別の可能性も検討することで、病気の見落としを減らし、よりよい医療につなげられると考える。"}, {"id": "67", "dept": "情報", "imp": ["C"], "ai": ["talk"], "hu": ["self"], "tmpl": false, "vision": "最終的に決めるのは自分自身でありたいです", "text": "今回の講義では、現代の医療技術について学ぶことができました。認知症などの心の健康などで「なぜ？なぜ？」と深堀してくれるAIがあれば自分の可能性や認知症になる可能性が低くなると思いました。一方で、治療方針や自分の人生に関わる重要な判断は、AIではなく人間が行ってほしいです。医師には患者の気持ちや状況を理解し、相手に寄り添って判断してほしいです。AIと共に考え、技術を活用することは大切ですが、最終的に決めるのは自分自身でありたいです。AIに使われるのではなく、自分がAIを使いこなす側に立つことが重要だと考えます。"}, {"id": "68", "dept": "情報", "imp": ["S"], "ai": ["ope", "img"], "hu": ["mind"], "tmpl": false, "vision": "感情の整理とかカウンセリング寄りのことは人がやったほうがいいと思う", "text": "ロボット手術\n​医療におけるAIやロボット技術は、手ぶれ防止、遠隔手術、人に出来ない可動域のいる手術、迅速な画像診断、人が直接やるより小さい切開による負担軽減など、間に機械を挟むことでより質の高い医療を実現している。\n​一方、私が思う人間が担った方が良いことは感情のケア\n授業で病気を機械に励まされても死なない機械に言われても響かないみたいなことを言ってたのと、もし私が死に関わる重い病気になったとき機械に落ち込まないでとか言われたら多分ムカつくだろうなと思ったので感情の整理とかカウンセリング寄りのことは人がやったほうがいいと思う。"}, {"id": "69", "dept": "ロボ", "imp": ["G"], "ai": ["img"], "hu": ["plan", "tell", "mind"], "tmpl": true, "vision": "病気への不安を抱える患者に寄り添い、安心させることは人間にしかできないと思う", "text": "AIはレントゲンやCT画像などを分析し、病気の兆候を見つけることができるためがんの早期発見や診断のサポートに役立つと思う。医師が見落としてしまうような小さな異常も発見できるしより正確な医療につながると思う。さらに、医師不足の地域でもAIを活用することで、多くの人が質の高い医療を受けられるようになると思う。\n治療方針を決めたり、患者に説明したりする場面は人間にやってほしいと思う。患者それぞれに考え方や気持ちを持っていて、データだけでは判断できないことがあると思うし、病気への不安を抱える患者に寄り添い、安心させることは人間にしかできないと思う。AIと人間がそれぞれの得意なことを生かして協力することで、より良い医療が実現できると思う"}, {"id": "70", "dept": "情報", "imp": ["K"], "ai": ["talk", "mon"], "hu": ["tell", "plan"], "tmpl": false, "vision": "人間に判断してほしいのは、「この結果を本人にどう伝えるか」と「店を続けるか、お金の管理をどうするか」を決める場面である", "text": "大石先生のプレゼンテーションで印象に残ったのは、長年呉服店を営んできた80代の女性の例である。娘さんは、洗濯物を干す途中で何をしていたか忘れる、釣銭の計算ができなくなるといった変化を心配している。しかし本人は認知機能の低下を認めず、検査で軽度の記憶力低下を指摘されると「もう二度と受診しない」と怒ってしまった。\n\nAIが役に立つと思うのは、この「検査を嫌がる人の変化を、日常の中で捉える」場面である。「今日は何月何日ですか」という検査は、本人には自分が試されていると感じられる。一方で、AIが呉服や帯、柄の話を相手にしながら会話すれば、本人は楽しんで話せる。プレゼンでは、話す速さや間の取り方から認知機能の低下を識別できる可能性を示した研究も紹介されていた。医師は月に一度の外来でしか本人を見られないが、AIなら毎日、疲れずに、同じ基準で変化を記録できる。私のアイデアとしては、AIがお客さん役になり、本人に着物の合わせ方を提案してもらったり、お会計をしてもらったりする仕組みを考えた。そうすれば判断・計画・計算を自然に使うことになり、「テストを受ける人」ではなく「頼られる専門家」として続けられると思う。\n\n一方で、人間に判断してほしいのは、「この結果を本人にどう伝えるか」と「店を続けるか、お金の管理をどうするか」を決める場面である。理由は二つある。一つ目は、同じ事実でも誰からどう言われるかで受け止め方が全く違うからだ。この女性は検査を受けただけで誇りを傷つけられたと感じた。機械に「低下しています」と言われたら、さらに傷つくかもしれない。二つ目は、本人の誇りと娘さんの心配がぶつかっていて、どちらを優先するかに正解がないからだ。これは数値ではなく価値の判断であり、本人の人生を知る人間が、責任を持って一緒に悩むべきだと考える。\n\nただし疑問も残った。本人に知らせずに会話から認知機能を測ることは、尊厳を守ることになるのか、それとも本人をだますことになるのか。AIが「見守る」ことと「監視する」ことの境目はどこにあるのか、先生に聞いてみたい。"}, {"id": "71", "dept": "ロボ", "imp": ["C"], "ai": ["mon"], "hu": ["mind", "talk"], "tmpl": false, "vision": "年をとったあとのメンタルケアや、人と会って会話することは、人間に担ってほしい", "text": "大石先生のプレゼンテーションから、定年後の高齢者の健康維持を例に考えた。AIなどの技術は、歩行や筋肉量、食事の状況などを記録・分析し、転倒や誤嚥性肺炎などのリスクを早期に発見する場面で役立つと考える。また、異常があれば医療従事者や家族に知らせることで、病気の予防や早期治療につなげられる。一方で、年をとったあとのメンタルケアや、人と会って会話することは、人間に担ってほしい。定年後は仕事や友人とのつながりが減り、孤独を感じることもある。AIは会話の相手になれても、人間同士の交流や相手の気持ちに寄り添うことを完全に代替するのは難しいからと考えました。"}, {"id": "72", "dept": "情報", "imp": ["G", "J"], "ai": ["img", "rec"], "hu": ["tell", "plan", "mind"], "tmpl": true, "vision": "がんの告知や最終的な治療方針の決定、患者の不安をやわらげる心のケアは人間が行うべきです", "text": "AIが医療を支える場面として、レントゲンなどの画像から病気を見つける作業や診察の記録づくりが挙げられます。データ分析や書類作成をAIに任せることで見落としを防ぎ、待ち時間の短縮や医療スタッフが患者に向き合う時間を増やすことができます。一方で、がんの告知や最終的な治療方針の決定、患者の不安をやわらげる心のケアは人間が行うべきです。データだけでは測れない人の気持ちや人生観に寄り添い、責任を持って重大な決断を下すことは感情を持つ人間にしかできないからです。"}, {"id": "73", "dept": "情報", "imp": ["C"], "ai": ["mon", "care", "talk"], "hu": ["plan", "mind"], "tmpl": true, "vision": "延命治療の選択や緩和ケアにおける「患者や家族の感情に寄り添った意思決定」は人間が行うべきである", "text": "AIやロボットは、患者の見守りや生活リズムの記録、服薬管理などの「日常的で定型的なサポート」で大きな力を発揮できる。センサー等で異変を察知し早期発見につなげることや、会話ロボットによる孤独感の軽減は、医療・介護現場の負担を減らし、より行き届いた医療の提供を支える。   \n・人間が判断・対応すべき場面と理由\n一方で、延命治療の選択や緩和ケアにおける「患者や家族の感情に寄り添った意思決定」は人間が行うべきである。AIはデータに基づく確率や客観的な判断は得意だが、患者個人の人生観や言葉にできない不安、家族の複雑な心情に共感することはできない。   AIを効率的なモニタリングや補助に活用しつつ、感情的なケアや終末期医療の最終判断は医師などの人間が担う「役割分担」が重要だと考える。"}, {"id": "74", "dept": "情報", "imp": ["D"], "ai": ["dx"], "hu": ["emer"], "tmpl": false, "vision": "イレギュラーな診断をしないといけなくなったときは人間の知識や経験で判断することも大事だと思い", "text": "私は、AIを内科診断と用いるメリットとデメリットのところで取り上げられていた症状、検査値、既往歴などから鑑別結果を掲示できるとあるが、このことが最もAIなどの技術がよりよい医療を支えられるのだと大石先生の話を聞いて思った。なぜなら、私は、医療で最も大切なことはより正しい診断でより正しい治療をして患者を治すことが重要であると思い、その上、人間だけでは限界があると思った。だが、逆に人間に判断してほしいなと思ったのが、医療は数学や英語などの勉強と違い規則的にいかないこともあり、例えると同じ病名でもつらさや痛さの部分や強さが違う。つまり何が言いたいかというと、イレギュラーする場合もよくあり、AIなどの機械は規則的にはしっかり対応できるが、イレギュラーの対応はまだこれからだと思うので、こういうイレギュラーな診断をしないといけなくなったときは人間の知識や経験で判断することも大事だと思い。医療に携わるのであれば、より深い知識を得る必要があると思った。"}, {"id": "75", "dept": "情報", "imp": ["D", "S"], "ai": ["dx", "ope"], "hu": ["plan"], "tmpl": false, "vision": "実際に最終的に選択を下すのは人間がすべきだと考える", "text": "どれだけ情報がそろっていても、人間ではすべての可能性を予測することは難しいが、AIに情報を渡せば見落としなくすべての可能性をリストアップすることができ、ミスを減らすことができる。また、現在は機械の手を人が動かして手術するようだが、、将来的にはAIが地震で腕を動かし、絶対にミスせずに手術できるようになるかもしれないと思う。一方で、、選択肢の候補を提示させることもできるが、実際に最終的に選択を下すのは人間がすべきだと考える。"}, {"id": "76", "dept": "ロボ", "imp": ["G"], "ai": ["img", "dx"], "hu": ["mind", "tell", "plan"], "tmpl": true, "vision": "患者の不安な気持ちに寄り添ったり、治療方法を説明して本人や家族と話し合ったりすることは、人間に判断してほしい", "text": "AIなどの技術は、レントゲンやCT画像から病気の可能性を見つけたり、検査データから病気を早く発見したりする場面で役立つと思う。また、患者一人ひとりの情報を分析することで、その人に合った治療方法を考えることにも活用できると思う。\n　一方で、患者の不安な気持ちに寄り添ったり、治療方法を説明して本人や家族と話し合ったりすることは、人間に判断してほしい。なぜなら、医療では病気を治すだけでなく、患者の気持ちを理解し、安心して治療を受けられるようにすることも大切だからだ。AIの技術と人間の経験や思いやりを組み合わせることで、よりよい医療につながると思う。"}, {"id": "77", "dept": "情報", "imp": ["G"], "ai": ["img"], "hu": ["tell", "plan", "resp", "mind"], "tmpl": true, "vision": "命に関わる最終的な決断や責任を負うこともAIではなく人間の医者が行うべきだと思います", "text": "​AIが役に立つと思うのは画像診断などの場面です。大量のレントゲンやCT写真から病気のサインを早く見つける作業はAIが得意とするところです。AIが確認をサポートすることで医者の見落としを防ぎ、診断の精度を高めることができると考えます。  \n​一方で患者への病状の説明や治療方針を一緒に決める場面はAIではなく人間に対応してほしいです。病気の告知や治療の選択は患者にとって大きな不安を伴います。人の気持ちに寄り添い、感情を汲み取りながら話を聞いてくれるのは人間だからこそです。また命に関わる最終的な決断や責任を負うこともAIではなく人間の医者が行うべきだと思います。  \n​このように技術でできることはAIに任せ、気持ちのケアや最終判断は人間が行うという役割分担が大切だと考えます。"}, {"id": "78", "dept": "情報", "imp": ["C"], "ai": ["mon", "care", "dx"], "hu": ["mind", "plan", "resp"], "tmpl": true, "vision": "治療や介護に関する重要な判断は、患者本人の希望や家族の状況も考慮して、人間が責任を持って行うべきだと考える", "text": "私は、認知症の予防や早期発見の場面でAIを活用できると考える。例えば、AIが日常の生活習慣や記憶力、歩く速度などのデータを分析することで、認知症の兆候を早い段階で発見できる可能性がある。また、一人ひとりの体力や健康状態に合わせて、ウォーキングや音読、計算などのメニューを提案することもできる。高齢者が自分に合った方法で認知症予防に取り組めるようになれば、健康的な生活を長く続けることにつながると思う。さらに、医師が患者のデータを確認する際にもAIを活用すれば、診断や治療方針を考えるための参考になり、医療の質の向上にも役立つと考える。\n一方で、患者やその家族の気持ちに寄り添い、治療方針を一緒に考えることは人間にしてほしい。認知症の診断を受けた人は、将来の生活や家族への負担について不安を感じることがある。そのようなとき、AIがデータをもとに説明するだけでは、患者の気持ちを十分に理解できない場合があると思う。医師や看護師が患者の表情や話し方から気持ちをくみ取り、安心できるように話を聞くことが大切である。また、治療や介護に関する重要な判断は、患者本人の希望や家族の状況も考慮して、人間が責任を持って行うべきだと考える。AIは医療を支える便利な技術だが、人間の思いやりや信頼関係を完全に代わりに担うことはできない。そのため、AIと人間がそれぞれの得意なことを生かして協力することが重要だと思う。れば、診断や治療方針を考えるための参考になり、医療の質の向上にも役立つと考える。"}, {"id": "79", "dept": "情報", "imp": ["C"], "ai": ["talk"], "hu": ["diag", "mind"], "tmpl": false, "vision": "病気の診断などは直接AIが行うのではなく人が行ってほしいです", "text": "AIが医療を支えられそうな場面は認知症を改善・予防するようなことです。AIとの会話を通して脳を刺激し認知症になりにくくしたり、AIを使い趣味を見つけ友人関係を作っていくなど、会話や提案の能力を使って医療を支えていけると思います。\n逆の場合としては、病気の診断などは直接AIが行うのではなく人が行ってほしいです。\nなぜなら、患者はAIとの会話では判断に説得力を感じづらかったり、精神的な安心感を得づらいと考えるからです。"}, {"id": "80", "dept": "情報", "imp": ["S"], "ai": ["ope"], "hu": ["plan", "tell"], "tmpl": false, "vision": "治療方法を決めたり、患者に説明したりするのは人間にしてほしいです", "text": "大石先生の発表で、ロボット支援手術が印象に残りました。手ぶれを抑えて細かい操作ができ、傷口も小さくなるので、患者の負担を減らせるところがよいと思いました。さらに、AIが手術中に危険な場所を知らせてくれたら、医師もより安全に手術できると思います。一方で、治療方法を決めたり、患者に説明したりするのは人間にしてほしいです。患者によって不安や希望は違うので、気持ちを聞きながら、一緒に考えることが大切だと思うからです。"}, {"id": "81", "dept": "ロボ", "imp": ["F"], "ai": ["img"], "hu": ["disc", "plan", "resp"], "tmpl": false, "vision": "人間にやってほしいのは、「これは調べる価値がある」と決めることと、患者さんと一緒に治療方針を考えることです", "text": "大石先生のプレゼンの中から、ペニシリンの発見を選びました。Flemingは、カビが入ってしまった失敗作の培養皿を捨てずに、カビの周りだけ細菌が増えていないことに気づいたそうです。\nAIに任せたいのは、この「あれ?いつもと違うな」に気づく部分だと思います。レントゲンやCTの画像をAIが全部チェックして、変なところを教えてくれたら、早期のがんなども見つけやすくなると思います。人間だと疲れて見落とすこともあるけど、AIならその心配が少ないです。\n逆に人間にやってほしいのは、「これは調べる価値がある」と決めることと、患者さんと一緒に治療方針を考えることです。Flemingも、普通なら捨てるものを「調べてみよう」と思ったから発見できました。AIだと前例がないものはノイズとして無視してしまいそうです。それに、治療は患者さんの気持ちや生き方によって選ぶものが変わるし、何かあったときに責任を持つのも人間であるべきだと思います。"}, {"id": "83", "dept": "ロボ", "imp": ["G"], "ai": ["img"], "hu": ["plan", "tell", "mind"], "tmpl": true, "vision": "重大な治療方針の決定や告知、緩和ケアの選択などはAIではなく人間が行うべきです", "text": "スライドでは活用例として「診断・検査の向上」が挙げられています。医療現場では大量のCTやMRI画像を医師が確認しており、大きな負担となっています。AI技術は、この画像解析における見落とし防止や下調べに大きな効果を発揮します。AIが微小な病変を高速かつ高精度に抽出するダブルチェック体制を整えることで、医師の負担を減らし、診断精度の向上と患者に向き合う時間の確保が可能になります。一方で、重大な治療方針の決定や告知、緩和ケアの選択などはAIではなく人間が行うべきです。生存率などの数値だけでなく、患者の価値観や生活環境、死生観といった複雑な要素を考慮して納得のいく意思決定をする必要があるためです。また、病状への不安や恐怖に寄り添う心のケアも、人間の医療従事者との信頼関係があってこそ成り立ちます。"}, {"id": "84", "dept": "ロボ", "imp": ["D"], "ai": ["dx"], "hu": ["diag"], "tmpl": false, "vision": "対人での問診は、AIに任せずに医師が実際に行い、検査内容を判断するべきであり", "text": "AIの技術は内科診断に用いることで医療を支えられる。AIを用いることで、検査の見落としを減らしたり、検査に必要な情報を素早くまとめたりすることができる。しかし、AIは間違えることがあるため、AIの回答をしっかり調査することや、AIに頼りすぎると正しくない検査が行われてしまう可能性があるため、必要以上に頼りすぎないことが重要である。\n逆にAIではなく人間が行うべき場面は、内科診断における対人での問診や直接の検査などであると考える。対人での問診は、AIに任せずに医師が実際に行い、検査内容を判断するべきであり、AIはサポート程度に利用するのが適切であると考える。また、直接の検査においても、AIでは行うことが難しいため、経験のある医師が直接行うこと安定した医療を実現するために必要であると考える。"}, {"id": "87", "dept": "情報", "imp": ["W"], "ai": ["mon"], "hu": ["mind", "plan"], "tmpl": true, "vision": "患者の気持ちを理解したり、治療について大切な判断をしたりすることは、人間にやってほしいです", "text": "私は、AIを使って患者の体調の変化を見つけることが、よりよい医療につながると考えます。例えば、AIが心拍数や体温などのデータを確認し、いつもと違う変化があれば医師や看護師に知らせる仕組みです。これによって、病気の早期発見や、早めの治療につながると思います。\n\n一方で、患者の気持ちを理解したり、治療について大切な判断をしたりすることは、人間にやってほしいです。なぜなら、患者は病気への不安や悩みを抱えていることがあり、データだけではその人の気持ちを十分に理解できないからです。医師や看護師が患者の話をよく聞き、一人ひとりに合った対応をすることが大切だと思います。AIの便利さと人間の思いやりを組み合わせることで、よりよい医療ができると考えます。"}, {"id": "88", "dept": "情報", "imp": ["D"], "ai": ["dx"], "hu": ["plan", "resp"], "tmpl": false, "vision": "最終的には人間が責任を持って医療を行うことが望ましいと考える", "text": "大石先生のプレゼンテーションから、AIによる病気の診断支援について考えた。\nAIが医療を支えられる場面として、病気を早く発見して早期治療につなげることや、人間が見落としてしまうかもしれない小さな異常に気づくことが挙げられると思う。AIは人間とは違う視点から検査データなどを分析できるため、人間では気づきにくいことも発見できるかもしれない。特に、判断が難しい病気の場合、人間は焦りなどによって、うっかり見落としてしまうこともあると思う。そのような部分をAIが補うことで、病気の発見を助け、医師の負担を減らすことにもつながると考える。また、診断が効率よく進めば、病院の運営にもよい影響があると思う。一方で、AIに頼りすぎることには注意が必要だと思う。AIはさまざまな視点から病気の可能性を考えられる反面、複数の病気を提示することもあり、その中に間違った判断が含まれている可能性もある。医師がそれを十分に確認せずに信じてしまうと、誤った診断につながり、患者に重大な影響を与えてしまうかもしれない。また、AIに頼りすぎることで、人間自身が考える機会が減り、考える力や判断力が衰えてしまうのではないかとも思う。AIがあれば簡単に答えを出せるようになり、医師自身が知識や経験を積み、自分で考えて判断することが少なくなってしまうかもしれない。私は、AIはあくまでも医師の補助であり、最終的な判断は人間が行うべきだと考える。ロボットを使った医療技術なども発達しているが、もし医療ミスによって患者の命に関わることが起きた場合、誰が責任を取るのかという問題もある。医療は人の命がかかっているからこそ、技術に頼りきるのではなく、人間が自分で考え、患者の状態を理解したうえで判断することが大切だと思う。AIの技術を活用することは必要だが、最終的には人間が責任を持って医療を行うことが望ましいと考える。"}, {"id": "89", "dept": "情報", "imp": ["G", "S"], "ai": ["img", "ope"], "hu": ["tell", "mind"], "tmpl": true, "vision": "手術を受ける患者への事前説明や、手術後のカウンセリングは、人間が担当する方がよいと考えます", "text": "私は、医療の場では、病気の検査や精密な操作などをAIに任せ、人間は患者へのカウンセリングなどを担当することが最適だと考えます。AIは大量の医療データを分析し、病気の兆候を発見したり、検査結果から病気の可能性を判断したりすることが得意です。また、細かい操作を正確に行う技術にも活用できるため、医療の精度や効率を高めることが期待できます。\n一方で、手術を受ける患者への事前説明や、手術後のカウンセリングは、人間が担当する方がよいと考えます。患者は手術に対して不安や恐怖を感じることがあり、その気持ちを理解し、安心できるように寄り添うことが大切だからです。人間であれば、患者の表情や声の変化などから気持ちをくみ取り、状況に応じて柔軟に対応できます。AIだけでは十分に対応することが難しい、信頼関係を築くことも重要です。このように、AIの正確性や効率性と、人間の共感力や判断力を組み合わせることで、より安全で患者に寄り添った医療を実現できると考えます。"}, {"id": "92", "dept": "情報", "imp": ["G"], "ai": ["img", "rec", "mon"], "hu": ["plan", "mind", "tell", "emer"], "tmpl": true, "vision": "病状告知やターミナルケアにおける対話と合意形成など", "text": "画像診断支援システム（AIによる病変の早期検出）\nAIが得意とする「膨大なデータの高速処理」「疲労のない高精度なパターン認識」「24時間の常時モニタリング」は、医療の効率化と品質向上に大きな威力を発揮する。例えば、高度な画像解析・ビッグデータに基づく早期発見と一次スクリーニング、医療従事者の事務・行政作業の削減、ウェアラブルデバイス・IoTを活用した予防医療とパーソナライズ医療など。\n逆に、テクノロジーがどれほど進化しても、「倫理的判断」「感情的配慮」「文脈依存の複雑な意思決定」「身体的・直感的な対応」が求められる場面では、人間の判断と介入が不可欠。例えば未知の症例や倫理的ジレンマが交錯する複雑な意思決定、微細な感覚を頼りとする触診・身体的コミュニケーションおよび突発的な外科手術の対応、病状告知やターミナルケアにおける対話と合意形成など。\n医療の望ましい未来像は「AI対人間」という二律背反ではなく、「AIが得意なデータ処理や精度向上を担い、人間が得意な共感・倫理・責任ある意思決定に集中する」という相互補完の関係を構築していくことにあると考えられた。"}, {"id": "93", "dept": "情報", "imp": ["C", "G"], "ai": ["img", "mind"], "hu": ["diag"], "tmpl": false, "vision": "実際に人間同士で会話をして、患者の病気だけでなく、精神的な部分を見抜く声や表情を確認していき、診療することが大切だと思います", "text": "父が娘の前で認知症であることを認めようとしなかったというお話で、とてもリアルな場面が思い浮かびました。普通に生活していたら見えない、違う視点の話があって面白かったです。AIなどの技術が医療を支えるのは、やはり講義でも扱っていた治療中の見落としミスを減らすカメラ機能や症状を診断するといった部分だと思います。私のアイデアは患者に寄り添う技術を考えたいです。カメラで表情を捉えて患者の不安を読み取って話し方を変えていく、患者自身も気づかない初期症状をみつけられるロボットやシステムを作りたいです。AIなどに代わってほしくないところは診察の時の相手です。症状を分析していく診断だけでは嘘の症状を取り入れてしまう可能性もあるからです。やはり、実際に人間同士で会話をして、患者の病気だけでなく、精神的な部分を見抜く声や表情を確認していき、診療することが大切だと思います。"}, {"id": "94", "dept": "情報", "imp": ["G"], "ai": ["img", "dx"], "hu": ["mind", "plan", "tell"], "tmpl": true, "vision": "病気を告げられて不安になっている患者に対して、医師が直接話を聞き、安心できるように説明することは大切だと思います", "text": "私は、大石先生のプレゼンテーションから、AIなどの技術を活用して医療をよりよくすることに興味を持ちました。例えば、AIを使ってレントゲンやCTの画像を分析し、病気の可能性を早期に発見することができれば、医師の診断を助け、患者が早く治療を受けられるようになると考えます。また、AIを活用して文部科学省などの資料や医療に関する情報を調べ、必要な知識を効率よく集めることで、医療の研究や学習にも役立てられると思います。さらに、患者の年齢や症状、過去の診療記録などを分析することで、一人ひとりに合った治療方法を考える際にもAIが役立つと考えます。\n\n一方で、患者の気持ちを理解し、不安に寄り添うことは、人間に判断してほしい部分です。例えば、病気を告げられて不安になっている患者に対して、医師が直接話を聞き、安心できるように説明することは大切だと思います。また、治療方法を決める際には、AIが出した結果だけで判断するのではなく、患者本人の希望や生活環境も考慮する必要があります。AIは情報を分析することが得意ですが、人間の気持ちを完全に理解できるとは限りません。そのため、AIの技術と医師の経験や思いやりを組み合わせることで、より安全で患者に寄り添った医療を実現できると考えます。"}, {"id": "95", "dept": "情報", "imp": ["K"], "ai": ["talk", "mon"], "hu": ["tell", "dx", "plan"], "tmpl": false, "vision": "何を記録し誰に見せるかは、本人・家族・医師が話し合って決めるべきだ", "text": "私は、Discussion 3の呉服店を営んできた80歳代の女性の例を選んだ。軽度認知障害が疑われるが、本人は検査で誇りを傷つけられ、受診を拒んでいる。正しく測ることと尊厳を守ることがぶつかる点に、技術の役割があると考えた。\n私のアイデアは、AIを「呉服の弟子」にする会話アプリである。AIが「この帯に合う着物は何ですか」「この反物を2割引きにするといくらですか」と教わる側として質問し、本人は経験を語るだけで、記憶や計算、判断の要素が自然に含まれる。講義で紹介された、話す速さや間から認知機能の低下を捉える研究のように、日常の会話から変化を追えるうえ、頼られる役割が続ける意欲や生きがいにもなる。\n一方で、診断の確定と告知は人間にしてほしい。AIはもっともらしい誤りをすることがあり、伝え方は本人の表情や家族関係を見て決めるべきだからだ。また、本人に黙って会話を解析すれば、それ自体が隠れた検査になる。何を記録し誰に見せるかは、本人・家族・医師が話し合って決めるべきだ。AIは「気づく」ことや「続ける」ことを支え、人間は「決める」ことや「寄り添う」ことを担うべきだと考える"}, {"id": "97", "dept": "情報", "imp": ["G", "J"], "ai": ["img", "rec"], "hu": ["plan", "tell", "mind"], "tmpl": true, "vision": "治療方針の最終的な判断や、患者への説明などはは人間の判断にするべきだと思う", "text": "AIの発達により、医療ではレントゲンやCTなどの画像をAIが分析することで、病気の発見や診断の効率化が図れる。また、カルテの作成や検査データの整理などを自動化することで、医師や看護師の負担が減り、患者と向き合う時間を増やすことができる。それだけでなく、医師が少ない地域でも、AIによる健康相談や診断の補助を活用することで、医療を受けやすくなると考える。しかし、AIを使えば効率がよくなるからといって、すべてをAIだけで判断することはできない。AIにも病気を見逃す可能性があり、学習したデータにない未知の病気があったときは、適切に対応できない場合もあるからである。そのほかにも、AIに診断されるこのに不信な人たちもいる。患者の不安や気持ちに寄り添い、一人ひとりの状況に合わせるにはまだ人間で判断した方がよい。そのため治療方針の最終的な判断や、患者への説明などはは人間の判断にするべきだと思う。"}, {"id": "99", "dept": "情報", "imp": ["C"], "ai": ["care"], "hu": ["mind"], "tmpl": false, "vision": "人間の思いや感情についての支えになってほしいと思いました", "text": "認知症であったりでの高齢者たちの支えになる場面だと思いました。\n逆に人間にやってほしいこととしてはAIじゃまだできることができない人間の思いや感情についての支えになってほしいと思いました。なぜそう思ったかというとAIはいろいろな行動などを介護であったり手助けをしてくれたりしますが、人間の思いや感情にはまだ寄り添うことができないのでそういう心が病んだりしたりしてる人に寄り添うことでAIと人間のお互いを支えあうことができると思ったからです。"}], "stats": {"imp": {"W": 3, "G": 27, "S": 15, "C": 18, "F": 3, "J": 5, "D": 9, "R": 1, "M": 1, "X": 1, "K": 3}, "ai": {"mon": 18, "img": 30, "rec": 9, "dx": 16, "ope": 12, "care": 8, "talk": 12, "mind": 3, "tell": 1, "diag": 1}, "hu": {"mind": 40, "plan": 45, "tell": 28, "diag": 7, "care": 2, "resp": 10, "emer": 6, "disc": 2, "self": 2, "dx": 4, "ope": 1, "talk": 2}, "tmpl": 29}, "newp": [{"name": "前例のないものに気づく", "ids": ["81", "12"], "desc": "ペニシリンのように、偶然や違和感から始まる発見を拾うのは人の役目"}, {"name": "想定外に対応する", "ids": ["23", "36", "74", "61", "92"], "desc": "手術中の地震、イレギュラーな症状、突発的な事態への臨機応変な対応"}, {"name": "責任の根拠を問う", "ids": ["20", "13", "08", "88"], "desc": "なぜ人間が決めるのか。責任を負えるのは誰か、から考える"}, {"name": "誇りを傷つけずに見守る", "ids": ["70", "95", "56"], "desc": "「検査」に見えない会話の中で、本人の変化に気づく"}, {"name": "AIが伝えたほうがいい場面", "ids": ["45", "48", "06"], "desc": "言いにくい生活習慣の指摘、薬をもらうだけの定期診察、温かみのあるAIなら"}, {"name": "患者自身が決める", "ids": ["67", "27"], "desc": "最終的に決めるのは医師でもAIでもなく、自分自身でありたい"}, {"name": "寄り添いを技術で支える", "ids": ["93", "33", "34"], "desc": "表情から不安を読み取る、ドラえもんのような話し相手、希望を与える対話"}, {"name": "人と人をつなぐ", "ids": ["79", "55", "31"], "desc": "AIで趣味や友人を見つける、つながりづくりは人、会話しながら移動する車椅子"}], "voices": [{"id": "81", "dept": "ロボティクス", "tag": "前例", "quote": "AIだと前例がないものはノイズとして無視してしまいそうです", "comment": "フレミングのペニシリン発見を手がかりに、「いつもと違う」に気づくことと、「調べる価値がある」と決めることを分けています。AIの得意と苦手の境目を、歴史の一場面から引いています。", "text": "大石先生のプレゼンの中から、ペニシリンの発見を選びました。Flemingは、カビが入ってしまった失敗作の培養皿を捨てずに、カビの周りだけ細菌が増えていないことに気づいたそうです。\nAIに任せたいのは、この「あれ?いつもと違うな」に気づく部分だと思います。レントゲンやCTの画像をAIが全部チェックして、変なところを教えてくれたら、早期のがんなども見つけやすくなると思います。人間だと疲れて見落とすこともあるけど、AIならその心配が少ないです。\n逆に人間にやってほしいのは、「これは調べる価値がある」と決めることと、患者さんと一緒に治療方針を考えることです。Flemingも、普通なら捨てるものを「調べてみよう」と思ったから発見できました。AIだと前例がないものはノイズとして無視してしまいそうです。それに、治療は患者さんの気持ちや生き方によって選ぶものが変わるし、何かあったときに責任を持つのも人間であるべきだと思います。"}, {"id": "70", "dept": "情報システム工学", "tag": "見守りと監視", "quote": "AIが「見守る」ことと「監視する」ことの境目はどこにあるのか、先生に聞いてみたい", "comment": "呉服店の女性の例で、AIがお客さん役になって本人を頼る仕組みを考えたうえで、その案の危うさにも自分で気づいています。アイデアと問いの両方があるレポートです。", "text": "大石先生のプレゼンテーションで印象に残ったのは、長年呉服店を営んできた80代の女性の例である。娘さんは、洗濯物を干す途中で何をしていたか忘れる、釣銭の計算ができなくなるといった変化を心配している。しかし本人は認知機能の低下を認めず、検査で軽度の記憶力低下を指摘されると「もう二度と受診しない」と怒ってしまった。\n\nAIが役に立つと思うのは、この「検査を嫌がる人の変化を、日常の中で捉える」場面である。「今日は何月何日ですか」という検査は、本人には自分が試されていると感じられる。一方で、AIが呉服や帯、柄の話を相手にしながら会話すれば、本人は楽しんで話せる。プレゼンでは、話す速さや間の取り方から認知機能の低下を識別できる可能性を示した研究も紹介されていた。医師は月に一度の外来でしか本人を見られないが、AIなら毎日、疲れずに、同じ基準で変化を記録できる。私のアイデアとしては、AIがお客さん役になり、本人に着物の合わせ方を提案してもらったり、お会計をしてもらったりする仕組みを考えた。そうすれば判断・計画・計算を自然に使うことになり、「テストを受ける人」ではなく「頼られる専門家」として続けられると思う。\n\n一方で、人間に判断してほしいのは、「この結果を本人にどう伝えるか」と「店を続けるか、お金の管理をどうするか」を決める場面である。理由は二つある。一つ目は、同じ事実でも誰からどう言われるかで受け止め方が全く違うからだ。この女性は検査を受けただけで誇りを傷つけられたと感じた。機械に「低下しています」と言われたら、さらに傷つくかもしれない。二つ目は、本人の誇りと娘さんの心配がぶつかっていて、どちらを優先するかに正解がないからだ。これは数値ではなく価値の判断であり、本人の人生を知る人間が、責任を持って一緒に悩むべきだと考える。\n\nただし疑問も残った。本人に知らせずに会話から認知機能を測ることは、尊厳を守ることになるのか、それとも本人をだますことになるのか。AIが「見守る」ことと「監視する」ことの境目はどこにあるのか、先生に聞いてみたい。"}, {"id": "95", "dept": "情報システム工学", "tag": "記録のルール", "quote": "何を記録し誰に見せるかは、本人・家族・医師が話し合って決めるべきだ", "comment": "AIを「呉服の弟子」にする会話アプリを考え、黙って会話を解析すればそれ自体が隠れた検査になる、と指摘しています。技術と一緒に、使うときの決まりまで考えています。", "text": "私は、Discussion 3の呉服店を営んできた80歳代の女性の例を選んだ。軽度認知障害が疑われるが、本人は検査で誇りを傷つけられ、受診を拒んでいる。正しく測ることと尊厳を守ることがぶつかる点に、技術の役割があると考えた。\n私のアイデアは、AIを「呉服の弟子」にする会話アプリである。AIが「この帯に合う着物は何ですか」「この反物を2割引きにするといくらですか」と教わる側として質問し、本人は経験を語るだけで、記憶や計算、判断の要素が自然に含まれる。講義で紹介された、話す速さや間から認知機能の低下を捉える研究のように、日常の会話から変化を追えるうえ、頼られる役割が続ける意欲や生きがいにもなる。\n一方で、診断の確定と告知は人間にしてほしい。AIはもっともらしい誤りをすることがあり、伝え方は本人の表情や家族関係を見て決めるべきだからだ。また、本人に黙って会話を解析すれば、それ自体が隠れた検査になる。何を記録し誰に見せるかは、本人・家族・医師が話し合って決めるべきだ。AIは「気づく」ことや「続ける」ことを支え、人間は「決める」ことや「寄り添う」ことを担うべきだと考える"}, {"id": "20", "dept": "情報システム工学", "tag": "責任の根拠", "quote": "法制度の面で見れば人格と責任を持てるのは、現実空間のヒトと、法人だけであってAIにはできないという点", "comment": "「人間が判断すべき」の理由を、気持ちではなく社会のルールから説明しています。「AIは確率で答えるからダメ」という話ではない、と論点を分けている点も鋭いです。", "text": "大石先生のプレゼンテーションで印象的な例としては、診断にAIを用いるということです。先生もおっしゃっていたように、ある症状を訴えていても、様々な病気に重なることが多いため、患者の方の話をよく聞いたりしながら、分析して病気を特定するという従来の治療方針の建て方に、AIを組み合わせることで、膨大な数の病状を自分の知識と合わせて特定できる、思いがけない希少な病気であったり、忘れていた病気について気づきを得ることで、正しい、効果的な治療になるという点で、AI黎明期の今では正しい使い方であると思います。プログラミングに通ずるように基礎知識をもった人物がAIを利用して知っているけれど毎回繰り返すこと、忘れていたこと、というものを検索ツールとして有用でもあると思います。プレゼンテーションでも言われていたように、熟練の医者がAIを用いるとかなり症状の発見率が上がる、という点で現状のAIと医療のかかわり方は、データベース検索に合わせて、概念空間を以て関連度を算出させるという使い方で医療を支えると思います。\n\n逆に人間に判断、やってほしいことは、責任を持って判断をする、診断をするということです。法制度の面で見れば人格と責任を持てるのは、現実空間のヒトと、法人だけであってAIにはできないという点。（いくつかの判決ではAIを開発している企業とされますが。）AIが確率的に答えを出すから駄目だという話ではなく、人間社会を構成する既存のルールとしては合わないことからという点です。"}, {"id": "23", "dept": "ロボティクス", "tag": "想定外", "quote": "AI機械は地震など急激な状態変化を理解できるのか対応できるのかなどを考えると正直に怪しいと感じました", "comment": "手術中に地震が起きたというニュースを手がかりに、想定外の事態への対応を考えています。講義の外の出来事を、講義の内容につなげています。", "text": "ロボット支援手術が普及しているということについてです。いずれセンサーを完璧に生かしたブレのない手術ができるようになり、人間は監視する程度になると予測しました。\nしかし、今年の7月熊本で手術中に地震が発生するニュースも見ました。安全なスペースの確保のため固定されているものと、ぶつからないように簡単に移動するものに分かれており、地震の中で医師の方々は患者さんを抑えたりスペースの確保の急な対応を求められていました。固定されているものでも大地震には耐えられない可能性などやAI機械は地震など急激な状態変化を理解できるのか対応できるのかなどを考えると正直に怪しいと感じました。人手も対応できないことはあると思いますがそういった点においてはまだまだ人間の力が必要だと考えました。"}, {"id": "55", "dept": "ロボティクス", "tag": "友人", "quote": "AIは友人にはなれず、誰かに気にかけてもらえる実感は人との関わりの中で生まれる", "comment": "フレイルの負のループを踏まえ、見守りはAI、つながりは人、と役割を分けています。", "text": "私はフレイルを例に選んだ。フレイルは体力が落ちて外出や交流が減り、さらに衰えるという負のループに陥りやすい。特に定年後の男性は、居場所や役割を失って孤立しやすいと学んだ。\nAIが医療を支えられるのは、早期発見の場面だと思う。AIは見落としや医師によるばらつきを減らせる。スマートウォッチなどで歩数や外出の減少に気づき、本人や家族に知らせる見守りができれば、負のループに入る前に対応できる。\n一方、人間に任せたいのは、患者の表情や生活背景を見た総合的な判断と、人とのつながりづくりである。AIは友人にはなれず、誰かに気にかけてもらえる実感は人との関わりの中で生まれる。AIが広く見て、人が寄り添うという役割分担が大切だと考える。"}, {"id": "79", "dept": "情報システム工学", "tag": "つなぐ", "quote": "AIを使い趣味を見つけ友人関係を作っていくなど", "comment": "AIを友人の代わりにするのではなく、人と人をつなぐきっかけに使う案です。隣の「AIは友人にはなれない」と並べると、線の引き方がよく見えます。", "text": "AIが医療を支えられそうな場面は認知症を改善・予防するようなことです。AIとの会話を通して脳を刺激し認知症になりにくくしたり、AIを使い趣味を見つけ友人関係を作っていくなど、会話や提案の能力を使って医療を支えていけると思います。\n逆の場合としては、病気の診断などは直接AIが行うのではなく人が行ってほしいです。\nなぜなら、患者はAIとの会話では判断に説得力を感じづらかったり、精神的な安心感を得づらいと考えるからです。"}, {"id": "45", "dept": "情報システム工学", "tag": "AIが伝える", "quote": "人間が言うよりも角が立たないように現在抱えているリスクや具体的な解決方法のことを伝えてくれることも期待できると思います", "comment": "多くの人が「伝えるのは人間」と書いた中で、言いにくいことはAIのほうが伝えやすい場面もある、と逆の見方をしています。", "text": "私が大石先生のプレゼンテーションの中からAIなどの技術がよりよい医療を支えられそうだと思った場面は認知症の人や、認知症になるような生活を送っている人の生活です。認知症の人を介護するのは大変なのでフィジカルAIやそうでなくとも適切な指示を出してくれるAIがあれば負担は軽減されるでしょう。また、認知症になりそうな生活を送っている人に対しては人間が言うよりも角が立たないように現在抱えているリスクや具体的な解決方法のことを伝えてくれることも期待できると思います。逆にAIではなく人間にやってほしいことは病気や診断の最終確認です。現在AIは人間では見つけられないような病気を見つけたり調剤のサポートをしてくれたりしますがそれでもまだまだその信頼性は担保されておらず間違いを犯す可能性が人間と比べて高いと思うのでAIはあくまでサポートのための道具であってほしいです。"}, {"id": "68", "dept": "情報システム工学", "tag": "本音", "quote": "機械に落ち込まないでとか言われたら多分ムカつくだろうなと思った", "comment": "「寄り添いは人間」という結論を、きれいな言葉ではなく自分の感情で確かめています。授業で聞いた「死なない機械に言われても響かない」という話を、自分ごととして考えています。", "text": "ロボット手術\n​医療におけるAIやロボット技術は、手ぶれ防止、遠隔手術、人に出来ない可動域のいる手術、迅速な画像診断、人が直接やるより小さい切開による負担軽減など、間に機械を挟むことでより質の高い医療を実現している。\n​一方、私が思う人間が担った方が良いことは感情のケア\n授業で病気を機械に励まされても死なない機械に言われても響かないみたいなことを言ってたのと、もし私が死に関わる重い病気になったとき機械に落ち込まないでとか言われたら多分ムカつくだろうなと思ったので感情の整理とかカウンセリング寄りのことは人がやったほうがいいと思う。"}, {"id": "67", "dept": "情報システム工学", "tag": "自分で決める", "quote": "最終的に決めるのは自分自身でありたいです", "comment": "多くの人が「最終判断は医師」と書いた中で、患者である自分が決めたい、と書いています。誰が決めるのか、という問いをもう一段深めています。", "text": "今回の講義では、現代の医療技術について学ぶことができました。認知症などの心の健康などで「なぜ？なぜ？」と深堀してくれるAIがあれば自分の可能性や認知症になる可能性が低くなると思いました。一方で、治療方針や自分の人生に関わる重要な判断は、AIではなく人間が行ってほしいです。医師には患者の気持ちや状況を理解し、相手に寄り添って判断してほしいです。AIと共に考え、技術を活用することは大切ですが、最終的に決めるのは自分自身でありたいです。AIに使われるのではなく、自分がAIを使いこなす側に立つことが重要だと考えます。"}, {"id": "38", "dept": "情報システム工学", "tag": "見る場所", "quote": "医者は注目している部分や疑っている病気を中心に見るが、AIはそれ以外の部分や全体を見て異常を見つけることができる", "comment": "AIが「人より正確」なのではなく、「見ている場所が違う」と整理しています。人とAIを組み合わせる理由を、わかりやすく言い当てています。", "text": "AI内視鏡について例に挙げる。医者は注目している部分や疑っている病気を中心に見るが、AIはそれ以外の部分や全体を見て異常を見つけることができる。なので、人間が見落としやすい変化や、病気の兆候を見つけるような場面がAIが医療を支えられる場面だと考えられる。\n逆に人間が判断してほしい場面は、最終的な判断である。なぜなら、AIは検査の結果などのデータを元に判断するが、医者はそれに加えて、患者の心境などを考えて判断できるからである。感情などが関わることにはAIではなく人間主導で行ってほしい。\nなので、医療におけるAI活用に関しては、医者だけでは足りないこと（検査での分析など）をAIが支えるような関係が、よりよい医療につながると考える。"}, {"id": "08", "dept": "ロボティクス", "tag": "拡張", "quote": "ロボットが単なる人の代替ではなく、人の優れた技術をさらに拡張するパートナーとして機能していることに、個人的に希望をもらった", "comment": "熟練の医師ほどAIで成績が伸びた、という講義の話から、ロボティクス専攻としての希望を読み取っています。", "text": "大石先生のプレゼンテーションから例を一つ選んでください。 \n\nロボット支援手術の解説について、私はロボティクス専攻なので、個人的に一番興味深かった。手振れ補正などの精密な操作性、安全性など、スライドのみの印象では、外科医療の大部分はすでにロボットによって自動化されているのかと思った。しかし、大石先生の「熟練の方がAIを活用した方が、若手の方がAIを活用した時より成績の伸びが大きかった」という旨の話を聞いて、ロボットが単なる人の代替ではなく、人の優れた技術をさらに拡張するパートナーとして機能していることに、個人的に希望をもらった。\n\nAIなどの技術がよりよい医療を支えられるのはどんな場面でしょうか。自分なりにアイデアをまとめてください。 \n\nAIは膨大なデータの処理や機械学習などのパターン認識、24時間一貫して稼働し続けられる持続可能性が強みである。それらを踏まえて私が考える、AIを活用し、よりよい医療を支える具体的な場面として、高度な画像診断による微小な疾患の検出、患者のビッグデータを用いた医療の個別化の強化、電子カルテの作成など、これまで人が行っていた事務作業の自動化、そしてウェアラブル機器による遠隔医療の、リアルタイムでの監視が可能になることなどが挙げられる。これらによって、診断ミスの防止や負担の軽減、早期の介入が可能になると考えられる。\n\n逆にAIではなく、人間に判断してほしい、やってほしいのはどんな場面や行為でしょうか。理由も考えてください。 \n\n人間の役割として、感情の共有や複雑な倫理的判断、最終的な責任の引き受けは現在人間にしかできない。がんの末期告知などの深刻な告知と精神的ケアには、現在のAIでは代替できない共感が必要だと考える。また、延命治療の可否、手術中の不測の事態といった、正解のない倫理的、総合的な意思決定では患者の価値観に寄り添う対話、熟練者の勘による臨機応変な対応が不可欠だと考える。そして、AIはミスに対して責任を負えないため、医師が最終的な責任を引き受けることこそが患者の安心感を支える重要な仕事であると考える。"}, {"id": "33", "dept": "情報システム工学", "tag": "ドラえもん", "quote": "ドラえもんのように人の気持ちを理解し、会話を通して安心感を与えられるロボットが実現すれば、高齢者の孤独を減らすことにもつながると思います", "comment": "第1回のドラえもんの話を、医療・介護の場面につなげています。", "text": "今回の講義を通して、AIやロボットは人間の生活を便利にするだけでなく、人々の健康や心の支えにもなるのだと感じました。医療の分野では、AIが病気の発見をサポートすることで、医師の負担を減らし、より適切な治療につなげられる可能性があります。一方で、AIの判断が必ずしも正しいとは限らないため、人間が結果を確認し、責任を持って判断することも大切だと思いました。また、認知症の予防には人との交流も重要であると知り、技術が発展しても、人と人とのつながりを大切にする必要があると考えました。将来は、ドラえもんのように人の気持ちを理解し、会話を通して安心感を与えられるロボットが実現すれば、高齢者の孤独を減らすことにもつながると思います。AIの能力と人間らしい思いやりを組み合わせることが、これからの社会に必要なのではないかと感じました。"}, {"id": "93", "dept": "情報システム工学", "tag": "技術で寄り添う", "quote": "カメラで表情を捉えて患者の不安を読み取って話し方を変えていく", "comment": "「寄り添いは人間の仕事」で止まらず、寄り添いを技術で支える案を出しています。エンジニアを目指す人らしい発想です。", "text": "父が娘の前で認知症であることを認めようとしなかったというお話で、とてもリアルな場面が思い浮かびました。普通に生活していたら見えない、違う視点の話があって面白かったです。AIなどの技術が医療を支えるのは、やはり講義でも扱っていた治療中の見落としミスを減らすカメラ機能や症状を診断するといった部分だと思います。私のアイデアは患者に寄り添う技術を考えたいです。カメラで表情を捉えて患者の不安を読み取って話し方を変えていく、患者自身も気づかない初期症状をみつけられるロボットやシステムを作りたいです。AIなどに代わってほしくないところは診察の時の相手です。症状を分析していく診断だけでは嘘の症状を取り入れてしまう可能性もあるからです。やはり、実際に人間同士で会話をして、患者の病気だけでなく、精神的な部分を見抜く声や表情を確認していき、診療することが大切だと思います。"}]};
+const S = DATA.students;
+const IMP = {G:"画像診断・早期発見",C:"認知症・高齢者の孤独",S:"ロボット支援手術",D:"内科診断の支援",J:"カルテ・事務の自動化",W:"見守り・体調の記録",F:"ペニシリン・偶然の発見",K:"呉服店の女性の例",R:"再生医療",M:"こころの支え",X:"その他"};
+const TASK = {img:"画像・データから異常を見つける",ope:"手術・精密な操作",dx:"病名を考える・診断する",mon:"見守り・体調の変化に気づく",talk:"話し相手になる",rec:"カルテ・記録・事務",care:"介護・生活の手助け",mind:"不安に寄り添う・こころのケア",plan:"治療方針・最終判断",tell:"病名を伝える・説明する",resp:"責任を引き受ける",diag:"向き合って診察する",emer:"想定外への対応",disc:"新しい発見の芽を拾う",self:"患者自身が決める"};
+const esc = s => s.replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const deptName = d => d === "情報" ? "情報システム工学" : "ロボティクス";
+const snip = t => esc(t.length > 150 ? t.slice(0, 148) + "…" : t);
+
+/* ---------- hero: 72 lights → a heartbeat ---------- */
+(() => {
+  const cv = document.getElementById("sky"), ctx = cv.getContext("2d"), tip = document.getElementById("tip");
+  let W, H, dpr, mode = "free", hover = -1;
+  const order = S.map((s, i) => i).sort((a, b) => S[a].id.localeCompare(S[b].id));
+  const pts = S.map((s, i) => ({ s, order: order.indexOf(i), x: Math.random(), y: Math.random(), vx: (Math.random() - .5) * .0006, vy: (Math.random() - .5) * .0006, tx: 0, ty: 0, r: 3 + Math.min(4, s.text.length / 220) }));
+  // an ECG trace; lights are spaced evenly along its length
+  const ECG = [[-20, 4], [-8, 4], [-6.5, 1.5], [-5, 4], [-3, 4], [-2, 6.5], [0, -14], [2, 9.5], [3.5, 4], [6, 4], [8, 1], [10.5, 4], [20, 4]];
+  const seg = ECG.slice(1).map((p, i) => Math.hypot(p[0] - ECG[i][0], p[1] - ECG[i][1])), total = seg.reduce((a, b) => a + b, 0);
+  function ecg(i, n) {
+    let d = (i + .5) / n * total, k = 0;
+    while (k < seg.length - 1 && d > seg[k]) { d -= seg[k]; k++; }
+    const a = ECG[k], b = ECG[k + 1], t = d / seg[k];
+    return [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t];
+  }
+  function size() { dpr = window.devicePixelRatio || 1; W = cv.clientWidth; H = cv.clientHeight; cv.width = W * dpr; cv.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0); }
+  function setShape() {
+    if (!W || !H) return;
+    const sc = W > 860 ? Math.min(W * .4, H * .9) / 40 : (W - 32) / 40, cx = W > 860 ? W * .72 : W * .5, cy = W > 860 ? H * .46 : H * .7;
+    pts.forEach(p => { const [x, y] = ecg(p.order, pts.length); p.tx = (cx + x * sc) / W; p.ty = (cy + y * sc) / H; if (/beat/.test(location.search)) { p.x = p.tx; p.y = p.ty; } });
+  }
+  function frame() {
+    if (cv.clientWidth !== W || cv.clientHeight !== H) { size(); if (mode === "shape") setShape(); }
+    if (!W || !H) { requestAnimationFrame(frame); return; }
+    ctx.clearRect(0, 0, W, H);
+    pts.forEach((p, i) => {
+      if (mode === "shape") { p.x += (p.tx - p.x) * .045; p.y += (p.ty - p.y) * .045; }
+      else { p.x += p.vx; p.y += p.vy; if (p.x < 0 || p.x > 1) p.vx *= -1; if (p.y < 0 || p.y > 1) p.vy *= -1; }
+      if (!isFinite(p.x) || !isFinite(p.y)) { p.x = Math.random(); p.y = Math.random(); }
+      const X = p.x * W, Y = p.y * H, on = i === hover;
+      const col = p.s.dept === "情報" ? "255,138,107" : "93,214,203";
+      const g = ctx.createRadialGradient(X, Y, 0, X, Y, p.r * (on ? 6 : 4));
+      g.addColorStop(0, `rgba(${col},${on ? .9 : .55})`); g.addColorStop(1, `rgba(${col},0)`);
+      ctx.fillStyle = g; ctx.beginPath(); ctx.arc(X, Y, p.r * (on ? 6 : 4), 0, 7); ctx.fill();
+      ctx.fillStyle = `rgba(${col},1)`; ctx.beginPath(); ctx.arc(X, Y, on ? p.r + 2 : p.r * .7, 0, 7); ctx.fill();
+    });
+    requestAnimationFrame(frame);
+  }
+  cv.parentElement.addEventListener("mousemove", e => {
+    const b = cv.getBoundingClientRect(), mx = e.clientX - b.left, my = e.clientY - b.top;
+    hover = -1; let best = 18 * 18;
+    pts.forEach((p, i) => { const d = (p.x * W - mx) ** 2 + (p.y * H - my) ** 2; if (d < best) { best = d; hover = i; } });
+    if (hover >= 0) {
+      const s = pts[hover].s; tip.innerHTML = `<b>No.${s.id}</b>（${deptName(s.dept)}）<br>${esc(s.vision)}`;
+      tip.style.left = Math.min(mx + 14, W - 290) + "px"; tip.style.top = (my + 14) + "px"; tip.style.opacity = 1;
+    } else tip.style.opacity = 0;
+  });
+  cv.parentElement.addEventListener("mouseleave", () => { hover = -1; tip.style.opacity = 0; });
+  document.getElementById("gather").onclick = () => { setShape(); mode = "shape"; };
+  document.getElementById("scatter").onclick = () => { mode = "free"; pts.forEach(p => { p.vx = (Math.random() - .5) * .002; p.vy = (Math.random() - .5) * .002; setTimeout(() => { p.vx /= 3; p.vy /= 3; }, 900); }); };
+  window.addEventListener("resize", () => { size(); if (mode === "shape") setShape(); });
+  size(); frame();
+  if (/beat/.test(location.search)) { setShape(); mode = "shape"; }
+  setTimeout(() => { setShape(); mode = "shape"; }, 1600);
+})();
+
+/* ---------- count up & reveal ---------- */
+const io = new IntersectionObserver(es => es.forEach(e => {
+  if (!e.isIntersecting) return;
+  e.target.classList.add("in");
+  e.target.querySelectorAll("[data-count]").forEach(el => {
+    const n = +el.dataset.count, small = el.querySelector("small").outerHTML; let t0 = null;
+    const step = ts => { if (SHOW_ALL) return; t0 = t0 || ts; const k = Math.min(1, (ts - t0) / 900); el.innerHTML = Math.round(n * (1 - Math.pow(1 - k, 3))) + small; if (k < 1) requestAnimationFrame(step); };
+    requestAnimationFrame(step);
+  });
+  e.target.querySelectorAll(".fill").forEach(f => f.style.width = f.dataset.w);
+  io.unobserve(e.target);
+}), { threshold: .25 });
+document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+const SHOW_ALL = /all/.test(location.search);
+function showAll() { document.querySelectorAll(".reveal").forEach(e => e.classList.add("in")); document.querySelectorAll(".fill").forEach(f => f.style.width = f.dataset.w); document.querySelectorAll("[data-count]").forEach(el => { el.innerHTML = el.dataset.count + el.querySelector("small").outerHTML; }); }
+
+/* a list of students that expands to the full text on click */
+function fillList(listEl, list) {
+  listEl.innerHTML = list.map(s => `<div class="m" data-id="${s.id}"><div class="id">No.${s.id}</div>${snip(s.text)}</div>`).join("");
+  listEl.querySelectorAll(".m").forEach(m => m.onclick = () => { m.innerHTML = `<div class="id">No.${m.dataset.id}</div>` + esc(S.find(s => s.id === m.dataset.id).text); });
+}
+
+/* ---------- bars ---------- */
+(() => {
+  const counts = DATA.stats.imp, order = Object.keys(IMP).filter(k => k !== "X").sort((a, b) => (counts[b] || 0) - (counts[a] || 0)).concat("X");
+  const max = Math.max(...Object.values(counts));
+  const box = document.getElementById("bars"); box.classList.add("reveal");
+  order.forEach(k => {
+    const el = document.createElement("div"); el.className = "bar" + (k === "G" || k === "C" ? " hot" : "");
+    el.innerHTML = `<div class="name">${IMP[k]}</div><div class="track"><div class="fill" data-w="${(counts[k] / max) * 100}%"></div></div><div class="cnt">${counts[k]}</div>`;
+    el.onclick = () => {
+      document.querySelectorAll(".bar").forEach(b => b.classList.toggle("on", b === el));
+      const list = S.filter(s => s.imp.includes(k));
+      document.getElementById("drawerTitle").textContent = `${IMP[k]}を選んだ ${list.length}人`;
+      fillList(document.getElementById("drawerList"), list);
+      document.getElementById("drawer").classList.add("open");
+    };
+    box.appendChild(el);
+  });
+  io.observe(box);
+})();
+
+/* ---------- tug of war ---------- */
+(() => {
+  const ai = DATA.stats.ai, hu = DATA.stats.hu, box = document.getElementById("tugbox");
+  const keys = Object.keys(TASK).sort((a, b) => ((ai[b] || 0) - (hu[b] || 0)) - ((ai[a] || 0) - (hu[a] || 0)));
+  const max = Math.max(...Object.values(ai), ...Object.values(hu));
+  keys.forEach(k => {
+    const a = ai[k] || 0, h = hu[k] || 0, row = document.createElement("div");
+    row.className = "trow" + (k === "talk" || k === "mind" ? " hot" : ""); row.tabIndex = 0;
+    // the count rides on the outer end of each bar; 85% leaves room for it
+    row.innerHTML = `<div class="tl"><div class="track"><span class="c${a ? "" : " z"}">${a}</span><div class="fill" data-w="${a / max * 85}%"></div></div></div><div class="nm">${TASK[k]}</div><div class="tr"><div class="track"><div class="fill" data-w="${h / max * 85}%"></div><span class="c${h ? "" : " z"}">${h}</span></div></div>`;
+    const open = () => {
+      box.querySelectorAll(".trow").forEach(r => r.classList.toggle("on", r === row));
+      const la = S.filter(s => s.ai.includes(k)), lh = S.filter(s => s.hu.includes(k));
+      document.getElementById("tugTitle").textContent = `「${TASK[k]}」`;
+      document.getElementById("tugAiH").textContent = `AIに任せたい ${la.length}人`;
+      document.getElementById("tugHuH").textContent = `人間にしてほしい ${lh.length}人`;
+      fillList(document.getElementById("tugAi"), la); fillList(document.getElementById("tugHu"), lh);
+      document.getElementById("tugDrawer").classList.add("open");
+    };
+    row.onclick = open; row.onkeydown = e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); open(); } };
+    box.appendChild(row);
+  });
+})();
+
+/* ---------- flips ---------- */
+document.querySelectorAll(".flip").forEach(f => { const t = () => f.classList.toggle("on"); f.onclick = t; f.onkeydown = e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); t(); } }; });
+
+/* ---------- template dots & stepping-out cards ---------- */
+(() => {
+  const out = new Set(DATA.newp.flatMap(p => p.ids)), grid = document.getElementById("tgrid"), panel = document.getElementById("panel");
+  const show = s => {
+    grid.querySelectorAll("button").forEach(b => b.classList.toggle("on", b.dataset.id === s.id));
+    panel.innerHTML = `<div class="id">No.${s.id}｜${deptName(s.dept)}｜${s.tmpl ? "同じ型で答えた" : "型の外の答え"}</div><div class="v">${esc(s.vision)}</div><div class="full">${esc(s.text)}</div>`;
+  };
+  // same-template answers first, then the stepping-out ones, so the 29 read as one block
+  const rank = s => s.tmpl ? 0 : out.has(s.id) ? 1 : 2;
+  grid.innerHTML = [...S].sort((a, b) => rank(a) - rank(b)).map(s => `<button class="${s.tmpl ? "t" : out.has(s.id) ? "x" : ""}" data-id="${s.id}" title="No.${s.id}" aria-label="No.${s.id}"></button>`).join("");
+  grid.querySelectorAll("button").forEach(b => b.onclick = () => show(S.find(s => s.id === b.dataset.id)));
+  document.getElementById("newp").innerHTML = DATA.newp.map((p, i) => `<div class="np reveal" data-i="${i}"><div class="nm">${p.name}</div><div class="d">${p.desc}</div><div class="k">No.${p.ids.join("・")}</div></div>`).join("");
+  document.querySelectorAll("#newp .np").forEach(el => el.onclick = () => { show(S.find(s => s.id === DATA.newp[+el.dataset.i].ids[0])); panel.scrollIntoView({ block: "nearest", behavior: "smooth" }); });
+  document.querySelectorAll("#newp .reveal").forEach(e => io.observe(e));
+})();
+
+/* ---------- voices ---------- */
+(() => {
+  document.getElementById("vgrid").innerHTML = DATA.voices.map((v, i) => `<article class="vc reveal"><div class="top"><span>No.${v.id}｜${v.dept}</span><span class="badge">${v.tag}</span></div><blockquote>${esc(v.quote)}</blockquote><div class="cm">${v.comment}</div><button data-i="${i}">全文を読む ▾</button><div class="full">${esc(v.text)}</div></article>`).join("");
+  document.querySelectorAll(".vc button").forEach(b => b.onclick = () => { const c = b.parentElement; c.classList.toggle("open"); b.textContent = c.classList.contains("open") ? "閉じる ▴" : "全文を読む ▾"; });
+  document.querySelectorAll(".vc").forEach(e => io.observe(e));
+})();
+if (SHOW_ALL) showAll();
+</script>
+</body>
+</html>
