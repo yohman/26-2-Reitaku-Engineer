@@ -1,1 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" fill="#143c63"/><path d="M11 47V17h18c10 0 16 4 16 13 0 6-3 10-9 12l12 5H32l-11-8v8zM21 28v6h9c3 0 5-1 5-3s-2-3-5-3z" fill="#e2b73b"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <title>Reitaku Engineering — bridge</title>
+  <rect width="32" height="32" rx="7" fill="#172e46"/>
+  <path d="M23 2h5v7l-2.5-2L23 9Z" fill="#f2c35b"/>
+  <g fill="none" stroke="#fffaf0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 23h20M9 26V12m14 14V12M9 14q7 12 14 0M13 19v4m6-4v4"/></g>
+</svg>

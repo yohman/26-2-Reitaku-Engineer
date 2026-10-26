@@ -411,7 +411,8 @@ function renderHome() {
 }
 function renderAgenda() {
   const target = document.querySelector('#agenda-list'); if (!target) return;
-  const planning = new URLSearchParams(location.search).has('planning');
+  const parameters = new URLSearchParams(location.search);
+  const planning = parameters.has('p') || parameters.has('planning');
   const today = new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Tokyo',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
   const linkedWeek = location.hash.match(/^#week-(\d+)$/)?.[1];
   const ja = language === 'ja';
@@ -474,6 +475,12 @@ Promise.all([getFiles(WEEK_FILES),getFiles(GUEST_FILES)]).then(([loadedWeeks,loa
 // The in-app preview can retain the first document on a full-page navigation.
 // Load course pages within the same document so its links work there as well.
 async function openCoursePage(url, addHistory = true) {
+  // Match initial-load ?p routing during in-document navigation and history restores.
+  if (url.searchParams.has('p') && /\/(?:index\.html)?$/.test(url.pathname)) {
+    url = new URL(url);
+    url.pathname = url.pathname.replace(/(?:index\.html)?$/, 'agenda.html');
+    if (!addHistory) history.replaceState(null, '', url);
+  }
   const response = await fetch(url.pathname, {cache:'no-cache'});
   if (!response.ok) throw new Error(`Page could not be loaded (${response.status})`);
   const next = new DOMParser().parseFromString(await response.text(), 'text/html');
