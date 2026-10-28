@@ -121,6 +121,14 @@ html[lang="ja"] .agenda-week-title h2 { letter-spacing: .01em; }
 .week-four-report strong { font-size: clamp(1.1rem, 2vw, 1.4rem); line-height: 1.35; }
 .week-four-report-description { color: var(--muted); font-size: .82rem; }
 .week-four-report-action { margin-top: auto; padding-top: .3rem; color: var(--blue); font-size: .82rem; font-weight: 600; }
+.week-five-gallery { display: grid; grid-template-columns: minmax(180px, 260px) minmax(0, 1fr); align-items: center; gap: 1.3rem; max-width: 850px; margin: 1.5rem 0 0 calc(110px + clamp(1.25rem, 3.5vw, 3rem)); padding: 1rem; background: var(--layer-2); color: var(--ink); text-decoration: none; }
+.week-five-gallery:hover, .week-five-gallery:focus-visible { background: var(--layer-3); }
+.week-five-gallery img { display: block; width: 100%; aspect-ratio: 8/5; object-fit: cover; }
+.week-five-gallery > span { display: flex; flex-direction: column; align-items: flex-start; gap: .5rem; }
+.week-five-gallery .section-label { margin: 0; }
+.week-five-gallery strong { font-size: clamp(1.2rem, 2.1vw, 1.55rem); line-height: 1.3; }
+.week-five-gallery-description { color: var(--muted); font-size: .85rem; }
+.week-five-gallery-action { color: var(--blue); font-size: .83rem; font-weight: 600; }
 .week-two-part, .vibe-materials { max-width: 850px; margin: 1.5rem 0 0 calc(110px + clamp(1.25rem, 3.5vw, 3rem)); padding: 1.25rem; background: var(--layer-1); }
 .agenda-section-heading .section-label { margin: 0 0 .35rem; color: var(--blue); font-size: .7rem; }
 .agenda-section-heading h3 { margin: 0 0 1.15rem; font-size: clamp(1.2rem, 2vw, 1.5rem); }
@@ -238,7 +246,7 @@ html[lang="ja"] .agenda-week-title h2 { letter-spacing: .01em; }
 @media (max-width: 720px) {
   .wrap { width: min(calc(100% - 30px), 1160px); }
   .editorial-grid { grid-template-columns: 1fr; }
-  .agenda-speaker, .agenda-content, .week-two-feature, .week-two-report, .week-two-part, .week-four-reports, .vibe-materials, .agenda-document-card { margin-left: 0; }
+  .agenda-speaker, .agenda-content, .week-two-feature, .week-two-report, .week-two-part, .week-four-reports, .week-five-gallery, .vibe-materials, .agenda-document-card { margin-left: 0; }
   .agenda-week-heading { grid-template-columns: 70px minmax(0, 1fr) auto; }
   .agenda-week-title h2 { font-size: clamp(1.55rem, 5vw, 2.2rem); }
   .agenda-week { padding: 1.2rem; }
@@ -258,6 +266,7 @@ html[lang="ja"] .agenda-week-title h2 { letter-spacing: .01em; }
   .week-two-report > a { grid-template-columns: 1fr; }
   .week-two-report > a > span { display: none; }
   .week-four-report-grid { grid-template-columns: 1fr; }
+  .week-five-gallery { grid-template-columns: 1fr; }
   .vibe-materials-grid { grid-template-columns: 1fr; }
   .agenda-document-cover { max-width: 170px; }
   .section-band .wrap { align-items: start; flex-direction: column; gap: .25rem; }

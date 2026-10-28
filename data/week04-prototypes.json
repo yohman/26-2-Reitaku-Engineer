@@ -1,0 +1,334 @@
+{
+  "updated": "20261028181115",
+  "items": [
+    {
+      "title_ja": "1ボタンゲーム",
+      "title_en": "One Button game",
+      "url": "https://aistudio.google.com/apps/e0abc08d-4b2f-43d8-8200-94a5f207c5c4?showPreview=true&showAssistant=true",
+      "thumbnail": "assets/week04/prototypes/prototype-01.jpg",
+      "preview": true
+    },
+    {
+      "title_ja": "Apexランク管理",
+      "title_en": "Apex rank tracker",
+      "url": "https://ai.studio/apps/3067cc04-e2d8-4d33-ae80-52b60de9cd76",
+      "thumbnail": "assets/week04/prototypes/prototype-02.jpg",
+      "preview": true
+    },
+    {
+      "title_ja": "BUMP OF CHICKEN 曲ルーレット",
+      "title_en": "BUMP OF CHICKEN song roulette",
+      "url": "https://ai.studio/apps/53047d13-fe09-4787-88ad-a260a7ed2017",
+      "thumbnail": "assets/week04/prototypes/prototype-03.jpg",
+      "preview": true
+    },
+    {
+      "title_ja": "アルバイト給与計算",
+      "title_en": "Part-time pay calculator",
+      "url": "https://ai.studio/apps/60e4fd6b-db5b-4d0f-8d96-ba967679c3e7",
+      "thumbnail": "assets/week04/prototypes/prototype-04.jpg",
+      "preview": true
+    },
+    {
+      "title_ja": "ガチャの確率計算",
+      "title_en": "Gacha probability calculator",
+      "url": "https://ai.studio/apps/1f8ae802-0d5e-4a1d-aa44-691e290823dd",
+      "thumbnail": "assets/week04/prototypes/prototype-05.jpg",
+      "preview": true
+    },
+    {
+      "title_ja": "シフトと給与の記録",
+      "title_en": "Shift and pay tracker",
+      "url": "https://ai.studio/apps/6e8cffd5-d2cc-4b4b-9af2-57cc86d7e40c",
+      "thumbnail": "assets/week04/prototypes/prototype-06.jpg",
+      "preview": true
+    },
+    {
+      "title_ja": "シンプルなTo Doリスト",
+      "title_en": "Simple to-do list",
+      "url": "https://ai.studio/apps/0d6a4691-ef1c-479b-b138-854f98950a53",
+      "thumbnail": "assets/week04/prototypes/prototype-07.jpg",
+      "preview": true
+    },
+    {
+      "title_ja": "スプラトゥーンのアイテム情報",
+      "title_en": "Splatoon item shop",
+      "url": "https://ai.studio/apps/b8496185-2817-4467-b07e-0a4c7ce36a28",
+      "thumbnail": "assets/week04/prototypes/prototype-08.jpg",
+      "preview": false
+    },
+    {
+      "title_ja": "タスクの締め切り管理",
+      "title_en": "Task deadline tracker",
+      "url": "https://ai.studio/apps/1a75c769-6a39-4962-b8df-62ee5ba84def",
+      "thumbnail": "assets/week04/prototypes/prototype-09.jpg",
+      "preview": true
+    },
+    {
+      "title_ja": "テスト対策",
+      "title_en": "Test practice",
+      "url": "https://ai.studio/apps/bbd4772b-010e-4cdb-b5bc-295d615c523d",
+      "thumbnail": "assets/week04/prototypes/prototype-10.jpg",
+      "preview": true
+    },
+    {
+      "title_ja": "フライドフィッシュ",
+      "title_en": "Flying Fish game",
+      "url": "https://ai.studio/apps/b1144af7-d76e-4831-a189-30a107d952b3",
+      "thumbnail": "assets/week04/prototypes/prototype-11.jpg",
+      "preview": true
+    },
+    {
+      "title_ja": "モグラたたき",
+      "title_en": "Whack-a-mole game",
+      "url": "https://aistudio.google.com/apps/13681e9a-6377-4b88-b510-2eb32ffe24ea?showPreview=true&showAssistant=true",
+      "thumbnail": "assets/week04/prototypes/prototype-12.jpg",
+      "preview": true
+    },
+    {
+      "title_ja": "モールス信号の練習",
+      "title_en": "Morse code practice",
+      "url": "https://ai.studio/apps/165b63ed-5f92-43aa-bf49-e220c4425987",
+      "thumbnail": "assets/week04/prototypes/prototype-13.jpg",
+      "preview": true
+    },
+    {
+      "title_ja": "一言日記",
+      "title_en": "One-line diary",
+      "url": "https://ai.studio/apps/f290fdbd-3c00-40ca-adf3-a3be6e192853",
+      "thumbnail": "assets/week04/prototypes/prototype-14.jpg",
+      "preview": true
+    },
+    {
+      "title_ja": "今日いくら使える？",
+      "title_en": "Daily spending budget",
+      "url": "https://ai.studio/apps/ac4f9a96-217a-4694-be45-fe6e925a90b2",
+      "thumbnail": "assets/week04/prototypes/prototype-15.jpg",
+      "preview": true
+    },
+    {
+      "title_ja": "使えるお金の管理",
+      "title_en": "Budget planner",
+      "url": "https://ai.studio/apps/883512f2-8190-465f-9323-8fd283a70793",
+      "thumbnail": "assets/week04/prototypes/prototype-16.jpg",
+      "preview": true
+    },
+    {
+      "title_ja": "割引計算",
+      "title_en": "Discount calculator",
+      "url": "https://ai.studio/apps/7cee3ca5-7c2d-4375-9085-a163ada55731",
+      "thumbnail": "assets/week04/prototypes/prototype-17.jpg",
+      "preview": true
+    },
+    {
+      "title_ja": "口げんかチャットボット",
+      "title_en": "Argument chatbot",
+      "url": "https://ai.studio/apps/8d436af6-cc91-4dd0-b47d-1c0b0e234298",
+      "thumbnail": "assets/week04/prototypes/prototype-18.jpg",
+      "preview": false
+    },
+    {
+      "title_ja": "名前ジェネレーター",
+      "title_en": "Name generator",
+      "url": "https://ai.studio/apps/0be6653b-e398-428d-a300-2fabdc92f474",
+      "thumbnail": "assets/week04/prototypes/prototype-19.jpg",
+      "preview": true
+    },
+    {
+      "title_ja": "地震避難サポート",
+      "title_en": "Earthquake evacuation guide",
+      "url": "https://ai.studio/apps/4086dc77-d904-43da-be21-b9be2e556474",
+      "thumbnail": "assets/week04/prototypes/prototype-20.jpg",
+      "preview": true
+    },
+    {
+      "title_ja": "学食ランチの提案",
+      "title_en": "Cafeteria lunch picker",
+      "url": "https://ai.studio/apps/85d78d93-03b0-4b33-99b4-58a244656cee",
+      "thumbnail": "assets/week04/prototypes/prototype-21.jpg",
+      "preview": true
+    },
+    {
+      "title_ja": "家事のモチベーション",
+      "title_en": "Housework motivator",
+      "url": "https://aistudio.google.com/apps/e5360b98-f8bf-4798-a2be-7a466c2fa143?showAssistant=true&showPreview=true",
+      "thumbnail": "assets/week04/prototypes/prototype-22.jpg",
+      "preview": true
+    },
+    {
+      "title_ja": "提出期限の管理",
+      "title_en": "Deadline tracker",
+      "url": "https://ai.studio/apps/1fc0ba25-4881-48c1-8983-ae6879a63fb8",
+      "thumbnail": "assets/week04/prototypes/prototype-23.jpg",
+      "preview": true
+    },
+    {
+      "title_ja": "提出期限タイマー",
+      "title_en": "Deadline timer",
+      "url": "https://ai.studio/apps/92f7501a-d85d-4b78-b121-1ea960c1c6be",
+      "thumbnail": "assets/week04/prototypes/prototype-24.jpg",
+      "preview": true
+    },
+    {
+      "title_ja": "時間帯別To Doリスト",
+      "title_en": "Timed to-do list",
+      "url": "https://ai.studio/apps/ff917654-e508-4457-9c0e-bf647aa274b9",
+      "thumbnail": "assets/week04/prototypes/prototype-25.jpg",
+      "preview": true
+    },
+    {
+      "title_ja": "気持ちを伝えるサポート",
+      "title_en": "Communication helper",
+      "url": "https://ai.studio/apps/86019b45-0677-4033-afe6-ba60b183fb88",
+      "thumbnail": "assets/week04/prototypes/prototype-26.jpg",
+      "preview": true
+    },
+    {
+      "title_ja": "緋の眼の画面演出",
+      "title_en": "Scarlet-eye display",
+      "url": "https://ai.studio/apps/ab1a18a8-b675-46b7-9499-101457205e63",
+      "thumbnail": "assets/week04/prototypes/prototype-27.jpg",
+      "preview": true
+    },
+    {
+      "title_ja": "締め切りリマインダー",
+      "title_en": "Deadline reminders",
+      "url": "https://ai.studio/apps/df306b8a-d436-40da-9a9c-befd6baefaad",
+      "thumbnail": "assets/week04/prototypes/prototype-28.jpg",
+      "preview": true
+    },
+    {
+      "title_ja": "習慣トラッカー",
+      "title_en": "Habit tracker",
+      "url": "https://ai.studio/apps/359fcaee-a5c2-45bb-84ea-22798d3ffce2?fullscreenApplet=true",
+      "thumbnail": "assets/week04/prototypes/prototype-29.jpg",
+      "preview": true
+    },
+    {
+      "title_ja": "課題と予定の管理",
+      "title_en": "Assignment and schedule planner",
+      "url": "https://ai.studio/apps/c30869b9-dbef-4fac-9725-3c2686570384",
+      "thumbnail": "assets/week04/prototypes/prototype-30.jpg",
+      "preview": true
+    },
+    {
+      "title_ja": "課題の一括管理",
+      "title_en": "Assignment hub",
+      "url": "https://ai.studio/apps/7ba194ee-7a91-48c0-977b-650bec3c2c1c",
+      "thumbnail": "assets/week04/prototypes/prototype-31.jpg",
+      "preview": true
+    },
+    {
+      "title_ja": "課題の採点サポート",
+      "title_en": "Assignment feedback",
+      "url": "https://ai.studio/apps/819292ec-08fd-4eba-b0a0-366f1e2d338c",
+      "thumbnail": "assets/week04/prototypes/prototype-32.jpg",
+      "preview": true
+    },
+    {
+      "title_ja": "課題の締め切りカウントダウン",
+      "title_en": "Assignment countdown",
+      "url": "https://aistudio.google.com/apps/2b8bcb09-c34b-4c77-9907-e349e57828bb?showAssistant=true&showPreview=true",
+      "thumbnail": "assets/week04/prototypes/prototype-33.jpg",
+      "preview": true
+    },
+    {
+      "title_ja": "課題一覧",
+      "title_en": "Assignment overview",
+      "url": "https://shimmering-semifreddo-1d108e.netlify.app",
+      "thumbnail": "assets/week04/prototypes/prototype-34.jpg",
+      "preview": true
+    },
+    {
+      "title_ja": "資格取得サポート",
+      "title_en": "Qualification guide",
+      "url": "https://ai.studio/apps/25ba54f0-8e3f-45e8-bd13-9b91146af1fa",
+      "thumbnail": "assets/week04/prototypes/prototype-35.jpg",
+      "preview": true
+    },
+    {
+      "title_ja": "雨の風景",
+      "title_en": "Rain landscape",
+      "url": "https://rain-horizon-quiet-landscapes.ika1567942.chatgpt.site/",
+      "thumbnail": "assets/week04/prototypes/prototype-36.jpg",
+      "preview": true
+    },
+    {
+      "title_ja": "音楽の好み診断",
+      "title_en": "Music preference quiz",
+      "url": "https://ai.studio/apps/376184d4-7e22-40b8-bdff-9854d6822b38",
+      "thumbnail": "assets/week04/prototypes/prototype-37.jpg",
+      "preview": true
+    },
+    {
+      "title_ja": "スケジュール管理",
+      "title_en": "Schedule planner",
+      "url": null,
+      "thumbnail": "assets/week04/prototypes/prototype-38.jpg",
+      "preview": true
+    },
+    {
+      "title_ja": "スロットゲーム",
+      "title_en": "Slot game",
+      "url": null,
+      "thumbnail": "assets/week04/prototypes/prototype-39.jpg",
+      "preview": true
+    },
+    {
+      "title_ja": "バイト給与の記録",
+      "title_en": "Part-time pay log",
+      "url": null,
+      "thumbnail": "assets/week04/prototypes/prototype-40.jpg",
+      "preview": true
+    },
+    {
+      "title_ja": "天気に合わせた服装",
+      "title_en": "Weather-based outfits",
+      "url": null,
+      "thumbnail": "assets/week04/prototypes/prototype-41.jpg",
+      "preview": true
+    },
+    {
+      "title_ja": "学習サポート",
+      "title_en": "Study helper",
+      "url": null,
+      "thumbnail": "assets/week04/prototypes/prototype-42.jpg",
+      "preview": true
+    },
+    {
+      "title_ja": "学習プラン",
+      "title_en": "Study planner",
+      "url": null,
+      "thumbnail": "assets/week04/prototypes/prototype-43.jpg",
+      "preview": true
+    },
+    {
+      "title_ja": "家計と支出の管理",
+      "title_en": "Spending tracker",
+      "url": null,
+      "thumbnail": "assets/week04/prototypes/prototype-44.jpg",
+      "preview": true
+    },
+    {
+      "title_ja": "服装の提案",
+      "title_en": "Outfit suggestions",
+      "url": null,
+      "thumbnail": "assets/week04/prototypes/prototype-45.jpg",
+      "preview": true
+    },
+    {
+      "title_ja": "空き時間の過ごし方",
+      "title_en": "Free-time ideas",
+      "url": null,
+      "thumbnail": "assets/week04/prototypes/prototype-46.jpg",
+      "preview": true
+    },
+    {
+      "title_ja": "食事写真の健康管理",
+      "title_en": "Food photo health tracker",
+      "url": null,
+      "thumbnail": "assets/week04/prototypes/prototype-47.jpg",
+      "preview": true
+    }
+  ]
+}

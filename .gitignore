@@ -2,6 +2,9 @@
 # source documents that are not part of the public 2026 site.
 /2025/
 
+# Raw student submissions and the local gallery builder stay private.
+/admin/
+
 # macOS metadata
 .DS_Store
 
