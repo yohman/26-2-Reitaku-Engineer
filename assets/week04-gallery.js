@@ -8,6 +8,7 @@
     money: {ja: 'お金・バイト', en: 'Money & work'},
     creative: {ja: 'ゲーム・創作', en: 'Games & creativity'},
     life: {ja: 'くらし・健康', en: 'Daily life & wellbeing'},
+    unique: {ja: '意外な発想', en: 'Unexpected ideas'},
     other: {ja: 'その他', en: 'Other'},
     linked: {ja: 'リンクあり', en: 'Links available'}
   };
@@ -22,10 +23,11 @@
     if (text !== undefined) node.textContent = text;
     return node;
   };
-  const matches = (item, key) => key === 'all' || (key === 'linked' ? Boolean(item.url) : item.category === key);
+  const matches = (item, key) => key === 'all' || (key === 'linked' ? Boolean(item.url) : key === 'unique' ? Boolean(item.unique) : item.category === key);
   function initFilters() {
     const keys = ['all', 'study', 'money', 'creative', 'life'];
     if (items.some(item => item.category === 'other')) keys.push('other');
+    keys.push('unique');
     keys.push('linked');
     filterButtons = keys.map(key => {
       const button = el('button');
@@ -61,7 +63,10 @@
       image.loading = 'lazy';
       preview.append(image);
       const body = el('div', 'prototype-info');
-      body.append(el('p', 'prototype-category', categoryLabel(item.category)));
+      const tags = el('div', 'prototype-tags');
+      tags.append(el('span', 'prototype-category', categoryLabel(item.category)));
+      if (item.unique) tags.append(el('span', 'prototype-unique', categoryLabel('unique')));
+      body.append(tags);
       body.append(el('h3', '', title));
       if (item.url) {
         const link = el('a', 'prototype-open', ja ? 'アプリを開く ↗' : 'Open prototype ↗');

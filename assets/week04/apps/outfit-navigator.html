@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>大学生活コーデナビ</title>
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-light: #eff6ff;
+      --text-main: #1f2937;
+      --text-muted: #6b7280;
+      --bg: #f3f4f6;
+      --card-bg: #ffffff;
+      --border: #e5e7eb;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text-main);
+      padding: 20px 12px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 520px;
+      background: var(--card-bg);
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      padding: 24px 20px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    header h1 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    header p {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .section-title {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    /* 入力エリア */
+    .input-group {
+      background: #fafafa;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px;
+      margin-bottom: 16px;
+    }
+
+    /* 気温スライダー・入力 */
+    .temp-control {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .temp-slider {
+      flex: 1;
+      accent-color: var(--primary);
+    }
+
+    .temp-display {
+      font-size: 1.4rem;
+      font-weight: bold;
+      min-width: 65px;
+      text-align: right;
+      color: var(--text-main);
+    }
+
+    /* 天気ボタングループ */
+    .weather-options {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+
+    .weather-btn {
+      background: white;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      padding: 8px 0;
+      font-size: 0.85rem;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.2s ease;
+    }
+
+    .weather-btn .icon {
+      font-size: 1.2rem;
+    }
+
+    .weather-btn.active {
+      border-color: var(--primary);
+      background-color: var(--primary-light);
+      color: var(--primary);
+      font-weight: bold;
+    }
+
+    /* スタイル切り替え */
+    .style-options {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+      margin-bottom: 16px;
+    }
+
+    .style-btn {
+      background: #f3f4f6;
+      border: none;
+      border-radius: 6px;
+      padding: 6px 0;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      cursor: pointer;
+    }
+
+    .style-btn.active {
+      background: var(--text-main);
+      color: white;
+      font-weight: 600;
+    }
+
+    /* 結果カード */
+    .result-card {
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+      background: #ffffff;
+    }
+
+    .catchphrase {
+      background: var(--primary-light);
+      color: var(--primary);
+      padding: 10px 12px;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 16px;
+      line-height: 1.4;
+    }
+
+    .item-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .item-row {
+      display: flex;
+      align-items: baseline;
+      font-size: 0.88rem;
+      border-bottom: 1px dashed var(--border);
+      padding-bottom: 6px;
+    }
+
+    .item-label {
+      width: 75px;
+      font-size: 0.75rem;
+      font-weight: bold;
+      color: var(--text-muted);
+      flex-shrink: 0;
+    }
+
+    .item-name {
+      flex: 1;
+      color: var(--text-main);
+      font-weight: 500;
+    }
+
+    .advice-box {
+      background: #fffbeb;
+      border-left: 4px solid #f59e0b;
+      padding: 10px 12px;
+      border-radius: 4px;
+      font-size: 0.82rem;
+      line-height: 1.4;
+      color: #92400e;
+    }
+    
+    .advice-title {
+      font-weight: bold;
+      margin-bottom: 2px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <h1>大学生活コーデナビ</h1>
+      <p>今日何着ていく？迷わない定番スタイル提案</p>
+    </header>
+
+    <!-- 気温入力 -->
+    <div class="input-group">
+      <div class="section-title">予想気温</div>
+      <div class="temp-control">
+        <input type="range" id="tempRange" class="temp-slider" min="-5" max="35" value="18">
+        <div class="temp-display"><span id="tempValue">18</span>℃</div>
+      </div>
+    </div>
+
+    <!-- 天気選択 -->
+    <div class="input-group">
+      <div class="section-title">天気</div>
+      <div class="weather-options">
+        <button class="weather-btn active" data-weather="sunny">
+          <span class="icon">☀️</span>晴れ
+        </button>
+        <button class="weather-btn" data-weather="cloudy">
+          <span class="icon">☁️</span>くもり
+        </button>
+        <button class="weather-btn" data-weather="rainy">
+          <span class="icon">☔</span>雨
+        </button>
+      </div>
+    </div>
+
+    <!-- スタイル切り替え -->
+    <div class="section-title">スタイル</div>
+    <div class="style-options">
+      <button class="style-btn active" data-style="unisex">ユニセックス</button>
+      <button class="style-btn" data-style="mens">メンズ寄り</button>
+      <button class="style-btn" data-style="womens">レディース寄り</button>
+    </div>
+
+    <!-- 結果エリア -->
+    <div class="result-card">
+      <div class="catchphrase" id="catchphrase">読み込み中...</div>
+      
+      <div class="item-list">
+        <div class="item-row">
+          <span class="item-label">羽織り/上着</span>
+          <span class="item-name" id="itemOuter">-</span>
+        </div>
+        <div class="item-row">
+          <span class="item-label">トップス</span>
+          <span class="item-name" id="itemTop">-</span>
+        </div>
+        <div class="item-row">
+          <span class="item-label">ボトムス</span>
+          <span class="item-name" id="itemBottom">-</span>
+        </div>
+        <div class="item-row">
+          <span class="item-label">持ち物・小物</span>
+          <span class="item-name" id="itemAccessory">-</span>
+        </div>
+      </div>
+
+      <div class="advice-box">
+        <div class="advice-title">💡 大学生活ワンポイント</div>
+        <div id="adviceText">-</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // 状態管理
+    let currentTemp = 18;
+    let currentWeather = 'sunny';
+    let currentStyle = 'unisex';
+
+    // DOM要素
+    const tempRange = document.getElementById('tempRange');
+    const tempValue = document.getElementById('tempValue');
+    const weatherBtns = document.querySelectorAll('.weather-btn');
+    const styleBtns = document.querySelectorAll('.style-btn');
+
+    const catchphraseEl = document.getElementById('catchphrase');
+    const itemOuterEl = document.getElementById('itemOuter');
+    const itemTopEl = document.getElementById('itemTop');
+    const itemBottomEl = document.getElementById('itemBottom');
+    const itemAccessoryEl = document.getElementById('itemAccessory');
+    const adviceTextEl = document.getElementById('adviceText');
+
+    // 気温帯ごとのベースデータ
+    function getOutfit(temp, weather, style) {
+      let outer = "なし";
+      let top = "";
+      let bottom = "";
+      let accessory = [];
+      let phrase = "";
+      let advice = "";
+
+      // 気温帯ごとの判定
+      if (temp <= 7) {
+        phrase = "真冬の寒さ！最優先で防寒対策を";
+        outer = style === 'womens' ? "ロングダウンコート / 厚手ボアブルゾン" : "ダウンジャケット / 厚手チェスターコート";
+        top = "ヒートテック ＋ 厚手のニット・セーター";
+        bottom = style === 'womens' ? "裏起毛ワイドパンツ / 厚手タイツ＋スカート" : "暖パン / 厚手デニム / 裏起毛スラックス";
+        accessory.push("マフラー", "手袋");
+        advice = "講義室の暖房が効きすぎていることが多いので、一番上のアウターですぐ温度調節できるようにするのが鉄則です。";
+      } else if (temp <= 11) {
+        phrase = "しっかり冬の装い。風を通さないアウターを";
+        outer = style === 'womens' ? "ウール混コート / キルティングコート" : "チェスターコート / 中綿ジャケット";
+        top = "スウェット / ニット（インナーにロンT）";
+        bottom = "デニム / ワイドストレートパンツ";
+        accessory.push("薄手のマフラー（夜遅くなる場合）");
+        advice = "朝晩と昼の気温差に注意。キャンパスを歩いて移動するときは風を通さない上着が快適です。";
+      } else if (temp <= 15) {
+        phrase = "少し肌寒い季節。軽めのアウターが必須";
+        outer = style === 'womens' ? "トレンチコート / マウンテンパーカー" : "マウンテンパーカー / コーチジャケット / デニムジャケット";
+        top = "ロンT ＋ 薄手スウェット / シャツ";
+        bottom = "チノパン / デニム / スラックス";
+        accessory.push("脱いだ上着を入れる大きめトート・リュック");
+        advice = "教室に入ると意外と暑くなることがあります。脱ぎ着が楽な前開きアウターが便利です。";
+      } else if (temp <= 20) {
+        phrase = "過ごしやすい気候！重ね着でおしゃれを楽しめる時期";
+        outer = "カーディガン / シャツジャケット / 薄手パーカー";
+        top = "無地長袖Tシャツ / バンドカラーシャツ";
+        bottom = "スラックス / デニム / フレアパンツ";
+        accessory.push("特になし（軽快に過ごせます）");
+        advice = "日中は上着なしでも過ごせますが、夕方以降に友達と残ったり図書館にこもるなら羽織りを1枚持っておくと安心。";
+      } else if (temp <= 25) {
+        phrase = "ポカポカ暖かい陽気。半袖〜長袖1枚で快適";
+        outer = "基本不要（冷房対策に薄手の長袖シャツを携帯）";
+        top = "長袖Tシャツ1枚、または半袖Tシャツ";
+        bottom = "薄手のスラックス / アンクルパンツ / チノパン";
+        accessory.push("日差しが強ければキャップ");
+        advice = "教室によっては冷房が効き始めていることも。薄手のシャツやカーディガンをバッグに忍ばせておくと安心です。";
+      } else {
+        phrase = "暑い！涼しさ最優先の夏コーデでOK";
+        outer = "なし";
+        top = style === 'womens' ? "半袖Tシャツ / サマーニット / ノースリーブ＋シアーシャツ" : "半袖Tシャツ / オープンカラー半袖シャツ";
+        bottom = "リネン混パンツ / ゆったりワイドパンツ / ショートパンツ";
+        accessory.push("ハンカチ・タオル", "日傘・帽子", "水分");
+        advice = "汗染みが目立ちにくい白・黒・ネイビーのトップスや、通気性の良いオーバーサイズシルエットが無難でおすすめです。";
+      }
+
+      // 天気補正
+      if (weather === 'rainy') {
+        phrase += "（雨対策も忘れずに！）";
+        accessory.unshift("折りたたみ傘");
+        if (bottom.includes("デニム") || bottom.includes("パンツ")) {
+          bottom += "（※裾が濡れないようアンクル丈やロールアップ推奨）";
+        }
+        advice += " 雨の日はキャンパスの階段や床が滑りやすいので、履き慣れたスニーカーや撥水シューズが安心です。";
+      } else if (weather === 'cloudy') {
+        phrase += "（くもり・体感はややひんやり）";
+      } else if (weather === 'sunny' && temp >= 21) {
+        accessory.push("日焼け止め");
+      }
+
+      return {
+        phrase,
+        outer,
+        top,
+        bottom,
+        accessory: accessory.join("、"),
+        advice
+      };
+    }
+
+    // 表示更新
+    function updateDisplay() {
+      tempValue.textContent = currentTemp;
+      const data = getOutfit(currentTemp, currentWeather, currentStyle);
+
+      catchphraseEl.textContent = data.phrase;
+      itemOuterEl.textContent = data.outer;
+      itemTopEl.textContent = data.top;
+      itemBottomEl.textContent = data.bottom;
+      itemAccessoryEl.textContent = data.accessory;
+      adviceTextEl.textContent = data.advice;
+    }
+
+    // イベントリスナー
+    tempRange.addEventListener('input', (e) => {
+      currentTemp = parseInt(e.target.value, 10);
+      updateDisplay();
+    });
+
+    weatherBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        weatherBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentWeather = btn.dataset.weather;
+        updateDisplay();
+      });
+    });
+
+    styleBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        styleBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentStyle = btn.dataset.style;
+        updateDisplay();
+      });
+    });
+
+    // 初回実行
+    updateDisplay();
+  </script>
+</body>
+</html>

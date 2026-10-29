@@ -392,7 +392,7 @@ function weekFourMaterialsHtml() {
 }
 function weekFiveGalleryHtml() {
   const ja = language === 'ja';
-  return `<a class="week-five-gallery" href="week04-gallery.html"><img src="assets/week04/gallery-cover.jpg" alt="" loading="lazy"><span><span class="section-label">${ja ? '第4回のアプリ制作' : 'WEEK 04 · APP PROTOTYPES'}</span><strong>${ja ? '学生の試作品を見る' : 'Explore student prototypes'}</strong><span class="week-five-gallery-description">${ja ? '制作したアプリの画面と、提出されたリンクを一覧で見られます。' : 'Browse app previews and the prototype links students submitted.'}</span><span class="week-five-gallery-action">${ja ? 'ギャラリーを開く' : 'Open the gallery'} →</span></span></a>`;
+  return `<a class="week-five-gallery" href="week04-gallery.html"><img src="assets/week04/gallery-cover.jpg?v=20261029114643" alt="" loading="lazy"><span><span class="section-label">${ja ? '第4回のアプリ制作' : 'WEEK 04 · APP PROTOTYPES'}</span><strong>${ja ? '学生の試作品を見る' : 'Explore student prototypes'}</strong><span class="week-five-gallery-description">${ja ? '制作したアプリの画面と、提出されたリンクを一覧で見られます。' : 'Browse app previews and the prototype links students submitted.'}</span><span class="week-five-gallery-action">${ja ? 'ギャラリーを開く' : 'Open the gallery'} →</span></span></a>`;
 }
 function weekDocumentHtml(week) {
   const documents = {

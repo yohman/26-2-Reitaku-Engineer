@@ -9,13 +9,18 @@
 .gallery-filters button { min-height: 42px; padding: .55rem .95rem; background: var(--layer-2); border: 0; border-radius: 999px; color: var(--ink); cursor: pointer; font: 600 .78rem var(--sans); }
 .gallery-filters button:hover { background: var(--layer-3); }
 .gallery-filters button[aria-pressed="true"] { background: var(--blue); color: #0b1015; }
+.gallery-filters button[data-gallery-filter="unique"] { background: #30362e; color: #d4e4bc; }
+.gallery-filters button[data-gallery-filter="unique"]:hover { background: #3c4637; }
+.gallery-filters button[data-gallery-filter="unique"][aria-pressed="true"] { background: #b6cf94; color: #10180d; }
 .prototype-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .85rem; }
 .prototype-card { display: flex; min-width: 0; flex-direction: column; background: var(--layer-1); }
 .prototype-preview { display: block; background: var(--layer-2); overflow: hidden; }
 .prototype-preview img { display: block; width: 100%; aspect-ratio: 8/5; object-fit: cover; transition: transform .25s ease; }
 a.prototype-preview:hover img, a.prototype-preview:focus-visible img { transform: scale(1.035); }
 .prototype-info { display: flex; flex: 1; flex-direction: column; align-items: flex-start; gap: .5rem; padding: 1rem 1.1rem 1.15rem; }
-.prototype-category { margin: 0; padding: .15rem .5rem; background: var(--layer-2); border-radius: 999px; color: var(--blue); font-size: .68rem; font-weight: 600; }
+.prototype-tags { display: flex; flex-wrap: wrap; gap: .3rem; }
+.prototype-category, .prototype-unique { margin: 0; padding: .15rem .5rem; background: var(--layer-2); border-radius: 999px; color: var(--blue); font-size: .68rem; font-weight: 600; }
+.prototype-unique { background: #30362e; color: #d4e4bc; }
 .prototype-info h3 { margin: 0; font-size: 1.04rem; line-height: 1.42; }
 .prototype-open { margin-top: auto; padding-top: .25rem; color: var(--blue); font-size: .82rem; font-weight: 600; text-underline-offset: .2em; }
 .prototype-unlinked { margin-top: auto; padding-top: .25rem; color: var(--muted); font-size: .78rem; }
