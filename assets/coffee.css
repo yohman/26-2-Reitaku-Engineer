@@ -1,0 +1,8 @@
+body[data-page="coffee"] .page-hero { padding-bottom: 1.5rem; }
+body[data-page="coffee"] .page-hero > p:not(.eyebrow):not(.dek) { max-width: 65ch; color: var(--muted); line-height: 1.8; }
+.coffee-form-wrap { padding-bottom: 4rem; }
+.coffee-form-help { max-width: 850px; margin: 0 auto 1.5rem; padding: 1.5rem; background: var(--layer-1); }
+.coffee-form-help p { margin: 0 0 1rem; line-height: 1.7; }
+.coffee-form-help .coffee-form-fallback { margin: 1rem 0 0; color: var(--muted); font-size: .85rem; }
+.coffee-form-frame { display: block; width: 100%; max-width: 850px; height: 1750px; margin: 0 auto; border: 0; background: #fff; }
+@media (max-width: 600px) { .coffee-form-frame { height: 2150px; } }
