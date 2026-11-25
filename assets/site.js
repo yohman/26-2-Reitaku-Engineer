@@ -396,7 +396,16 @@ function weekFiveGalleryHtml() {
 }
 function coffeeSignupHtml(week) {
   if (!week.coffee_signup_url) return '';
-  return `<section class="week-four-reports" lang="ja" aria-label="石崎さんとコーヒー"><a class="week-four-report" href="coffee.html"><span class="section-label">11月26日 · 5限 · Yohの研究室（407号室）</span><strong>石崎さんとコーヒー</strong><span class="week-four-report-description">授業のあと、石崎芳行さんとコーヒーを飲みながら話しませんか。定員は学生10名です。参加希望者は全員、フォームに記入してください。</span><span class="week-four-report-description">すでにYohに参加希望を伝えた方も記入してください。定員を超える場合、先週参加希望を伝えた方の枠を確保し、残りの枠は抽選で決めます。</span><span class="week-four-report-description">麗澤大学のGoogleアカウントでログインしてください。回答は学生同士には公開されません。</span><span class="week-four-report-action">申し込みフォームを開く →</span></a></section>`;
+  return `
+    <aside class="agenda-coffee" lang="ja" aria-labelledby="coffee-signup-title">
+      <span class="agenda-coffee-icon" aria-hidden="true">☕︎</span>
+      <h3 id="coffee-signup-title">石崎さんとコーヒー</h3>
+      <p class="agenda-coffee-time"><time datetime="${escapeHtml(week.date)}">11月26日（木）</time>・5限<br>Yohの研究室（407号室）</p>
+      <p>授業のあと、石崎さんとコーヒーを飲みながら話しませんか。</p>
+      <p><strong>定員は学生10名。</strong>すでにYohに参加希望を伝えた方も含め、参加希望者は全員お申し込みください。定員を超えた場合は、先週希望を伝えた方の枠を確保し、残りの枠は抽選で決めます。</p>
+      <a class="agenda-coffee-action" href="coffee.html">参加を申し込む <span aria-hidden="true">→</span></a>
+      <p class="agenda-coffee-note">麗澤大学のGoogleアカウントが必要です。回答は学生同士には公開されません。</p>
+    </aside>`;
 }
 function guestReportsHtml(week) {
   const ja = language === 'ja';
@@ -445,7 +454,12 @@ function renderAgenda() {
     const weekLabel = `${ja ? '第' : 'Week '}${String(w.week).padStart(2,'0')}${ja ? '回' : ''}`;
     const toggleLabel = isOpen ? (ja ? '閉じる' : 'Collapse') : (ja ? '開く' : 'Expand');
     const bodyId = `week-${escapeHtml(w.week)}-body`;
-    return `<article class="agenda-week" id="week-${escapeHtml(w.week)}"><div class="agenda-week-heading"><div class="agenda-week-number"><span class="week-number">${String(w.week).padStart(2,'0')}</span><p class="week-date">${escapeHtml(dateLabel(w.date,{month:'short',day:'numeric'}))}</p></div><div class="agenda-week-title"><p>${ja ? '木曜日 · 4限' : 'Thursday · Period 4'} · ${escapeHtml(dateLabel(w.date))}</p><h2>${escapeHtml(localized(w,'title'))}</h2></div><button class="agenda-toggle" type="button" data-week="${escapeHtml(w.week)}" aria-controls="${bodyId}" aria-expanded="${isOpen}" aria-label="${toggleLabel} ${weekLabel}"><span class="agenda-toggle-label">${toggleLabel}</span><span class="agenda-toggle-symbol" aria-hidden="true">${isOpen ? '−' : '+'}</span></button></div><div class="agenda-week-body" id="${bodyId}" ${isOpen ? '' : 'hidden'}>${speaker ? `<div class="agenda-speaker">${guestPhoto}<p class="speaker-line">${speaker}</p></div>` : ''}${Number(w.week) === 2 ? weekTwoReportHtml() + weekTwoFilmDiscussionHtml(w, summary) : Number(w.week) === 4 ? weekFourReportsHtml() + weekFourMaterialsHtml() : Number(w.week) === 5 ? guestReportsHtml(5) + weekFiveGalleryHtml() : Number(w.week) === 6 ? guestReportsHtml(6) : Number(w.week) === 7 ? guestReportsHtml() + weekDocumentHtml(w.week) : Number(w.week) === 9 ? coffeeSignupHtml(w) : weekDocumentHtml(w.week)}${Number(w.week) === 2 ? '' : `<div class="agenda-content"><p class="agenda-overview">${escapeHtml(summary)}</p>${details}</div>`}${Number(w.week) === 1 ? weekOneMaterialsHtml() : ''}${Number(w.week) === 2 && details ? `<div class="agenda-content">${details}</div>` : ''}</div></article>`;
+    const lecture = `<div class="agenda-content"><p class="agenda-overview">${escapeHtml(summary)}</p>${details}</div>`;
+    const coffeeSignup = coffeeSignupHtml(w);
+    const lectureContent = coffeeSignup
+      ? `<div class="agenda-lecture-layout">${coffeeSignup}${lecture}</div>`
+      : lecture;
+    return `<article class="agenda-week" id="week-${escapeHtml(w.week)}"><div class="agenda-week-heading"><div class="agenda-week-number"><span class="week-number">${String(w.week).padStart(2,'0')}</span><p class="week-date">${escapeHtml(dateLabel(w.date,{month:'short',day:'numeric'}))}</p></div><div class="agenda-week-title"><p>${ja ? '木曜日 · 4限' : 'Thursday · Period 4'} · ${escapeHtml(dateLabel(w.date))}</p><h2>${escapeHtml(localized(w,'title'))}</h2></div><button class="agenda-toggle" type="button" data-week="${escapeHtml(w.week)}" aria-controls="${bodyId}" aria-expanded="${isOpen}" aria-label="${toggleLabel} ${weekLabel}"><span class="agenda-toggle-label">${toggleLabel}</span><span class="agenda-toggle-symbol" aria-hidden="true">${isOpen ? '−' : '+'}</span></button></div><div class="agenda-week-body" id="${bodyId}" ${isOpen ? '' : 'hidden'}>${speaker ? `<div class="agenda-speaker">${guestPhoto}<p class="speaker-line">${speaker}</p></div>` : ''}${Number(w.week) === 2 ? weekTwoReportHtml() + weekTwoFilmDiscussionHtml(w, summary) : Number(w.week) === 4 ? weekFourReportsHtml() + weekFourMaterialsHtml() : Number(w.week) === 5 ? guestReportsHtml(5) + weekFiveGalleryHtml() : Number(w.week) === 6 ? guestReportsHtml(6) : Number(w.week) === 7 ? guestReportsHtml() + weekDocumentHtml(w.week) : weekDocumentHtml(w.week)}${Number(w.week) === 2 ? '' : lectureContent}${Number(w.week) === 1 ? weekOneMaterialsHtml() : ''}${Number(w.week) === 2 && details ? `<div class="agenda-content">${details}</div>` : ''}</div></article>`;
   }).join('') + `<p class="schedule-note">${language === 'ja' ? '最終発表は2回を予定しています。もう一回の日程は未定です。' : 'Two final presentation sessions are intended. The second date is to be confirmed.'}</p>`;
   function setWeekOpen(week, open) {
     const button = target.querySelector(`.agenda-toggle[data-week="${week}"]`);
